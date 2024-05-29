@@ -225,6 +225,17 @@
         margin-left: 200px;
         margin-right: 300px;
         align-items: center;
+        display: none;
+        line-height: 40px;
+        border: 1px solid #240202;
+        border-radius: 6px;
+        padding: 10px;
+    }
+
+    .contentGA.POP{
+        margin-left: 200px;
+        margin-right: 300px;
+        align-items: center;
         display: block;
         line-height: 40px;
         border: 1px solid #240202;
@@ -256,7 +267,6 @@
         padding: 10px;
     }
 
-/*PAPAPAPPAPAPAPAPA*/
     .contentEP{
         margin-left: 200px;
         margin-right: 300px;
