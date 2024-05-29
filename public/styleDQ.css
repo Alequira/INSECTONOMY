@@ -245,11 +245,23 @@
         margin: 10px;
     }
 
-    .contentEP{
+    .contentEP.POP{
         margin-left: 200px;
         margin-right: 300px;
         align-items: center;
         display: block;
+        line-height: 40px;
+        border: 1px solid #240202;
+        border-radius: 6px;
+        padding: 10px;
+    }
+
+/*PAPAPAPPAPAPAPAPA*/
+    .contentEP{
+        margin-left: 200px;
+        margin-right: 300px;
+        align-items: center;
+        display: none;
         line-height: 40px;
         border: 1px solid #240202;
         border-radius: 6px;
@@ -268,11 +280,22 @@
         margin: 10px;
     }
 
-    .contentPP{
+    .contentPP.POP{
         margin-left: 200px;
         margin-right: 300px;
         align-items: center;
         display: block;
+        line-height: 40px;
+        border: 1px solid #240202;
+        border-radius: 6px;
+        padding: 10px;
+    }
+
+    .contentPP{
+        margin-left: 200px;
+        margin-right: 300px;
+        align-items: center;
+        display: none;
         line-height: 40px;
         border: 1px solid #240202;
         border-radius: 6px;
