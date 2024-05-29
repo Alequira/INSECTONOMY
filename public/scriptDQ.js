@@ -79,116 +79,115 @@ function displayResults(results) {
     results.forEach(result => {
         const row = document.createElement('tr');
         
-        // Asegúrate de que las claves coincidan con los nombres de tus columnas
+        // Función para mostrar valores "0" correctamente
+        const showValue = (value) => (value === null || value === undefined) ? '' : value;
+
         row.innerHTML = `
+            <td>${showValue(result.id)}</td>
+            <td>${showValue(result.Or)}</td>
+            <td>${showValue(result.Fam)}</td>
+            <td>${showValue(result.ComNa)}</td>
+            <td>${showValue(result.SciNa)}</td>
+            <td>${showValue(result.BiogRe)}</td>
+            <td>${showValue(result.BiogZo)}</td>
+            <td>${showValue(result.HoldBio)}</td>
+            <td>${showValue(result.HoldPre)}</td>
+            <td>${showValue(result.HoldTemp)}</td>
+            <td>${showValue(result.HoldAB)}</td>
+            <td>${showValue(result.HoldLR)}</td>
+            <td>${showValue(result.HoldAD)}</td>
+            <td>${showValue(result.HabPat)}</td>
+            <td>${showValue(result.LSI)}</td>
 
-        
-            <td>${result.id}</td>
-            <td>${result.Or || ''}</td>
-            <td>${result.Fam || ''}</td>
-            <td>${result.ComNa || ''}</td>
-            <td>${result.SciNa || ''}</td>
-            <td>${result.BiogRe || ''}</td>
-            <td>${result.BiogZo || ''}</td>
-            <td>${result.HoldBio || ''}</td>
-            <td>${result.HoldPre || ''}</td>
-            <td>${result.HoldTemp || ''}</td>
-            <td>${result.HoldAB || ''}</td>
-            <td>${result.HoldLR || ''}</td>
-            <td>${result.HoldAD || ''}</td>
-            <td>${result.HabPat || ''}</td>
-            <td>${result.LSI || ''}</td>
+            <td>${showValue(result.eco_pot?.CultCultIdDi)}</td>
+            <td>${showValue(result.eco_pot?.CultInspArt)}</td>
+            <td>${showValue(result.eco_pot?.CultEdu)}</td>
+            <td>${showValue(result.eco_pot?.CultRecEcot)}</td>
+            <td>${showValue(result.eco_pot?.CultSpiReg)}</td>
+            <td>${showValue(result.eco_pot?.RegBioind)}</td>
+            <td>${showValue(result.eco_pot?.RegBiocont)}</td>
+            <td>${showValue(result.eco_pot?.RegPol)}</td>
+            <td>${showValue(result.eco_pot?.RegSeed)}</td>
+            <td>${showValue(result.eco_pot?.SupNutCy)}</td>
+            <td>${showValue(result.eco_pot?.SupSoIm)}</td>
+            <td>${showValue(result.eco_pot?.ProFF)}</td>
+            <td>${showValue(result.eco_pot?.ProWildF)}</td>
+            <td>${showValue(result.eco_pot?.ProBiomol)}</td>
+            <td>${showValue(result.eco_pot?.ProBiopro)}</td>
+            <td>${showValue(result.eco_pot?.ProBiom)}</td>
+            <td>${showValue(result.eco_pot?.ProBiomimi)}</td>
+            <td>${showValue(result.eco_pot?.DissVector)}</td>
+            <td>${showValue(result.eco_pot?.DissPest)}</td>
 
-            <td>${result.CultCultIdDi || ''}</td>
-            <td>${result.CultInspArt || ''}</td>
-            <td>${result.CultEdu || ''}</td>
-            <td>${result.CultRecEcot || ''}</td>
-            <td>${result.CultSpiReg || ''}</td>
-            <td>${result.RegBioind || ''}</td>
-            <td>${result.RegBiocont || ''}</td>
-            <td>${result.RegPol || ''}</td>
-            <td>${result.RegSeed || ''}</td>
-            <td>${result.SupNutCy || ''}</td>
-            <td>${result.SupSoIm || ''}</td>
-            <td>${result.ProFF || ''}</td>
-            <td>${result.ProWildF || ''}</td>
-            <td>${result.ProBiomol || ''}</td>
-            <td>${result.ProBiopro || ''}</td>
-            <td>${result.ProBiom || ''}</td>
-            <td>${result.ProBiomimi || ''}</td>
-            <td>${result.DissVector || ''}</td>
-            <td>${result.DissPest || ''}</td>
+            <td>${showValue(result.prod_pot?.ManSt)}</td>
+            <td>${showValue(result.prod_pot?.ManRu)}</td>
+            <td>${showValue(result.prod_pot?.ManAg)}</td>
+            <td>${showValue(result.prod_pot?.ManSoSt)}</td>
+            <td>${showValue(result.prod_pot?.ManHab)}</td>
+            <td>${showValue(result.prod_pot?.ManTer)}</td>
+            <td>${showValue(result.prod_pot?.ManTra)}</td>
+            <td>${showValue(result.prod_pot?.ManFac)}</td>
+            <td>${showValue(result.prod_pot?.NutFeed)}</td>
+            <td>${showValue(result.prod_pot?.NutCost)}</td>
+            <td>${showValue(result.prod_pot?.RepSexMat)}</td>
+            <td>${showValue(result.prod_pot?.RepNumbOff)}</td>
+            <td>${showValue(result.prod_pot?.RepCy)}</td>
+            <td>${showValue(result.prod_pot?.RepGestInc)}</td>
+            <td>${showValue(result.prod_pot?.RepSexInt)}</td>
+            <td>${showValue(result.prod_pot?.ProPopStu)}</td>
+            <td>${showValue(result.prod_pot?.ProProf)}</td>
+            <td>${showValue(result.prod_pot?.ProLong)}</td>
+            <td>${showValue(result.prod_pot?.ProReL)}</td>
+            <td>${showValue(result.prod_pot?.ProOpBre)}</td>
+            <td>${showValue(result.prod_pot?.ProAddVal)}</td>
+            <td>${showValue(result.prod_pot?.MarCultAcc)}</td>
+            <td>${showValue(result.prod_pot?.MarPri)}</td>
+            <td>${showValue(result.prod_pot?.MarCompDom)}</td>
+            <td>${showValue(result.prod_pot?.MarMarCha)}</td>
+            <td>${showValue(result.prod_pot?.RegRest)}</td>
 
+            <td>${showValue(result.use?.MaUSubs)}</td>
+            <td>${showValue(result.use?.MaUSelCons)}</td>
+            <td>${showValue(result.use?.MaUCom)}</td>
+            <td>${showValue(result.use?.SoUseFo)}</td>
+            <td>${showValue(result.use?.SoUseFe)}</td>
+            <td>${showValue(result.use?.SoUseBioconv)}</td>
+            <td>${showValue(result.use?.SoUseBiocont)}</td>
+            <td>${showValue(result.use?.SoUsePol)}</td>
+            <td>${showValue(result.use?.SoUsePet)}</td>
+            <td>${showValue(result.use?.SoUseCult)}</td>
+            <td>${showValue(result.use?.SoUseOth)}</td>
+            <td>${showValue(result.use?.ObtHar)}</td>
+            <td>${showValue(result.use?.ObtSHar)}</td>
+            <td>${showValue(result.use?.ObtPro)}</td>
+            <td>${showValue(result.use?.ContUtNA)}</td>
+            <td>${showValue(result.use?.ContUtCA)}</td>
+            <td>${showValue(result.use?.ContUtSA)}</td>
+            <td>${showValue(result.use?.ContUtAs)}</td>
+            <td>${showValue(result.use?.ContUtEu)}</td>
+            <td>${showValue(result.use?.ContUtOc)}</td>
+            <td>${showValue(result.use?.ContUtAf)}</td>
+            <td>${showValue(result.use?.MarYN)}</td>
+            <td>${showValue(result.use?.MarLoc)}</td>
+            <td>${showValue(result.use?.MarReg)}</td>
+            <td>${showValue(result.use?.MarNat)}</td>
+            <td>${showValue(result.use?.MarInt)}</td>
+            <td>${showValue(result.use?.MarMP)}</td>
+            <td>${showValue(result.use?.ScLS)}</td>
+            <td>${showValue(result.use?.ScMS)}</td>
+            <td>${showValue(result.use?.ScLaS)}</td>
+            <td>${showValue(result.use?.SocAccCSA)}</td>
+            <td>${showValue(result.use?.SocAccNA)}</td>
+            <td>${showValue(result.use?.SocAccAf)}</td>
+            <td>${showValue(result.use?.SocAccOc)}</td>
+            <td>${showValue(result.use?.SocAccEu)}</td>
+            <td>${showValue(result.use?.SocAccAs)}</td>
+            <td>${showValue(result.use?.LegPunc)}</td>
+            <td>${showValue(result.use?.LegLeg)}</td>
 
-            <td>${result.ManSt || ''}</td>
-            <td>${result.ManRu || ''}</td>
-            <td>${result.ManAg || ''}</td>
-            <td>${result.ManSoSt || ''}</td>
-            <td>${result.ManHab || ''}</td>
-            <td>${result.ManTer || ''}</td>
-            <td>${result.ManTra || ''}</td>
-            <td>${result.ManFac || ''}</td>
-            <td>${result.NutFeed || ''}</td>
-            <td>${result.NutCost || ''}</td>
-            <td>${result.RepSexMat || ''}</td>
-            <td>${result.RepNumbOff || ''}</td>
-            <td>${result.RepCy || ''}</td>
-            <td>${result.RepGestInc || ''}</td>
-            <td>${result.RepSexInt || ''}</td>
-            <td>${result.ProPopStu || ''}</td>
-            <td>${result.ProProf || ''}</td>
-            <td>${result.ProLong || ''}</td>
-            <td>${result.ProReL || ''}</td>
-            <td>${result.ProOpBre || ''}</td>
-            <td>${result.ProAddVal || ''}</td>
-            <td>${result.MarCultAcc || ''}</td>
-            <td>${result.MarPri || ''}</td>
-            <td>${result.MarCompDom || ''}</td>
-            <td>${result.MarMarCha || ''}</td>
-            <td>${result.RegRest || ''}</td>
-
-
-            <td>${result.MaUSubs || ''}</td>
-            <td>${result.MaUSelCons || ''}</td>
-            <td>${result.SoUseBioconv || ''}</td>
-            <td>${result.SoUseBiocont || ''}</td>
-            <td>${result.SoUsePol || ''}</td>
-            <td>${result.SoUsePet || ''}</td>
-            <td>${result.SoUseCult || ''}</td>
-            <td>${result.SoUseOth || ''}</td>
-            <td>${result.ObtHar || ''}</td>
-            <td>${result.ObtSHar || ''}</td>
-            <td>${result.ObtPro || ''}</td>
-            <td>${result.ContUtNA || ''}</td>
-            <td>${result.ContUtCA || ''}</td>
-            <td>${result.ContUtSA || ''}</td>
-            <td>${result.ContUtAs || ''}</td>
-            <td>${result.ContUtEu || ''}</td>
-            <td>${result.ContUtOc || ''}</td>
-            <td>${result.ContUtAf || ''}</td>
-            <td>${result.MarYN || ''}</td>
-            <td>${result.MarLoc || ''}</td>
-            <td>${result.MarReg || ''}</td>
-            <td>${result.MarNat || ''}</td>
-            <td>${result.MarInt || ''}</td>
-            <td>${result.MarMP || ''}</td>
-            <td>${result.ScLS || ''}</td>
-            <td>${result.ScMS || ''}</td>
-            <td>${result.ScLaS || ''}</td>
-            <td>${result.SocAccCSA || ''}</td>
-            <td>${result.SocAccNA || ''}</td>
-            <td>${result.SocAccAf || ''}</td>
-            <td>${result.SocAccOc || ''}</td>
-            <td>${result.SocAccEu || ''}</td>
-            <td>${result.SocAccAs || ''}</td>
-            <td>${result.LegPunc || ''}</td>
-            <td>${result.LegLeg || ''}</td>
-
-
-            <td>${result.Use || ''}</td>
-            <td>${result.ProdPot || ''}</td>
-            <td>${result.EcoPot || ''}</td>
-            
+            <td>${showValue(result.index?.Use)}</td>
+            <td>${showValue(result.index?.ProdPot)}</td>
+            <td>${showValue(result.index?.EcoPot)}</td>
         `;
         tableBody.appendChild(row);
     });

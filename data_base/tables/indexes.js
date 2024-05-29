@@ -28,7 +28,7 @@ const Indexes = sequelize.define('indexes', {
     timestamps: false
 });
 
-GenAsp.hasOne(Indexes, { foreignKey: 'GenAspId' });
-Indexes.belongsTo(GenAsp, { foreignKey: 'GenAspId' });
+GenAsp.hasOne(Indexes, { foreignKey: 'GenAspId' , as: 'index'});
+Indexes.belongsTo(GenAsp, { foreignKey: 'GenAspId' , as: 'index'});
 
 module.exports = Indexes;

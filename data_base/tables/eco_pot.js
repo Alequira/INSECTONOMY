@@ -92,7 +92,7 @@ const EcoPot = sequelize.define('eco_pot', {
     timestamps: false
 });
 
-GenAsp.hasOne(EcoPot, { foreignKey: 'GenAspId' });
-EcoPot.belongsTo(GenAsp, { foreignKey: 'GenAspId' });
+GenAsp.hasOne(EcoPot, { foreignKey: 'GenAspId', as: 'eco_pot' });
+EcoPot.belongsTo(GenAsp, { foreignKey: 'GenAspId', as: 'eco_pot' });
 
 module.exports = EcoPot;

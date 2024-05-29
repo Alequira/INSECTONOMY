@@ -168,7 +168,7 @@ const Use = sequelize.define('use', {
     timestamps: false 
 });
 
-GenAsp.hasOne(Use, { foreignKey: 'GenAspId' });
-Use.belongsTo(GenAsp, { foreignKey: 'GenAspId' });
+GenAsp.hasOne(Use, { foreignKey: 'GenAspId' , as: 'use'});
+Use.belongsTo(GenAsp, { foreignKey: 'GenAspId', as: 'use' });
 
 module.exports = Use;

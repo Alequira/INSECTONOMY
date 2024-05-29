@@ -224,7 +224,7 @@ const ProdPot = sequelize.define('prod_pot', {
     timestamps: false 
 });
 
-GenAsp.hasOne(ProdPot, { foreignKey: 'GenAspId' });
-ProdPot.belongsTo(GenAsp, { foreignKey: 'GenAspId' });
+GenAsp.hasOne(ProdPot, { foreignKey: 'GenAspId' , as: 'prod_pot'});
+ProdPot.belongsTo(GenAsp, { foreignKey: 'GenAspId' , as: 'prod_pot'});
 
 module.exports = ProdPot;

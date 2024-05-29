@@ -16,17 +16,24 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.static('public'));
 
-// Endpoint para búsqueda por categorías
 app.post('/search', async (req, res) => {
     const { categories } = req.body;
+
+    const searchCriteria = {};
+    for (const [key, value] of Object.entries(categories)) {
+        if (value) {
+            searchCriteria[key] = value;
+        }
+    }
+
     try {
         const results = await GenAsp.findAll({
-            where: categories,
+            where: searchCriteria,
             include: [
-                { model: EcoPot },
-                { model: ProdPot },
-                { model: Use },
-                { model: Indexes}
+                { model: EcoPot, as: 'eco_pot' },
+                { model: ProdPot, as: 'prod_pot' },
+                { model: Use, as: 'use' },
+                { model: Indexes, as: 'index' }
             ]
         });
         res.json(results);
@@ -35,7 +42,6 @@ app.post('/search', async (req, res) => {
         res.status(500).json({ error: 'Error al realizar la búsqueda' });
     }
 });
-
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
