@@ -22,19 +22,33 @@
             <section id="query-section">
                 <h2>Data Query</h2>
                 <div class="subsections">
+                    <div class="pI">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                            Totam, eius reiciendis, magni cum dolore qui, facilis fugiat explicabo earum quo quidem ullam sit quae voluptates. 
+                            Veritatis nostrum necessitatibus at repudiandae.
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                            Aspernatur tempora sunt rem unde quae dignissimos laborum mollitia cumque sequi quis ullam facere officia inventore, 
+                            vel obcaecati delectus voluptatum? Dolore, molestiae.
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                            Totam, eius reiciendis, magni cum dolore qui, facilis fugiat explicabo earum quo quidem ullam sit quae voluptates. 
+                            Veritatis nostrum necessitatibus at repudiandae.
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                            Aspernatur tempora sunt rem unde quae dignissimos laborum mollitia cumque sequi quis ullam facere officia inventore, 
+                            vel obcaecati delectus voluptatum? Dolore, molestiae.</p>
+                    </div>
                     <div class="subsection">
                         <form id="input-form">
 
                             <!-- Campos de gen_asp -->
 
-                            <button type="button" class="collapsible">General Aspects</button>
-                            <div class="content">
+                            <button type="button" class="collapsibleGA">General Aspects</button>
+                            <div class="contentGA">
                                 <p>All general information on the insect.</p>
-                                <div class="input-box">
+                                <div class="input-boxGA">
                                     <label for="genAspId">ID</label>
                                     <input type="number" id="genAspId" name="genAspId">
                                 </div>
-                                <div class="input-box">
+                                <div class="input-boxGA">
                                     <label for="Or">Order</label>
                                     <select id="Or" name="Order">
                                         <option value="1">Ortoptera</option>
@@ -52,29 +66,29 @@
                                         <option value="13">Thysanoptera</option>
                                     </select>
                                 </div>
-                                <div class="input-box">
+                                <div class="input-boxGA">
                                     <label for="Fam">Family</label>
                                     <input type="text" id="Fam" name="Fam">
                                 </div>
-                                <div class="input-box">
+                                <div class="input-boxGA">
                                     <label for="ComNa">Common Name</label>
                                     <input type="text" id="ComNa" name="ComNa">
                                 </div>
-                                <div class="input-box">
+                                <div class="input-boxGA">
                                     <label for="SciNa">Scientific Name</label>
                                     <input type="text" id="SciNa" name="SciNa">
                                 </div>
-                                <div class="input-box">
+                                <div class="input-boxGA">
                                     <label for="BiogRe">Biogeographic Realm</label>
                                     <input type="text" id="BiogRe" name="BiogRe">
                                 </div>
-                                <div class="input-box">
+                                <div class="input-boxGA">
                                     <label for="BiogZo">Biogeographic Zone</label>
                                     <input type="text" id="BiogZo" name="BiogZo">
                                 </div>
-                                <div>
-                                    <h3>Holdridge</h3>
-                                    <div class="input-box">
+                                <h3>Holdridge</h3>
+                                <div class="input-DQ">
+                                    <div class="input-boxGA">
                                         <label for="HoldBio">Biome</label>
                                         <select id="HoldBioS" name="Biome">
                                             <option value="1">Moist forest</option>
@@ -87,7 +101,7 @@
                                             <option value="8">Very Dry forest</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxGA">
                                         <label for="HoldPre">Annual Precipitation</label>
                                         <select id="HoldPreS" name="AnnualPrecipitation">
                                             <option value="1">125 - 250</option>
@@ -99,7 +113,7 @@
                                             <option value="7">8000 - 16000</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxGA">
                                         <label for="HoldTemp">Temperature</label>
                                         <select id="HoldTempS" name="Temperature">
                                             <option value="1">3 - 6</option>
@@ -109,7 +123,7 @@
                                             <option value="5"> >24 </option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxGA">
                                         <label for="HoldAB">Altitudinal Belts</label>
                                         <select id="HoldABS" name="AltitudinalBelts">
                                             <option value="1">Premontane</option>
@@ -119,7 +133,7 @@
                                             <option value="5">Lower Montane</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxGA">
                                         <label for="HoldLR">Latitudinal Regions</label>
                                         <select id="HoldLRS" name="LatitudinalRegions">
                                             <option value="1">Tropical</option>
@@ -129,7 +143,7 @@
                                             <option value="5">Subtropical</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxGA">
                                         <label for="HoldAD">Altitudinal Distribution</label>
                                         <select id="HoldAD" name="AltitudinalDistribution">
                                             <option value="1">100 - 500</option>
@@ -148,11 +162,11 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="input-box">
+                                <div class="input-boxGA">
                                     <label for="HabPat">Habitat Use Patterns</label>
                                     <input type="text" id="HabPat" name="HabPat">
                                 </div>
-                                <div class="input-box">
+                                <div class="input-boxGA">
                                     <label for="LSI">Life Stage Interest</label>
                                     <select id="LSIS" name="LSI">
                                         <option value="1">Imago</option>
@@ -170,14 +184,14 @@
 
                             <!-- Campos de eco_pot -->
 
-                            <button type="button" class="collapsible">Ecological Potential</button>
-                            <span class="icon"><ion-icon name="help-outline"></ion-icon>
+                            <button type="button" class="collapsibleEP">Ecological Potential</button>
+                            <span class="iconEP"><ion-icon name="help-circle"></ion-icon></ion-icon>
                             </span>
-                            <div class="content">
+                            <div class="contentEP">
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
                                 <h3>Cultural</h3>
                                 <div>
-                                    <div class="input-box">
+                                    <div class="input-boxEP">
                                         <label for="CultCultIdDi">Cultural Diversity and Identity</label>
                                         <select id="CultCultIdDi" name="CultCultIdDi">
                                             <option value="1">0</option>
@@ -186,7 +200,7 @@
                                             <option value="4">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxEP">
                                         <label for="CultInspArt">Inspiration and Art</label>
                                         <select id="CultInspArt" name="CultInspArt">
                                             <option value="1">0</option>
@@ -195,7 +209,7 @@
                                             <option value="4">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxEP">
                                         <label for="CultEdu">Education</label>
                                         <select id="CultEdu" name="CultEdu">
                                             <option value="1">0</option>
@@ -204,7 +218,7 @@
                                             <option value="4">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxEP">
                                         <label for="CultRecEcot">Recreation and Ecoturism</label>
                                         <select id="CultRecEcot" name="CultRecEcot">
                                             <option value="1">0</option>
@@ -213,7 +227,7 @@
                                             <option value="4">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxEP">
                                         <label for="CultSpiReg">Spiritual and Religious</label>
                                         <select id="CultSpiReg" name="CultSpiReg">
                                             <option value="1">0</option>
@@ -225,7 +239,7 @@
                                 </div>
                                 <h3>Regulation</h3>
                                 <div>
-                                    <div class="input-box">
+                                    <div class="input-boxEP">
                                         <label for="RegBioind">Bioindicator</label>
                                         <select id="RegBioind" name="RegBioind">
                                             <option value="1">0</option>
@@ -234,7 +248,7 @@
                                             <option value="4">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxEP">
                                         <label for="RegBiocont">Biocontrol</label>
                                         <select id="RegBiocont" name="RegBiocont">
                                             <option value="1">0</option>
@@ -243,7 +257,7 @@
                                             <option value="4">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxEP">
                                         <label for="RegPol">Pollination</label>
                                         <select id="RegPol" name="RegPol">
                                             <option value="1">0</option>
@@ -252,7 +266,7 @@
                                             <option value="4">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxEP">
                                         <label for="RegSeed">Seed Dispersal</label>
                                         <select id="RegSeed" name="RegSeed">
                                             <option value="1">0</option>
@@ -264,7 +278,7 @@
                                 </div>
                                 <h3>Support</h3>
                                 <div>
-                                    <div class="input-box">
+                                    <div class="input-boxEP">
                                         <label for="SupNutCy">Nutrient Cycling</label>
                                         <select id="SupNutCy" name="SupNutCy">
                                             <option value="1">0</option>
@@ -273,7 +287,7 @@
                                             <option value="4">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxEP">
                                         <label for="SupSoIm">Soil improvement</label>
                                         <select id="SupSoIm" name="SupSoIm">
                                             <option value="1">0</option>
@@ -285,7 +299,7 @@
                                 </div>
                                 <h3>Provision</h3>
                                 <div>
-                                    <div class="input-box">
+                                    <div class="input-boxEP">
                                         <label for="ProFF">Food and Feed</label>
                                         <select id="ProFF" name="ProFF">
                                             <option value="1">0</option>
@@ -294,7 +308,7 @@
                                             <option value="4">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxEP">
                                         <label for="ProWildF"> Wildlife Feed</label>
                                         <select id="ProWildF" name="ProWildF">
                                             <option value="1">0</option>
@@ -303,7 +317,7 @@
                                             <option value="4">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxEP">
                                         <label for="ProBiomol">Biomolecules</label>
                                         <select id="ProBiomol" name="ProBiomol">
                                             <option value="1">0</option>
@@ -312,7 +326,7 @@
                                             <option value="4">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxEP">
                                         <label for="ProBiopro">Bioproducts</label>
                                         <select id="ProBiopro" name="ProBiopro">
                                             <option value="1">0</option>
@@ -321,7 +335,7 @@
                                             <option value="4">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxEP">
                                         <label for="ProBiom">Biomodels</label>
                                         <select id="ProBiom" name="ProBiom">
                                             <option value="1">0</option>
@@ -330,7 +344,7 @@
                                             <option value="4">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxEP">
                                         <label for="ProBiomimi">Biomimicry</label>
                                         <select id="ProBiomimi" name="ProBiomimi">
                                             <option value="1">0</option>
@@ -342,7 +356,7 @@
                                 </div>
                                 <h3>Disservices</h3>
                                 <div>
-                                    <div class="input-box">
+                                    <div class="input-boxEP">
                                         <label for="DissVector">Vector</label>
                                         <select id="DissVector" name="DissVector">
                                             <option value="1">0</option>
@@ -351,7 +365,7 @@
                                             <option value="4">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxEP">
                                         <label for="DissPest">Pest</label>
                                         <select id="DissPest" name="DissPest">
                                             <option value="1">0</option>
@@ -365,14 +379,14 @@
 
                             <!-- Campos de prod_pot -->
 
-                            <button type="button" class="collapsible">Productive Potential</button>
-                            <span class="icon"><ion-icon name="help-outline"></ion-icon>
+                            <button type="button" class="collapsiblePP">Productive Potential</button>
+                            <span class="iconPP"><ion-icon name="help-circle"></ion-icon></ion-icon>
                             </span>
-                            <div class="content">
+                            <div class="contentPP">
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
                                 <h3>Management</h3>
                                 <div>
-                                    <div class="input-box">
+                                    <div class="input-boxPP">
                                         <label for="ManSt">Stress</label>
                                         <select id="ManSt" name="ManSt">
                                             <option value="1">Low</option>
@@ -380,7 +394,7 @@
                                             <option value="3">High</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxPP">
                                         <label for="ManRu">Rusticity</label>
                                         <select id="ManRu" name="ManRu">
                                             <option value="1">Low</option>
@@ -388,7 +402,7 @@
                                             <option value="3">High</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxPP">
                                         <label for="ManAg">Agility</label>
                                         <select id="ManAg" name="ManAg">
                                             <option value="1">Low</option>
@@ -396,7 +410,7 @@
                                             <option value="3">High</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxPP">
                                         <label for="ManSoSt">Social structure</label>
                                         <select id="ManSoSt" name="ManSoSt">
                                             <option value="1">Gregaroius</option>
@@ -404,14 +418,14 @@
                                             <option value="3">Solitaire</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxPP">
                                         <label for="ManHab">Habits</label>
                                         <select id="ManHab" name="ManHab">
                                             <option value="1">Diurnal</option>
                                             <option value="2">Nocturnal</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxPP">
                                         <label for="ManTer">Territoriality</label>
                                         <select id="ManTer" name="ManTer">
                                             <option value="1">Low</option>
@@ -419,7 +433,7 @@
                                             <option value="3">High</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxPP">
                                         <label for="ManTra">Transportation</label>
                                         <select id="ManTra" name="ManTra">
                                             <option value="1">Simple</option>
@@ -427,7 +441,7 @@
                                             <option value="3">Difficult</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxPP">
                                         <label for="ManFac">Facilities</label>
                                         <select id="ManFac" name="ManFac">
                                             <option value="1">Simple</option>
@@ -438,7 +452,7 @@
                                 </div>
                                 <h3>Nutrition</h3>
                                 <div>
-                                    <div class="input-box">
+                                    <div class="input-boxPP">
                                         <label for="NutFeed">Feeding Type</label>
                                         <select id="NutFeed" name="NutFeed">
                                             <option value="1">Omnivore</option>
@@ -471,7 +485,7 @@
                                             <option value="25">No feed</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxPP">
                                         <label for="NutCost">Cost of Feed</label>
                                         <select id="NutCost" name="NutCost">
                                             <option value="1">Low</option>
@@ -482,7 +496,7 @@
                                 </div>
                                 <h3>Reproduction</h3>
                                 <div>
-                                    <div class="input-box">
+                                    <div class="input-boxPP">
                                         <label for="RepSexMat">Sexual Maturity</label>
                                         <select id="RepSexMat" name="RepSexMat">
                                             <option value="1">Early</option>
@@ -490,7 +504,7 @@
                                             <option value="3">Late</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxPP">
                                         <label for="RepNumbOff">Number of Offspring</label>
                                         <select id="RepNumbOff" name="RepNumbOff">
                                             <option value="1">Low</option>
@@ -498,7 +512,7 @@
                                             <option value="3">High</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxPP">
                                         <label for="RepCy">Reproduction Cycles</label>
                                         <select id="RepCy" name="RepCy">
                                             <option value="1">Low</option>
@@ -506,7 +520,7 @@
                                             <option value="3">High</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxPP">
                                         <label for="RepGestInc">Gestation/Incubation Time</label>
                                         <select id="RepGestInc" name="RepGestInc">
                                             <option value="1">Short</option>
@@ -514,7 +528,7 @@
                                             <option value="3">Long</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxPP">
                                         <label for="RepSexInt">Sexual Interaction</label>
                                         <select id="RepSexInt" name="RepSexInt">
                                             <option value="1">Polygamy</option>
@@ -524,7 +538,7 @@
                                 </div>
                                 <h3>Production</h3>
                                 <div>
-                                    <div class="input-box">
+                                    <div class="input-boxPP">
                                         <label for="ProPopStu">Population study</label>
                                         <select id="ProPopStu" name="ProPopStu">
                                             <option value="1">Low</option>
@@ -532,7 +546,7 @@
                                             <option value="3">High</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxPP">
                                         <label for="ProProf">Profit</label>
                                         <select id="ProProf" name="ProProf">
                                             <option value="1">Early</option>
@@ -540,7 +554,7 @@
                                             <option value="3">Late</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxPP">
                                         <label for="ProLong">Longevity</label>
                                         <select id="ProLong" name="ProLong">
                                             <option value="1">Short</option>
@@ -548,7 +562,7 @@
                                             <option value="3">Long</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxPP">
                                         <label for="ProReL">Research Level</label>
                                         <select id="ProReL" name="ProReL">
                                             <option value="1">Low</option>
@@ -556,7 +570,7 @@
                                             <option value="3">High</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxPP">
                                         <label for="ProOpBre">Optimal Breeding Type</label>
                                         <select id="ProOpBre" name="ProOpBre">
                                             <option value="3">Closed Cycle</option>
@@ -564,7 +578,7 @@
                                             <option value="1">Open Cycle</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxPP">
                                         <label for="ProAddVal">Added Value</label>
                                         <select id="ProAddVal" name="ProAddVal">
                                             <option value="1">Yes</option>
@@ -574,7 +588,7 @@
                                 </div>
                                 <h3>Market</h3>
                                 <div>
-                                    <div class="input-box">
+                                    <div class="input-boxPP">
                                         <label for="MarCultAcc">Cultural Acceptance</label>
                                         <select id="MarCultAcc" name="MarCultAcc">
                                             <option value="1">Low</option>
@@ -582,7 +596,7 @@
                                             <option value="3">High</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxPP">
                                         <label for="MarPri">Price</label>
                                         <select id="MarPri" name="MarPri">
                                             <option value="1">Low</option>
@@ -590,7 +604,7 @@
                                             <option value="3">High</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxPP">
                                         <label for="MarCompDom">Competition with Domestic Species</label>
                                         <select id="MarCompDom" name="MarCompDom">
                                             <option value="1">Low</option>
@@ -598,7 +612,7 @@
                                             <option value="3">High</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxPP">
                                         <label for="MarMarCha">Chains</label>
                                         <select id="MarMarCha" name="MarMarCha">
                                             <option value="1">Yes</option>
@@ -606,7 +620,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="input-box">
+                                <div class="input-boxPP">
                                     <label for="RegRest">IUCN-CITES and/or National Restrictions</label>
                                     <select id="RegRest" name="RegRest">
                                         <option value="1">Yes</option>
@@ -617,14 +631,14 @@
                             
                             <!-- Campos de use -->
 
-                            <button type="button" class="collapsible">Use</button>
-                            <span class="icon"><ion-icon name="help-outline"></ion-icon>
+                            <button type="button" class="collapsibleU">Use</button>
+                            <span class="iconU"><ion-icon name="help-circle"></ion-icon></ion-icon>
                             </span>
-                            <div class="content">
+                            <div class="contentU">
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
                                 <h3>Main Use</h3>
                                 <div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="MaUSubs">Subsistence</label>
                                         <select id="MaUSubs" name="MaUSubs">
                                             <option value="0">0</option>
@@ -633,7 +647,7 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="MaUSelCons">Self-Consumption</label>
                                         <select id="MaUSelCons" name="MaUSelCons">
                                             <option value="0">0</option>
@@ -642,7 +656,7 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="MaUCom">Commercial</label>
                                         <select id="MaUCom" name="MaUCom">
                                             <option value="0">0</option>
@@ -654,7 +668,7 @@
                                 </div>
                                 <h3>Sort of Use</h3>
                                 <div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="SoUseFo">Food</label>
                                         <select id="SoUseFo" name="SoUseFo">
                                             <option value="0">0</option>
@@ -663,7 +677,7 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="SoUseFe">Feed</label>
                                         <select id="SoUseFe" name="SoUseFe">
                                             <option value="0">0</option>
@@ -672,7 +686,7 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="SoUseBioconv">Bioconversion</label>
                                         <select id="SoUseBioconv" name="SoUseBioconv">
                                             <option value="0">0</option>
@@ -681,7 +695,7 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="SoUseBiocont">Biocontrol</label>
                                         <select id="SoUseBiocont" name="SoUseBiocont">
                                             <option value="0">0</option>
@@ -690,7 +704,7 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="SoUsePol">Pollination</label>
                                         <select id="SoUsePol" name="SoUsePol">
                                             <option value="0">0</option>
@@ -699,7 +713,7 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="SoUsePet">Pet</label>
                                         <select id="SoUsePet" name="SoUsePet">
                                             <option value="0">0</option>
@@ -708,7 +722,7 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="SoUseCult">Cultural</label>
                                         <select id="SoUseCult" name="SoUseCult">
                                             <option value="0">0</option>
@@ -717,7 +731,7 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="SoUseOth">Other</label>
                                         <select id="SoUseOth" name="SoUseOth">
                                             <option value="0">0</option>
@@ -729,7 +743,7 @@
                                 </div>
                                 <h3>Primary Way to Obtain</h3>
                                 <div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="ObtHar">Harvesting</label>
                                         <select id="ObtHar" name="ObtHar">
                                             <option value="0">0</option>
@@ -738,7 +752,7 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="ObtSHar">Semiharvesting</label>
                                         <select id="ObtSHar" name="ObtSHar">
                                             <option value="0">0</option>
@@ -747,7 +761,7 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="ObtPro">Production</label>
                                         <select id="ObtPro" name="ObtPro">
                                             <option value="0">0</option>
@@ -759,7 +773,7 @@
                                 </div>
                                 <h3>Primary Continents of Utilization</h3>
                                 <div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="ContUtNA">North America</label>
                                         <select id="ContUtNA" name="ContUtNA">
                                             <option value="0">0</option>
@@ -768,7 +782,7 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="ContUtCA">Central America</label>
                                         <select id="ContUtCA" name="ContUtCA">
                                             <option value="0">0</option>
@@ -777,7 +791,7 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="ContUtSA">South America</label>
                                         <select id="ContUtSA" name="ContUtSA">
                                             <option value="0">0</option>
@@ -786,7 +800,7 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="ContUtAs">Asia</label>
                                         <select id="ContUtAs" name="ContUtAs">
                                             <option value="0">0</option>
@@ -795,7 +809,7 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="ContUtEu">Europe</label>
                                         <select id="ContUtEu" name="ContUtEu">
                                             <option value="0">0</option>
@@ -804,7 +818,7 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="ContUtOc">Oceania</label>
                                         <select id="ContUtOc" name="ContUtOc">
                                             <option value="0">0</option>
@@ -813,7 +827,7 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="ContUtAf">Africa</label>
                                         <select id="ContUtAf" name="ContUtAf">
                                             <option value="0">0</option>
@@ -825,7 +839,7 @@
                                 </div>
                                 <h3>Market</h3>
                                 <div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="MarYN">Y/N</label>
                                         <select id="MarYN" name="MarYN">
                                             <option value="0">0</option>
@@ -834,7 +848,7 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="MarLoc">Local</label>
                                         <select id="MarLoc" name="MarLoc">
                                             <option value="0">0</option>
@@ -843,7 +857,7 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="MarReg">Regional</label>
                                         <select id="MarReg" name="MarReg">
                                             <option value="0">0</option>
@@ -852,7 +866,7 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="MarNat">National</label>
                                         <select id="MarNat" name="MarNat">
                                             <option value="0">0</option>
@@ -861,7 +875,7 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="MarInt">International</label>
                                         <select id="MarInt" name="MarInt">
                                             <option value="0">0</option>
@@ -870,7 +884,7 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="MarMP">Main Product of Use</label>
                                         <select id="MarMP" name="MarMP">
                                             <option value="0">Feed</option>
@@ -879,39 +893,35 @@
                                             <option value="3">Pet</option>
                                             <option value="1">Biocontrol</option>
                                             <option value="2">Pollination</option>
-                                            <option value="3">N/A</option>
-                                            <option value="2">Pollination</option>
-                                            <option value="3">N/A</option>
+                                            <option value="3">Laboratory- reared</option>
+                                            <option value="2">Biomodel</option>
                                             <option value="3">N/A</option>
                                         </select>
                                     </div>
                                 </div>
                                 <h3>Production Scale</h3>
                                 <div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="ScLS">Low Scale</label>
-                                        <input type="number" id="ScLS" name="ScLS">
-                                        <select id="ContUtNA" name="ContUtNA">
+                                        <select id="ScLS" name="ScLS">
                                             <option value="0">0</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="ScMS">Middle Scale</label>
-                                        <input type="number" id="ScMS" name="ScMS">
-                                        <select id="ContUtNA" name="ContUtNA">
+                                        <select id="ScMS" name="ScMS">
                                             <option value="0">0</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="ScLaS">Large Scale</label>
-                                        <input type="number" id="ScLaS" name="ScLaS">
-                                        <select id="ContUtNA" name="ContUtNA">
+                                        <select id="ScLaS" name="ScLaS">
                                             <option value="0">0</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
@@ -921,60 +931,54 @@
                                 </div>
                                 <h3>Social Acceptability</h3>
                                 <div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="SocAccCSA">Central and South America</label>
-                                        <input type="number" id="SocAccCSA" name="SocAccCSA">
-                                        <select id="ContUtNA" name="ContUtNA">
+                                        <select id="SocAccCSA" name="SocAccCSA">
                                             <option value="0">0</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="SocAccNA">Central and North America</label>
-                                        <input type="number" id="SocAccNA" name="SocAccNA">
-                                        <select id="ContUtNA" name="ContUtNA">
+                                        <select id="SocAccNA" name="SocAccNA">
                                             <option value="0">0</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="SocAccAf">Africa</label>
-                                        <input type="number" id="SocAccAf" name="SocAccAf">
-                                        <select id="ContUtNA" name="ContUtNA">
+                                        <select id="SocAccAf" name="SocAccAf">
                                             <option value="0">0</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="SocAccOc">Oceania</label>
-                                        <input type="number" id="SocAccOc" name="SocAccOc">
-                                        <select id="ContUtNA" name="ContUtNA">
+                                        <select id="SocAccOc" name="SocAccOc">
                                             <option value="0">0</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="SocAccEu">Europe</label>
-                                        <input type="number" id="SocAccEu" name="SocAccEu">
-                                        <select id="ContUtNA" name="ContUtNA">
+                                        <select id="SocAccEu" name="SocAccEu">
                                             <option value="0">0</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-box">
+                                    <div class="input-boxU">
                                         <label for="SocAccAs">Asia</label>
-                                        <input type="number" id="SocAccAs" name="SocAccAs">
-                                        <select id="ContUtNA" name="ContUtNA">
+                                        <select id="SocAccAs" name="SocAccAs">
                                             <option value="0">0</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
@@ -982,7 +986,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="input-box">
+                                <div class="input-boxU">
                                     <label for="LegLeg">Legislation</label>
                                     <input type="text" id="LegLeg" name="LegLeg">
                                 </div>
@@ -1117,18 +1121,12 @@
                         </div>
                     </div>
                 </div>
-                <div>
-                    <img src="Imagenes/Diss.png" alt="" class="Clusdiss">
-                </div>
-                <div>
-                    <img src="Imagenes/ClusEco.png" alt="" class="ClusEco">
-                </div>
             </section>
         </main>
 
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-        <script src="script.js"></script>
+        <script src="scriptDQ.js"></script>
     </body>
     <footer>
         <p>Insectonomy - Universidad Nacional de Colombia</p>

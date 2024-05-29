@@ -183,8 +183,134 @@
     /*Estilo del main*/
 
     .mainDQ{
-        margin-top: 100px;
+        margin-top: 130px;
         margin-left: 40px;
+        margin-bottom: 40px;
+    }
+
+    h2{
+        text-align: center;
+    }
+
+    h3{
+        margin: 5px;
+    }
+
+    .pI{
+        margin-top: 40px;
+        margin-bottom: 10px;
+        margin-left: 150px;
+        margin-right: 150px;
+    }
+
+    .buttons{
+        position: relative;
+        text-align: center;
+    }
+
+    /*Content GeneralASP*/
+
+    .iconGA{
+        position: absolute;
+        font-size: 1.8em;
+        line-height: 130px;
+    }
+    .input-boxGA{
+        display: inline;
+        align-items: center;
+        margin: 10px;
+    }
+
+    .contentGA{
+        margin-left: 200px;
+        margin-right: 300px;
+        align-items: center;
+        display: block;
+        line-height: 40px;
+        border: 1px solid #240202;
+        border-radius: 6px;
+        padding: 10px;
+    }
+
+    /*Content EcoPot*/
+
+    .iconEP{
+        position: absolute;
+        font-size: 1.8em;
+        line-height: 130px;
+    }
+    .input-boxEP{
+        display: inline;
+        align-items: center;
+        margin: 10px;
+    }
+
+    .contentEP{
+        margin-left: 200px;
+        margin-right: 300px;
+        align-items: center;
+        display: block;
+        line-height: 40px;
+        border: 1px solid #240202;
+        border-radius: 6px;
+        padding: 10px;
+    }
+    /**/
+
+    .iconPP{
+        position: absolute;
+        font-size: 1.8em;
+        line-height: 130px;
+    }
+    .input-boxPP{
+        display: inline;
+        align-items: center;
+        margin: 10px;
+    }
+
+    .contentPP{
+        margin-left: 200px;
+        margin-right: 300px;
+        align-items: center;
+        display: block;
+        line-height: 40px;
+        border: 1px solid #240202;
+        border-radius: 6px;
+        padding: 10px;
+    }
+    /**/
+
+    .iconU{
+        position: absolute;
+        font-size: 1.8em;
+        line-height: 130px;
+    }
+    .input-boxU{
+        display: inline;
+        align-items: center;
+        margin: 10px;
+    }
+
+    .contentU.POP{
+        margin-left: 200px;
+        margin-right: 300px;
+        align-items: center;
+        display: block;
+        line-height: 40px;
+        border: 1px solid #240202;
+        border-radius: 6px;
+        padding: 10px;
+    }
+
+    .contentU{
+        margin-left: 200px;
+        margin-right: 300px;
+        align-items: center;
+        display: none;
+        line-height: 40px;
+        border: 1px solid #240202;
+        border-radius: 6px;
+        padding: 10px;
     }
 
         /*Estilo de botones*/
@@ -193,7 +319,7 @@
             position: relative;
             font-size: 1em;
             background: transparent;
-            width: 100px;
+            width: 150px;
             height: 40px;
             outline: none;
             color: #250000;
@@ -203,7 +329,8 @@
             font-weight: 600;
             transition: 0.4s;
             justify-content: center;
-            margin: 7px;
+            margin: 10px;
+            margin-top: 40px;
         }
 
         .btnDQ:hover{
@@ -211,11 +338,105 @@
             color: #ffffff;
         }
 
+        /**/
+            .collapsibleGA{
+                margin: 40px;
+                margin-left: 100px;
+                position: relative;
+                font-size: 1em;
+                background: transparent;
+                width: 250px;
+                height: 40px;
+                outline: none;
+                color: #250000;
+                border: 2px solid #240202;
+                border-radius: 6px;
+                cursor: pointer;
+                font-weight: 600;
+                transition: 0.4s;
+                justify-content: center;
+            }
+
+            .collapsibleGA:hover{
+                background-color: #220000;
+                color: #ffffff;
+            }
+        /**/
+            .collapsibleEP{
+                margin: 40px;
+                margin-left: 100px;
+                position: relative;
+                font-size: 1em;
+                background: transparent;
+                width: 250px;
+                height: 40px;
+                outline: none;
+                color: #250000;
+                border: 2px solid #240202;
+                border-radius: 6px;
+                cursor: pointer;
+                font-weight: 600;
+                transition: 0.4s;
+                justify-content: center;
+            }
+
+            .collapsibleEP:hover{
+                background-color: #220000;
+                color: #ffffff;
+            }
+        /**/
+            .collapsiblePP{
+                margin: 40px;
+                margin-left: 100px;
+                position: relative;
+                font-size: 1em;
+                background: transparent;
+                width: 250px;
+                height: 40px;
+                outline: none;
+                color: #250000;
+                border: 2px solid #240202;
+                border-radius: 6px;
+                cursor: pointer;
+                font-weight: 600;
+                transition: 0.4s;
+                justify-content: center;
+            }
+
+            .collapsiblePP:hover{
+                background-color: #220000;
+                color: #ffffff;
+            }
+        /**/
+            .collapsibleU{
+                margin: 40px;
+                margin-left: 100px;
+                position: relative;
+                font-size: 1em;
+                background: transparent;
+                width: 250px;
+                height: 40px;
+                outline: none;
+                color: #250000;
+                border: 2px solid #240202;
+                border-radius: 6px;
+                cursor: pointer;
+                font-weight: 600;
+                transition: 0.4s;
+                justify-content: center;
+            }
+
+            .collapsibleU:hover{
+                background-color: #220000;
+                color: #ffffff;
+            }
+
         /*Estilo de tablas*/
 
         .table-container {
             margin-top: 20px;
             overflow-x: auto;
+            margin-right: 40px;
         }
 
         table {
@@ -232,7 +453,6 @@
         }
 
         table th {
-            background-color: #3d00002f;
             font-weight: 600;
             color: #200000;
             font-weight: bold;
