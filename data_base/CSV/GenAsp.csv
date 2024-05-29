@@ -1,0 +1,130 @@
+Id;Or;Fam;ComNa;SciNa;BiogRe;BiogZo;HoldBio;HoldPre;HoldTemp;HoldAB;HoldLR;HoldAD;HabPat;LSI
+1;Ortoptera;Gryllidae;House cricket;Acheta domesticus;Paleartic;Asia;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Forest surface;Pupa, Imago
+2;Hymenoptera;Formicidae;Fat-Bottomed ant;Atta laevigata;Neotropical;Central America, South America;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Subsoil;Imago
+3;Blattodea;Blaberidae;Discoid cockroach;Blaberus discoidalis;Neotropical;South America;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Forest surface;Pupa, Imago
+4;Blattodea;Blaberidae;Giant cockroach;Blaberus giganteus;Neotropical;South America;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Forest surface;Pupa, Imago
+5;Lepidoptera;Bombycidae;Silkworm moth;Bombyx mori; Paleartic, Indomalayan;Asia;Dry forest;1000 - 2000;>24;Premontane;Tropical;100 - 2000;Undergrowth;Larva
+6;Lepidoptera;Nymphalide;Andean silverspot;Dione glycera;Neotropical;South America;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Undergrowth;Larva, Pupa, Imago
+7;Coleoptera;Scarabaeidae;Hercules Beetle;Dynastes hercules;Neotropical;South America;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Forest surface;Larva, Pupa, Imago
+8;Lepidoptera;Pyralidae;Wax moth;Galleria mellonella;Paleartic, Afrotropical, Cosmopolitan;Africa, Asia;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Forest surface;Larva
+9;Ortoptera;Gryllidae;Jamaican field cricket;Gryllus assimilis;Neotropical;South America;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Forest surface;Nymph, Imago
+10;Diptera;Stratiomyidae;Black soldier fly;Hermetia illucens;Neartic, Cosmopolitan;North America;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Forest surface;Larva, Pupa, Imago
+11;Mantodea;Mantidae;Praying mantis;Mantis religiosa;Paleartic, Afrotropical;Africa, Europe;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Undergrowth;Imago
+12;Lepidoptera;Nymphalide;Blue emperor butterfly;Morpho rhodopteron;Neotropical;Central America, South America;Moist forest;1000 - 2000;12 - 24;Lower montane ;Warm temperate;1800 - 2000;Forest canopy;Imago
+13;Diptera;Muscidae;House fly;Musca domestica;Neartic, Cosmopolitan;North America;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Forest surface;Larva, Imago
+14;Coleoptera;Curculionidae;Palm weevil;Rhynchophorus palmarum;Neotropical;South America;Dry forest;1000 - 2000;>24;Premontane;Tropical;100 - 2000;Subsoil;Larva
+15;Hymenoptera;Apidae;Mandaguari bee;Scaptotrigona spp.;Neotropical;South America;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Forest surface;Larva, Pupa, Imago
+16;Coleoptera;Tenebrionidae;Mealworm;Tenebrio molitor;Paleartic, Afrotropical, Cosmopolitan;Africa, Europe;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Subsoil;Larva, Pupa, Imago
+17;Hymenoptera;Trichogrammatidae;Little wasp;Trichogramma exiguum;Neotropical;South America;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Forest surface;Imago
+18;Coleoptera;Tenebrionidae;Superworm;Zophobas atratus;Neotropical;Central America;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Forest surface;Larva
+19;Coleoptera;Scarabaeidae;Horned beetle;Golofa porteri;Neotropical;Central America, South America;Wet forest;1000 - 2000;6 - 12;Montane;Cool temperate;2500 - 3300;Subsoil;Larva
+20;Coleoptera;Scarabaeidae;Neptune beetle;Dynastes neptunus;Neotropical;South America;Rain forest;2000 - 4000;>24;Subalpine;Boreal;1200 - 2400;Forest surface;Larva, Imago
+21;Coleoptera;Scarabaeidae;Elephant beetle;Megasoma elephas;Neotropical;South America;Dry forest;1000 - 2000;>24;Premontane;Tropical;100 - 2000;Subsoil;Larva, Imago
+22;Coleoptera;Lucanidae;Stag beetle;Lucanus cervus;Paleartic;Europe;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Subsoil;Larva, Imago
+23;Coleoptera;Scarabaeidae;Japanese rhinoceros beetle;Trypoxylus dichotomus;Paleartic;Asia;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Subsoil;Larva, Imago
+24;Lepidoptera;Erebidae;Coca tussock moth;Eloria noyesi;Neotropical;South America;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Forest canopy;Larva, Imago
+25;Lepidoptera;Papilionidae;Common yellow swallowtail;Papilio machaon;Paleartic, Neartic;Asia, Europe, North America;Steppe;250 - 500;6 - 12;Montane;Cool temperate;1100 - 2000;Forest canopy;Imago
+26;Lepidoptera;Nymphalide;Giant blue morpho;Morpho didius;Neotropical;South America;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Forest canopy;Larva, Imago
+27;Lepidoptera;Papilionidae;Queen Alexandra's birdwing;Ornithoptera alexandrae;Paleartic, Indomalayan;Asia;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Forest canopy;Larva, Imago
+28;Hemiptera;Dactylopiidae;Cochineals;Dactylopius coccus;Afrotropical, Neotropical;Central America, South America;Desert scrub;125 - 250;6 - 12;Montane;Cool temperate;2500 - 3300;Forest surface;Imago
+29;Lepidoptera;Cossidae;Mezcal worm;Comadia redtenbacheri;Neotropical;South America;Dry forest;125 - 250;>24;Premontane;Tropical;100 - 2000;Forest surface;Larva, Imago
+30;Hymenoptera;Braconidae;Braconid wasp;Aphidius colemani;Neotropical;South America;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Forest surface;Imago
+31;Ortoptera;Pyrgomorphidae;Chapulin, corn-field grasshopper;Sphenarium purpurascens;Neotropical;Central America;Dry scrub;125 - 250;3 - 6;Subalpine;Boreal;500–2600;Forest surface;Nymph, Imago
+32;Diptera;Asilidae;Yellow assassin fly;Laphria flava;Neotropical;South America;Moist forest;1000 - 2000;12 - 18;Lower montane ;Warm temperate;1800 - 2000;Forest surface;Imago
+33;Diptera;Syrphidae;Hoverfly, Band-eyed drone fly;Eristalinus taeniops;Neartic, Neotropical;Africa, Asia, Europe, South America;Moist forest;1000 - 2000;12 - 18;Lower montane ;Warm temperate;1800 - 2000;Forest surface;Larva, Imago
+34;Hemiptera;Pentatomidae;Edible bedbug;Euschistus taxcoensis;Neotropical;Central America;Moist forest;1000 - 2000;12 - 18;Lower montane ;Warm temperate;1800 - 2000;Forest surface;Imago
+35;Blattodea;Blaberidae;Dubia- roach;Blaptica dubia;Neotropical;South America;Moist forest;1000 - 2000;12 - 18;Lower montane ;Warm temperate;1800 - 2000;Subsoil;Nymph, Imago
+36;Hymenoptera;Formicidae;Harvester ant;Messor barbarus;Paleartic;Europe;Dry scrub;125 - 250;3 - 6;Subalpine;Boreal;500–2600;Subsoil, Meadows, Plains;Imago
+37;Coleoptera;Elateroidea;Cocuyo;Pyrophorus noctilucus;Neotropical;South America;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Subsoil;Larva, Imago
+38;Coleoptera;Cerambycidae;Harlequin beetle;Acrocinus longimanus;Neotropical;South America;Rain forest;8000 - 16000;>24;Premontane;Tropical;2000 - 3000;Subsoil;Larva, Imago
+39;Coleoptera;Carabidae;Manticora beetle;Manticora scabra;Afrotropical;Africa;Desert scrub;125 - 250;12 - 18;Lower montane;Warm temperate;100 - 500;Subsoil;Larva, Imago
+40;Hymenoptera;Formicidae;Weaver ant;Oecophylla smaragdina;Neotropical;Asia, Oceania;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Forest surface;Larva, Imago
+41;Hymenoptera;Formicidae;Eciton army ant;Eciton burchellii;Neotropical;Central America, South America;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Forest surface;Imago
+42;Hemiptera;Reduviidae;Horrid king assassin bug;Psytalla horrida;Afrotropical;Africa;Dry forest;1000 - 2000;>24;Premontane;Tropical;100 - 2000;Subsoil;Imago
+43;Ephemeroptera ;Leptohyphidae;Ephemeral;Haplohyphes huallaga;Neotropical;South America;Dry forest;1000 - 2000;>24;Premontane;Tropical;100 - 2000;Forest surface;Larva, Imago
+44;Coleoptera;Curculionidae;Banana root borer;Cosmopolites sordidus;Neotropical;Cosmopolitan;Moist forest;1000 - 2000;12 - 18;Lower montane;Warm temperate;1800 - 2000;Vegetation;Larva
+45;Lepidoptera;Nymphalide;Forest Giant owl;Caligo eurilochus;Neotropical;Central America, South America;Rain forest;4000 - 8000;12 - 24;Premontane;Tropical;2000 - 3000;Forest canopy;Imago
+46;Hymenoptera;Apidae;Common bumblebee;Bombus atratus;Neotropical;South America;Wet forest;1000 - 2000;6 - 12;Montane;Cool temperate;2500 - 3300;Forest surface;Imago
+47;Blattodea;Lycidae;Colombian- roach;Lucihormetica subcincta;Neotropical;South America;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Subsoil;Pupa, Imago
+48;Coleoptera;Tenebrionidae;Superworm;Zophobas opacus;Neotropical;South America;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Subsoil, Forest surface;Larva, Imago
+49;Diptera;Stratiomyidae;Yellow soldier fly;Ptecticus testaceus;Neartic, Neotropical;America;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Forest surface;Larva, Pupa, Imago
+50;Coleoptera;Tenebrionidae;Lesser mealworm;Alphitobius diaperinus;Afrotropical;Africa;Wet forest;1000 - 2000;6 - 12;Montane;Cool temperate;2500 - 3300;Subsoil, cracks in walls, floors;Larva
+51;Hemiptera;Cicadidae;Citrus cicada;Diceroprocta apache;Neartic, Neotropical;America;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Stems, leaves;Imago
+52;Coleoptera;Curculionidae;Acorn weevils;Curculio spp.;Neartic, Neotropical;America;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Vegetation;Larva
+53;Hymenoptera;Formicidae;Black carpenter ant;Camponotus pennsylvanicus;Neartic, Neotropical;Central America, North America;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Forest surface;Larva, Imago
+54;Hymenoptera;Apidae;Western honeybee;Apis mellifera;Paleartic;Europe;Dry forest;500 - 1000;12 - 24;Lower montane;Warm temperate;2000 - 3000;Forest surface;Larva, Pupa, Imago
+55;Hymenoptera;Formicidae;Escamoles;Liometopum spp;Paleartic, Neartic, Neotropical;Asia, Europe, North America;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Forest surface;Imago
+56;Hymenoptera;Formicidae;Leafcutter ant;Atta cephalotes;Neartic, Neotropical;America;Dry forest;1000 - 2000;>24;Premontane;Tropical;100 - 2000;Subsoil;Imago
+57;Coleoptera;Tenebrionidae;Chinese weevil;Ulomoides dermestoides;Paleartic;Asia;Moist forest;500 - 1000;6 - 12;Montane;Cool temperate;2500 - 3300;Ground litter;Larva, Pupa, Imago
+58;Blattodea;Blaberidae;Madagascar hissing cockroach;Gromphadorhina portentosa;Afrotropical;Africa;Dry forest;1000 - 2000;>24;Premontane;Tropical;100 - 2000;Subsoil;Nymph, Imago
+59;Coleoptera;Tenebrionidae;Dark mealworm beetle;Tenebrio obscurus;Paleartic;Europe;Dry forest;500 - 1000;12 - 24;Lower montane;Warm temperate;2000 - 3000;Subsoil;Pupa, Imago
+60;Diptera;Tephritidae;Mediterranean fruit fly, medfly;Ceratitis capitata;Paleartic, Afrotropical;Africa;Moist forest;2000 - 4000;>24;Premontane;Tropical;1000 - 1800;Forest surface;Larva
+61;Diptera;Calliphoridae;Common green bottle fly;Lucilia sericata;Afrotropical, Neotropical, Oceanian;Africa, Oceania, South America;Moist forest;1000 - 4000;>24;Premontane;Tropical;1000 - 1800;Forest surface;Larva, Imago
+62;Diptera;Muscidae;Face fly;Musca autumnalis;Paleartic, Indomalayan;Africa, Asia;Dry forest;1000 - 2000;>24;Premontane;Tropical;100 - 2000;Forest surface;Larva, Pupa
+63;Ortoptera;Gryllidae;Edible cricket;Scapsipedus icipe;Afrotropical;Africa;Very Dry forest;500 - 1000;>24;Premontane;Tropical;600 - 1000;Forest surface;Nymph, Imago
+64;Hemiptera;Belostomatidae;Giant water bugs;Lethocerus cordofanus ;Afrotropical;Africa;Very Dry forest;500 - 1000;>24;Premontane;Tropical;600 - 1000;Rivers;Nymph, Imago
+65;Lepidoptera;Saturniidae;Mopane worm;Imbrasia spp;Afrotropical;Africa;Very Dry forest;500 - 1000;>24;Premontane;Tropical;600 - 1000;Forest canopy;Larva, Imago
+66;Lepidoptera;Notodontidae;Silkmoth;Anaphe panda;Afrotropical;Africa;Dry forest;500 - 1000;12 - 24;Lower montane;Warm temperate;2000 - 3000;Forest canopy;Larva, Imago
+67;Hymenoptera;Formicidae;African thief ant;Carebara vidua;Afrotropical;Africa;Dry forest;500 - 1000;12 - 24;Lower montane;Warm temperate;2000 - 3000;Subsoil;Imago
+68;Ortoptera;Tettigoniidae;Nsenene;Ruspolia  differens;Afrotropical;Africa;Dry forest;1000 - 2000;>24;Premontane;Tropical;100 - 2000;Forest surface;Nymph, Imago
+69;Diptera;Chaobiridae;Phantom midges;Chaoborus edulis;Afrotropical;Africa;Very Dry forest;500 - 1000;>24;Premontane;Tropical;600 - 1000;Forest surface;Larva
+70;Hemiptera;Tessaratomidae;Bedbug;Encosternum spp;Afrotropical;Africa;Very Dry forest;500 - 1000;>24;Premontane;Tropical;600 - 1000;Stems, leaves;Nymph, Imago
+71;Ortoptera;Acrididae;Sahelian tree locust;Anacridium melanorhodon;Afrotropical;Africa;Very Dry forest;500 - 1000;>24;Premontane;Tropical;600 - 1000;Forest surface;Nymph, Imago
+72;Blattodea;Termitidae;Mendi termite; Macrotermes subhyalinus;Afrotropical;Africa;Very Dry forest;500 - 1000;>24;Premontane;Tropical;600 - 1000;Wood;Nymph, Imago
+73;Ortoptera;Tettigoniidae;Grasshopper;Ruspolia nitidula;Afrotropical;Africa, Europe;Very Dry forest;500 - 1000;>24;Premontane;Tropical;600 - 1000;Forest surface;Nymph, Imago
+74;Ortoptera;Acrididae;Migratory locust;Locusta migratoria ;Afrotropical, Paleartic;Africa, Asia, Europe;Very Dry forest;500 - 1000;>24;Premontane;Tropical;600 - 1000;Forest surface;Nymph, Imago
+75;Lepidoptera;Crambidae;Bamboo borer;Omphisa fuscidentalis;Paleartic, Indomalayan;Asia;Moist forest;500 - 1000;6 - 12;Montane;Cool temperate;2500 - 3300;Sumsoil, wood;Larva, Imago
+76;Ortoptera;Acrididae;Bombay locust;Patanga succincta;Paleartic, Indomalayan;Asia;Moist forest;1000 - 2000;12 - 24;Premontane;Subtropical;1000 - 1800;Forest surface;Nymph, Imago
+77;Coleoptera;Curculionidae;Red palm weevil;Rhynchophorus ferrugineus;Paleartic, Indomalayan;Asia;Moist forest;1000 - 2000;12 - 24;Premontane;Subtropical;1000 - 1800;Subsoil;Larva
+78;Hemiptera;Pentatomidae;Stinky bebug;Aspongopus nepalensis ;Paleartic, Afrotropical;Africa, Asia;Very Dry forest;500 - 1000;>24;Premontane;Tropical;600 - 1000;Stems, leaves;Nymph, Imago
+79;Coleoptera;Coccinellidae;Ladybug;Harmonia axyridis;Paleartic;Asia;Moist forest;500 - 1000;6 - 12;Montane;Cool temperate;2500 - 3300;Leaves;Larva, Imago
+80;Hymenoptera;Formicidae;Red wood ant;Formica rufa;Paleartic;Europe;Dry forest;500 - 1000;12 - 24;Lower montane;Warm temperate;2000 - 3000;Forest surface;Larva, Imago
+81;Coleoptera;Lampyridae;Glow- worm;Lampyris noctiluca;Paleartic;Asia, Europe;Wet forest;2000 - 4000;12 - 24;Lower montane;Warm temperate;1000 - 2000;Shore of water bodies;Larva, Pupa, Imago
+82;Lepidoptera;Noctuidae;Nocturnal Bogong moth ;Agrotis infusa;Australian, Oceanian;Oceania;Moist forest;1000 - 2000;12 - 24;Lower montane;Warm temperate;1800 - 2000;Forest surface;Larva, Imago
+83;Hymenoptera;Formicidae;Honey ant;Camponotus inflatus;Australian;Oceania;Desert scrub;125 - 250;>24;Premontane;Tropical;400 - 1300;Forest surface;Larva, Imago
+84;Hymenoptera;Formicidae;Red honey ant;Melophorus bagoti;Australian;Oceania;Desert scrub;125 - 250;>24;Premontane;Tropical;400 - 1300;Forest surface;Larva, Imago
+85;Lepidoptera;Erebidae;Baphomet moth;Creatonotos gangis;Indomalayan, Australian;Asia, Oceania;Desert scrub;125 - 250;>24;Premontane;Tropical;400 - 1300;Forest surface;Larva, Imago
+86;Ortoptera;Rhaphidophoridae;Weta insect;Deinacrida spp;Oceanian;Oceania;Moist forest;1000 - 2000;12 - 24;Lower montane;Warm temperate;1800 - 2000;Subsoil;Nymph, Imago
+87;Coleoptera;Passalidae;Rotten wood beetle;Passalus sp;Neartic, Neotropical;America;Moist forest;1000 - 2000;12 - 24;Lower montane;Warm temperate;1800 - 2000;Rotten wood;Larva, Imago
+88;Blattodea;Blaberidae;Green banana cockroach;Panchlora nivea;Neartic, Neotropical;America;Very Dry forest;500 - 1000;>24;Premontane;Tropical;600 - 1000;Subsoil;Nymph, Imago
+89;Coleoptera;Scarabaeidae;Green fruit beetle;Cotinis mutabilis;Neartic;North America;Dry forest;1000 - 2000;>24;Premontane;Subtropical;100 - 2000;Soil;Larva
+90;Megaloptera;Corydalidae;Eastern dobsonfly;Corydalus cornutus;Neartic;North America;Moist forest;1000 - 2000;12 - 24;Lower montane;Warm temperate;1800 - 2000;Vegetation;Larva, Imago
+91;Lepidoptera;Nymphalide;Monarch butterfly;Danaus plexippus ;Neartic, Neotropical;America;Dry forest;1000 - 2000;>24;Premontane;Tropical;100 - 2000;Vegetation;Larva, Imago
+92;Diptera;Oestridae;Reindeer nose botfly;Cephenemyia trompe;Neartic;North America;Moist forest;500 - 1000;6 - 12;Montane;Cool temperate;2500 - 3300;Forest surface;Larva
+93;Diptera;Oestridae;Reindeer warble botfly;Hypoderma tarandi;Neartic;North America;Moist forest;500 - 1000;6 - 12;Montane;Cool temperate;2500 - 3300;Forest surface;Larva
+94;Coleoptera;Scarabaeidae;May beetles;Phyllophaga spp;Neartic, Neotropical;North America, South America;Moist forest;1000 - 2000;12 - 24;Lower montane;Warm temperate;1800 - 2000;Soil;Larva, imago
+95;Coleoptera;Cerambycidae;Elderberry borer;Desmocerus palliatus;Neartic;North America;Moist forest;1000 - 2000;12 - 24;Lower montane;Warm temperate;1800 - 2000;Subsoil;Larva, Imago
+96;Lepidoptera;Cossidae;Maguey worm;Hypopta agavis;Neartic, Neotropical;Central America, North America;Dry forest;1000 - 2000;>24;Premontane;Subtropical;100 - 2000;Forest surface;Larva, Imago
+97;Coleoptera;Tenebrionidae;Pinacate beetle;Eleodes longicollis;Neotropical, Indomalayan;America;Very Dry forest;500 - 1000 ;>24;Premontane;Tropical;600 - 1000;Subsoil;Larva, Pupa, Imago
+98;Coleoptera;Scarabaeidae;Green devil beetle;Oxysternon conspicillatum;Neotropical;Central America, South America;Dry forest;1000 - 2000;>24;Premontane;Tropical;100 - 2000;Soil;Larva, Imago
+99;Coleoptera;Scarabaeidae;Shining leaf chafer;Anomala spp;Neotropical;Central America, South America;Dry forest;1000 - 2000;>24;Premontane;Tropical;100 - 2000;Subsoil;Larva
+100;Coleoptera;Cerambycidae;Giant longhorn beetle, imperious sawyer;Enoplocerus armillatus;Neotropical;Central America, South America;Moist forest;1000 - 2000;12 - 24;Premontane;Subtropical;1000 - 1800;Subsoil;Larva, Imago
+101;Coleoptera;Lucanidae;Stag beetle;Cantharolethrus luxerii luxerii ;Neotropical;Central America, South America;Very Dry forest;500 - 1000 ;>24;Premontane;Tropical;600 - 1000;Subsoil;Larva, Imago
+102;Blattodea;Blattidae;American cockroach;Periplaneta americana;Cosmopolitan;Africa, Cosmopolitan;Very Dry forest;500 - 1000;>24;Premontane;Tropical;600 - 1000;Subsoil;Nymph, Imago
+103;Diptera;Drosophilidae;Fruit fly;Drosophila melanogaster;Cosmopolitan;Africa, Cosmopolitan;Very Dry forest;500 - 1000;>24;Premontane;Tropical;600 - 1000;Forest surface;Larva
+104;Hymenoptera;Apidae;Buff-tailed bumblebee;Bombus terrestris;Paleartic;Europe;Dry forest;500 - 1000;12 - 24;Lower montane;Warm temperate;2500 - 3300;Forest surface;Imago
+105;Hymenoptera;Apidae;Jatai bee;Tetragonisca angustula;Neotropical;South America;Moist forest;2000-4000;>24;Premontane;Tropical;100 - 2600;Forest surface;Larva, Pupa, Imago
+106;Hymenoptera;Apidae;Stingless bee;Melipona eburnea;Neotropical;South America;Moist forest;2000-4000;>24;Premontane;Tropical;100 - 2600;Forest surface;Larva, Pupa, Imago
+107;Diptera;Cuclicidae;Yellow fever mosquito;Aedes aegypti;Neotropical, Afrotropical;Cosmopolitan;Moist forest;2000-4000;>24;Premontane;Tropical;100 - 2600;Shady and humid places;Imago
+108;Diptera;Cuclicidae;Nail mosquito;Anopheles spp;Neotropical, Afrotropical, Indomalaya;Cosmopolitan;Moist forest;2000-4000;>24;Premontane;Tropical;100 - 2600;Shores of bodies of water;Imago
+109;Siphonaptera;Pulicidae;Oriental rat flea;Xenopsylla cheopsis;Cosmopolitan;Cosmopolitan;Wet forest;2000 - 4000;12 - 24;Lower montane;Warm temperate;1000 - 2000;Rats;Imago
+110;Siphonaptera;Pulicidae;Cat flea;Ctenocephalides felis;Cosmopolitan;Cosmopolitan;Wet forest;2000 - 4000;12 - 24;Lower montane;Warm temperate;1000 - 2000;Animals;Imago
+111;Hemiptera;Reduviidae;Kissing bug;Rhodnius prolixus;Neotropical;Cosmopolitan;Moist forest;2000-4000;>24;Premontane;Tropical;100 - 2600;Human houses;Imago
+112;Coleoptera;Curculionidae;Wheat weevil ;Sitophilus granarius;Cosmopolitan;Cosmopolitan;Dry forest;500 - 1000;12 - 24;Lower montane;Warm temperate;2500 - 3300;Grains;Larva, Imago
+113;Coleoptera;Curculionidae;Wheat weevil ;Sitophilus oryzae;Cosmopolitan;Cosmopolitan;Dry forest;500 - 1000;12 - 24;Lower montane;Warm temperate;2500 - 3300;Grains;Larva, Imago
+114;Coleoptera;Tenebrionidae;Red foor beetle;Tribolium castaneum;Cosmopolitan;Cosmopolitan;Dry forest;500 - 1000;12 - 24;Lower montane;Warm temperate;2500 - 3300;Grains;Larva, Imago
+115;Lepidoptera;Gelechiidae;Guatemalan potato moth;Tecia solanivora;Neotropical;Cosmopolitan;Moist forest;2000-4000;>24;Premontane;Tropical;100 - 2600;Potato crops;Larva
+116;Psocodea;Pediculidae;Body lice;Pediculus humanus;Cosmopolitan;Cosmopolitan;Wet forest;2000 - 4000;12 - 24;Lower montane;Warm temperate;1000 - 2000;Human's head and eyelashes;Ninfa, Imago
+117;Coleoptera;Curculionidae;Cofee berry borer;Hypothenemus hampei;cosmopolitan;Cosmopolitan;Wet forest;2000 - 4000;12 - 24;Lower montane;Warm temperate;1000 - 2000;Coffee crops;Larva, Imago
+118;Hemiptera;Reduviidae;Kissing bug;Triatoma spp;Neotropical;Cosmopolitan;Wet forest;2000 - 4000;12 - 24;Lower montane;Warm temperate;1000 - 2000;Rocks and caves;Ninfa, Imago
+119;Hemiptera;Aphididae;Green peach aphid;Myzus persicae;Cosmopolitan;Cosmopolitan;Wet forest;2000 - 4000;12 - 24;Lower montane;Warm temperate;1000 - 2000;Vegetable crops;Ninfa, Imago
+120;Thysanoptera;Thripidae;Western flower thrips;Frankliniella occidentalis ;Cosmopolitan;Cosmopolitan;Wet forest;2000 - 4000;12 - 24;Lower montane;Warm temperate;1000 - 2000; Crops ;Egg, Larva, Imago
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;i;;;;;;;;;
