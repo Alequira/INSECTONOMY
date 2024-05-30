@@ -203,7 +203,8 @@ app.post('/search', async (req, res) => {
         const indexData = filteredResults.map(result => ({
             id: result.id,
             use: result.index ? result.index.Use : null,
-            prodPot: result.index ? result.index.ProdPot : null
+            prodPot: result.index ? result.index.ProdPot : null,
+            ecoPot: result.index ? result.index.EcoPot : null
         }));
 
         // Responder con los resultados filtrados, el texto con los IDs y los datos de la gráfica

@@ -201,11 +201,23 @@ function displayIdsText(idsText) {
 
 function createChart(indexData) {
     const ctx = document.getElementById('indexChart').getContext('2d');
+    const ctx2 = document.getElementById('indexChart2').getContext('2d');
     const chartData = {
         labels: indexData.map(data => data.id),
         datasets: [{
-            label: 'Use vs ProdPot',
+            label: 'Use vs Productive Potential',
             data: indexData.map(data => ({ x: data.use, y: data.prodPot })),
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 2
+        }]
+    };
+
+    const chartData2 = {
+        labels: indexData.map(data => data.id),
+        datasets: [{
+            label: 'Use vs Ecological Potential',
+            data: indexData.map(data => ({ x: data.use, y: data.ecoPot })),
             backgroundColor: 'rgba(75, 192, 192, 0.2)',
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1
@@ -228,7 +240,30 @@ function createChart(indexData) {
                 y: {
                     title: {
                         display: true,
-                        text: 'ProdPot'
+                        text: 'Productive Potential'
+                    }
+                }
+            }
+        }
+    })
+
+    new Chart(ctx2, {
+        type: 'scatter',
+        data: chartData2,
+        options: {
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'bottom',
+                    title: {
+                        display: true,
+                        text: 'Use'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Ecological Potential'
                     }
                 }
             }
