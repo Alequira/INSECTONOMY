@@ -7,6 +7,7 @@ const contentEP = document.querySelector('.contentEP')
 const contentPP = document.querySelector('.contentPP')
 const contentU = document.querySelector('.contentU')
 
+
 /*Botones collapsible para aparecer y desaparecer cuadros de caracteristicas*/
 
 btnGA.addEventListener('click', () => {
@@ -199,34 +200,34 @@ function displayIdsText(idsText) {
     idsTextElement.textContent = idsText;
 }
 
+let chart1 = null;
+let chart2 = null;
+
 function createChart(indexData) {
-    const ctx = document.getElementById('indexChart').getContext('2d');
-    const ctx2 = document.getElementById('indexChart2').getContext('2d');
-    const chartData = {
+    // Destruye las gráficas anteriores si existen
+    if (chart1) {
+        chart1.destroy();
+    }
+    if (chart2) {
+        chart2.destroy();
+    }
+
+    // Gráfica de Use vs ProdPot
+    const ctx1 = document.getElementById('indexChart').getContext('2d');
+    const chartData1 = {
         labels: indexData.map(data => data.id),
         datasets: [{
             label: 'Use vs Productive Potential',
             data: indexData.map(data => ({ x: data.use, y: data.prodPot })),
             backgroundColor: 'rgba(75, 192, 192, 0.2)',
             borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 2
-        }]
-    };
-
-    const chartData2 = {
-        labels: indexData.map(data => data.id),
-        datasets: [{
-            label: 'Use vs Ecological Potential',
-            data: indexData.map(data => ({ x: data.use, y: data.ecoPot })),
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1
         }]
     };
 
-    new Chart(ctx, {
+    chart1 = new Chart(ctx1, {
         type: 'scatter',
-        data: chartData,
+        data: chartData1,
         options: {
             scales: {
                 x: {
@@ -245,9 +246,22 @@ function createChart(indexData) {
                 }
             }
         }
-    })
+    });
 
-    new Chart(ctx2, {
+    // Gráfica de Use vs EcoPot
+    const ctx2 = document.getElementById('indexChart2').getContext('2d');
+    const chartData2 = {
+        labels: indexData.map(data => data.id),
+        datasets: [{
+            label: 'Use vs Ecological Potential',
+            data: indexData.map(data => ({ x: data.use, y: data.ecoPot })),
+            backgroundColor: 'rgba(153, 102, 255, 0.2)',
+            borderColor: 'rgba(153, 102, 255, 1)',
+            borderWidth: 1
+        }]
+    };
+
+    chart2 = new Chart(ctx2, {
         type: 'scatter',
         data: chartData2,
         options: {
@@ -268,5 +282,5 @@ function createChart(indexData) {
                 }
             }
         }
-    })
+    });
 }
