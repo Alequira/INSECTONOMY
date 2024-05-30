@@ -64,8 +64,10 @@ async function searchGenAsp() {
             body: JSON.stringify({ categories })
         });
 
-        const results = await response.json();
-        displayResults(results);
+        const data = await response.json();
+        displayResults(data.results);
+        displayIdsText(data.idsText);
+        createChart(data.indexData);
     } catch (error) {
         console.error('Error al realizar la búsqueda:', error);
     }
@@ -195,4 +197,41 @@ function displayResults(results) {
 function displayIdsText(idsText) {
     const idsTextElement = document.getElementById('ids-text');
     idsTextElement.textContent = idsText;
+}
+
+function createChart(indexData) {
+    const ctx = document.getElementById('indexChart').getContext('2d');
+    const chartData = {
+        labels: indexData.map(data => data.id),
+        datasets: [{
+            label: 'Use vs ProdPot',
+            data: indexData.map(data => ({ x: data.use, y: data.prodPot })),
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+        }]
+    };
+
+    new Chart(ctx, {
+        type: 'scatter',
+        data: chartData,
+        options: {
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'bottom',
+                    title: {
+                        display: true,
+                        text: 'Use'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'ProdPot'
+                    }
+                }
+            }
+        }
+    })
 }

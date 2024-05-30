@@ -185,11 +185,11 @@ app.post('/search', async (req, res) => {
         // Filtrar resultados que no cumplen con todas las condiciones
         const filteredResults = finalResults.filter(result => {
             return Object.keys(searchCriteria).every(key => {
-                return result[key] || 
-                        (result.eco_pot && result.eco_pot[key]) ||
-                        (result.prod_pot && result.prod_pot[key]) ||
-                        (result.use && result.use[key]) ||
-                        (result.index && result.index[key]);
+                return result[key] !== undefined || 
+                        (result.eco_pot && result.eco_pot[key] !== undefined) ||
+                        (result.prod_pot && result.prod_pot[key] !== undefined) ||
+                        (result.use && result.use[key] !== undefined) ||
+                        (result.index && result.index[key] !== undefined);
             });
         });
 
@@ -199,8 +199,15 @@ app.post('/search', async (req, res) => {
         // Crear un texto con los IDs de los insectos
         const idsText = `IDs de insectos que coinciden con todas las búsquedas: ${insectIds.join(', ')}`;
 
-        // Responder con los resultados filtrados y el texto con los IDs
-        res.json(filteredResults);
+        // Extraer datos para la gráfica de índices
+        const indexData = filteredResults.map(result => ({
+            id: result.id,
+            use: result.index ? result.index.Use : null,
+            prodPot: result.index ? result.index.ProdPot : null
+        }));
+
+        // Responder con los resultados filtrados, el texto con los IDs y los datos de la gráfica
+        res.json({results: filteredResults , idsText, indexData});
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Error al realizar la búsqueda' });
