@@ -45,12 +45,8 @@
                             <div class="contentGA">
                                 <p>All general information on the insect.</p>
                                 <div class="input-boxGA">
-                                    <label for="genAspId">ID</label>
-                                    <input type="number" id="genAspId" name="genAspId">
-                                </div>
-                                <div class="input-boxGA">
                                     <label for="Or" id="Or">Order</label>
-                                    <select id="Or" name="Order">
+                                    <select id="Or" name="Or">
                                         <option value=""></option>
                                         <option value="Ortoptera">Ortoptera</option>
                                         <option value="Hymenoptera">Hymenoptera</option>
@@ -91,7 +87,7 @@
                                 <div class="input-DQ">
                                     <div class="input-boxGA">
                                         <label for="HoldBio">Biome</label>
-                                        <select id="HoldBioS" name="Biome">
+                                        <select id="HoldBio" name="HoldBio">
                                             <option value=""></option>
                                             <option value="Moist forest">Moist forest</option>
                                             <option value="Dry forest">Dry forest</option>
@@ -105,7 +101,7 @@
                                     </div>
                                     <div class="input-boxGA">
                                         <label for="HoldPre">Annual Precipitation</label>
-                                        <select id="HoldPreS" name="AnnualPrecipitation">
+                                        <select id="HoldPre" name="HoldPre">
                                             <option value=""></option>
                                             <option value="125 - 250">125 - 250</option>
                                             <option value="250 - 500">250 - 500</option>
@@ -118,7 +114,7 @@
                                     </div>
                                     <div class="input-boxGA">
                                         <label for="HoldTemp">Temperature</label>
-                                        <select id="HoldTempS" name="Temperature">
+                                        <select id="HoldTemp" name="HoldTemp">
                                             <option value=""></option>
                                             <option value="3 - 6">3 - 6</option>
                                             <option value="6 - 12">6 - 12</option>
@@ -129,7 +125,7 @@
                                     </div>
                                     <div class="input-boxGA">
                                         <label for="HoldAB">Altitudinal Belts</label>
-                                        <select id="HoldABS" name="AltitudinalBelts">
+                                        <select id="HoldAB" name="HoldAB">
                                             <option value=""></option>
                                             <option value="Premontane">Premontane</option>
                                             <option value="Lower Montane">Lower Montane</option>
@@ -140,7 +136,7 @@
                                     </div>
                                     <div class="input-boxGA">
                                         <label for="HoldLR">Latitudinal Regions</label>
-                                        <select id="HoldLRS" name="LatitudinalRegions">
+                                        <select id="HoldLR" name="HoldLR">
                                             <option value=""></option>
                                             <option value="Tropical">Tropical</option>
                                             <option value="Warm Temperate">Warm Temperate</option>
@@ -151,7 +147,7 @@
                                     </div>
                                     <div class="input-boxGA">
                                         <label for="HoldAD">Altitudinal Distribution</label>
-                                        <select id="HoldAD" name="AltitudinalDistribution">
+                                        <select id="HoldAD" name="HoldAD">
                                             <option value=""></option>
                                             <option value="100 - 500">100 - 500</option>
                                             <option value="100 - 2000">100 - 2000</option>
@@ -1088,6 +1084,7 @@
                         <button class="btnDQ" type="button" onclick="addGenAsp()"> Añadir </button>
                         <button class="btnDQ" type="button" onclick="deleteGenAsp()"> Eliminar </button>
                     </div>
+                    <div id="ids-text"></div>
                     <div class="subsection">
                         <div class="table-container">
                             <table id="results-table">

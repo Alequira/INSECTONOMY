@@ -42,7 +42,6 @@ btnU.addEventListener('click', () => {
 });
 
 
-
 // Función de búsqueda
 async function searchGenAsp() {
     const formData = new FormData(document.getElementById('input-form'));
@@ -78,7 +77,7 @@ function displayResults(results) {
 
     results.forEach(result => {
         const row = document.createElement('tr');
-        
+
         // Función para mostrar valores "0" correctamente
         const showValue = (value) => (value === null || value === undefined) ? '' : value;
 
@@ -191,4 +190,9 @@ function displayResults(results) {
         `;
         tableBody.appendChild(row);
     });
+}
+
+function displayIdsText(idsText) {
+    const idsTextElement = document.getElementById('ids-text');
+    idsTextElement.textContent = idsText;
 }
