@@ -281,11 +281,17 @@
     .charts-container {
         display: flex;
         margin-top: 20px;
+        margin-right: 40px;
+        border: 1px solid #240202;
+        border-radius: 6px;
+        justify-content: center;
+        gap: 20px;
     }
     
     .charts-container canvas {
-        max-width: 20%;
+        max-width: 50%;
         max-height: 100%;
+        padding: 10px;
     }
 
 
