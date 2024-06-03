@@ -20,6 +20,7 @@ app.use(express.static('public'));
 
 // Diccionario para mapear columnas a sus respectivas tablas
 const columnTableMap = {
+
     Or: GenAsp,
     Fam: GenAsp,
     ComNa: GenAsp,
@@ -84,6 +85,7 @@ const columnTableMap = {
     MarMarCha: ProdPot,
     RegRest: ProdPot,
 
+
     MaUSubs: Use,
     MaUSelCons: Use,
     MaUCom: Use,
@@ -123,7 +125,6 @@ const columnTableMap = {
     LegPunc: Use,
     LegLeg: Use
 
-    // Agrega todas las columnas de todas las tablas aquí
 };
 
 
