@@ -12,6 +12,7 @@ const Indexes = require('./data_base/tables/indexes');
 console.log('Modules loaded...');
 
 const app = express();
+// Puerto de escucha
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
@@ -198,15 +199,28 @@ app.post('/search', async (req, res) => {
         const insectIds = filteredResults.map(result => result.id);
 
         // Crear un texto con los IDs de los insectos
-        const idsText = `IDs de insectos que coinciden con todas las búsquedas: ${insectIds.join(', ')}`;
+        const idsText = `Insect IDs matching all searches: ${insectIds.join(', ')}`;
 
-        // Extraer datos para la gráfica de índices
+        /* // Extraer datos para la gráfica de índices
         const indexData = filteredResults.map(result => ({
             id: result.id,
             use: result.index ? result.index.Use : null,
             prodPot: result.index ? result.index.ProdPot : null,
             ecoPot: result.index ? result.index.EcoPot : null
+        })); */
+
+        // Recolectar todas las columnas de datos para las gráficas
+        const indexData = filteredResults.map(result => ({
+            id: result.id,
+            ...result.toJSON(), // Incluye todas las propiedades de GenAsp
+            ...(result.eco_pot ? result.eco_pot.toJSON() : {}), // Incluye todas las propiedades de EcoPot
+            ...(result.prod_pot ? result.prod_pot.toJSON() : {}), // Incluye todas las propiedades de ProdPot
+            ...(result.use ? result.use.toJSON() : {}), // Incluye todas las propiedades de Use
+            ...(result.index ? result.index.toJSON() : {}) // Incluye todas las propiedades de Indexes
         }));
+
+        // Log de datos extraídos para depuración
+        console.log("Index Data:", indexData);
 
         // Responder con los resultados filtrados, el texto con los IDs y los datos de la gráfica
         res.json({results: filteredResults , idsText, indexData});

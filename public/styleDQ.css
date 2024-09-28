@@ -203,6 +203,10 @@
         margin-right: 150px;
     }
 
+    .prf{
+        text-align: justify;
+    }
+
     .buttons{
         position: relative;
         text-align: center;
@@ -282,17 +286,15 @@
         display: flex;
         margin-top: 20px;
         margin-right: 40px;
-        border: 1px solid #240202;
-        border-radius: 6px;
-        justify-content: center;
         gap: 20px;
+        overflow-x: auto;
     }
     
     .charts-container canvas {
         max-width: 50%;
         max-height: 100%;
-        padding: 10px;
-    }
+        padding: 20px;
+    } 
 
 
     /**/
@@ -364,6 +366,15 @@
         padding: 10px;
     }
 
+    .texti{
+        justify-content: center;
+        display: flex;
+        }
+            .ids-text{
+                text-align: center;
+                max-width: 1200px;
+            }
+
         /*Estilo de botones*/
 
         .btnDQ{
@@ -382,6 +393,7 @@
             justify-content: center;
             margin: 10px;
             margin-top: 40px;
+            margin-bottom: 40px;
         }
 
         .btnDQ:hover{
@@ -488,6 +500,9 @@
             margin-top: 20px;
             overflow-x: auto;
             margin-right: 40px;
+            max-height: 583px;
+            overflow-y: auto;
+            white-space: nowrap;
         }
 
         table {
@@ -506,7 +521,6 @@
         table th {
             font-weight: 600;
             color: #200000;
-            font-weight: bold;
             text-align: center;
         }
 

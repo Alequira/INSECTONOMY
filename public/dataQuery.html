@@ -23,18 +23,12 @@
                 <h2>Data Query</h2>
                 <div class="subsections">
                     <div class="pI">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                            Totam, eius reiciendis, magni cum dolore qui, facilis fugiat explicabo earum quo quidem ullam sit quae voluptates. 
-                            Veritatis nostrum necessitatibus at repudiandae.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                            Aspernatur tempora sunt rem unde quae dignissimos laborum mollitia cumque sequi quis ullam facere officia inventore, 
-                            vel obcaecati delectus voluptatum? Dolore, molestiae.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                            Totam, eius reiciendis, magni cum dolore qui, facilis fugiat explicabo earum quo quidem ullam sit quae voluptates. 
-                            Veritatis nostrum necessitatibus at repudiandae.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                            Aspernatur tempora sunt rem unde quae dignissimos laborum mollitia cumque sequi quis ullam facere officia inventore, 
-                            vel obcaecati delectus voluptatum? Dolore, molestiae.</p>
+                        <p class="prf">Hello! Welcome to Insectonomy's website and its virtual query engine. 
+                            Here, you can perform searches only, as your registration is set as a guest. 
+                            This system operates with a distribution of categories that you can select to find your perfect insect. 
+                            Alternatively, you can browse the entire database out of curiosity by clicking <span id="click-here" onclick="fetchAllData()">here</span>. Each category has multiple or free options depending on its nature. 
+                            You can search through four major tables: General Aspects, Productive Potential, 
+                            Ecosystem Potential, and Usage. Without further ado, let yourself be guided and enjoy your search!</p>
                     </div>
                     <div class="subsection">
                         <form id="input-form">
@@ -188,7 +182,7 @@
 
                             <!-- Campos de eco_pot -->
 
-                            <button type="button" class="collapsibleEP">Ecological Potential</button>
+                            <button type="button" class="collapsibleEP">Ecosystemic Potential</button>
                             <span class="iconEP"><ion-icon name="help-circle"></ion-icon></ion-icon>
                             </span>
                             <div class="contentEP">
@@ -1080,130 +1074,134 @@
                         </form>
                     </div>
                     <div class="buttons">
-                        <button class="btnDQ" type="button" onclick= "searchGenAsp()"> Buscar </button>
-                        <button class="btnDQ" type="button" onclick="addGenAsp()"> Añadir </button>
-                        <button class="btnDQ" type="button" onclick="deleteGenAsp()"> Eliminar </button>
+                        <button class="btnDQ" type="button" onclick= "searchGenAsp()"> Search </button>
+                        <button class="btnDQ" type="button" onclick="addGenAsp()"> Add</button>
+                        <button class="btnDQ" type="button" onclick="deleteGenAsp()"> Delete</button>
                     </div>
-                    <div id="ids-text"></div>
+                    <div class="texti">
+                        <div class="idtext">
+                            <div id="ids-text" class="ids-text"></div>
+                        </div>
+                    </div>
                     <div class="subsection">
                         <div class="table-container">
                             <table id="results-table">
                                 <thead>
                                     <tr>
                                         <!-- Encabezados de gen_asp-->
-                                        <th>ID</th>
-                                        <th>Or</th>
-                                        <th>Fam</th>
-                                        <th>ComNa</th>
-                                        <th>SciNa</th>
-                                        <th>BiogRe</th>
-                                        <th>BiogZo</th>
-                                        <th>HoldBio</th>
-                                        <th>HoldPre</th>
-                                        <th>HoldTemp</th>
-                                        <th>HoldAB</th>
-                                        <th>HoldLR</th>
-                                        <th>HoldAD</th>
-                                        <th>HabPat</th>
-                                        <th>LSI</th>
+                                        <th><b>ID</b></th>
+                                        <th><b>Order</b></th>
+                                        <th><b>Family</b></th>
+                                        <th><b>Common name</b></th>
+                                        <th><b>Scientific name</b></th>
+                                        <th>Biogeographic - <b>realm</b></th>
+                                        <th>Biogeographic - <b>zone</b></th>
+                                        <th>Holdridge - <b>Biome</b></th>
+                                        <th>Holdridge - <b>Annual precipitation</b></th>
+                                        <th>Holdridge - <b>Temperature</b></th>
+                                        <th>Holdridge - <b>Altitudinal belts</b></th>
+                                        <th>Holdridge - <b>Latitudinal regions</b></th>
+                                        <th>Holdridge - <b>Altitudinal distribution</b></th>
+                                        <th>Habitat use patterns</th>
+                                        <th>Life stage interest</th>
 
                                         <!-- Encabezados de eco_pot-->
 
-                                        <th>CultCultIdDi</th>
-                                        <th>CultInspArt</th>
-                                        <th>CultEdu</th>
-                                        <th>CultRecEcot</th>
-                                        <th>CultSpiReg</th>
-                                        <th>RegBioind</th>
-                                        <th>RegBiocont</th>
-                                        <th>RegPol</th>
-                                        <th>RegSeed</th>
-                                        <th>SupNutCy</th>
-                                        <th>SupSoIm</th>
-                                        <th>ProFF</th>
-                                        <th>ProWildF</th>
-                                        <th>ProBiomol</th>
-                                        <th>ProBiopro</th>
-                                        <th>ProBiom</th>
-                                        <th>ProBiomimi</th>
-                                        <th>DissVector</th>
-                                        <th>DissPest</th>
+                                        <th>Cultural - <b>Cultural diversity and identity</b></th>
+                                        <th>Cultural - <b>Inspiration and art</b></th>
+                                        <th>Cultural - <b>Education</b></th>
+                                        <th>Cultural - <b>Recreation and ecoturism</th>
+                                        <th>Cultural - <b>Spiritual and religious</b></th>
+                                        <th>Regulation - <b>Bioindicator</b></th>
+                                        <th>Regulation - <b>Biocontrol</b></th>
+                                        <th>Regulation - <b>Pollination</b></th>
+                                        <th>Regulation - <b>Seed dispersal</b></th>
+                                        <th>Support - <b>Nutrient cycling</b></th>
+                                        <th>Support - <b>Soil improvement</b></th>
+                                        <th>Provision - <b>Food and feed</b></th>
+                                        <th>Provision - <b>Wildlife feed</b></th>
+                                        <th>Provision - <b>Biomolecules</b></th>
+                                        <th>Provision - <b>Bioproducts</b></th>
+                                        <th>Provision - <b>Biomodels</b></th>
+                                        <th>Provision - <b>Biomimicry</b></th>
+                                        <th>Disservices - <b>Vector</b></th>
+                                        <th>Disservices - <b>Pest</b></th>
 
                                         <!-- Encabezados de prod_pot-->
 
-                                        <th>ManSt</th>
-                                        <th>ManRu</th>
-                                        <th>ManAg</th>
-                                        <th>ManSoSt</th>
-                                        <th>ManHab</th>
-                                        <th>ManTer</th>
-                                        <th>ManTra</th>
-                                        <th>ManFac</th>
-                                        <th>NutFeed</th>
-                                        <th>NutCost</th>
-                                        <th>RepSexMat</th>
-                                        <th>RepNumbOff</th>
-                                        <th>RepCy</th>
-                                        <th>RepGestInc</th>
-                                        <th>RepSexInt</th>
-                                        <th>ProPopStu</th>
-                                        <th>ProProf</th>
-                                        <th>ProLong</th>
-                                        <th>ProReL</th>
-                                        <th>ProOpBre</th>
-                                        <th>ProAddVal</th>
-                                        <th>MarCultAcc</th>
-                                        <th>MarPri</th>
-                                        <th>MarCompDom</th>
-                                        <th>MarMarCha</th>
-                                        <th>RegRest</th>
+                                        <th>Management - <b>Stress</b></th>
+                                        <th>Management - <b>Rusticity</b></th>
+                                        <th>Management - <b>Agility</b></th>
+                                        <th>Management - <b>Social structure</b></th>
+                                        <th>Management - <b>Habits</b></th>
+                                        <th>Management - <b>Territoriality</b></th>
+                                        <th>Management - <b>Transportation</b></th>
+                                        <th>Management - <b>Facilities</b></th>
+                                        <th>Nutrition - <b>Feeding Type</b></th>
+                                        <th>Nutrition - <b>Cost of Feed</b></th>
+                                        <th>Reproduction - <b>Sexual Maturity</b></th>
+                                        <th>Reproduction - <b>Number of offspring</b></th>
+                                        <th>Reproduction - <b>Reproduction cycles</b></th>
+                                        <th>Reproduction - <b>Gestation/incubation time</b></th>
+                                        <th>Reproduction - <b>Sexual interaction</b></th>
+                                        <th>Production - <b>Population study</b></th>
+                                        <th>Production - <b>Profit</b></th>
+                                        <th>Production - <b>Longevity</b></th>
+                                        <th>Production - <b>Research level</b></th>
+                                        <th>Production - <b>Optimal breeding type</b></th>
+                                        <th>Production - <b>Added value</b></th>
+                                        <th>Market - <b>Cultural acceptance</b></th>
+                                        <th>Market - <b>Market price</b></th>
+                                        <th>Market - <b>Competition with domestic species</b></th>
+                                        <th>Market - <b>Market chains</b></th>
+                                        <th>IUCN-CITES and/or National restrictions</th>
 
                                         <!-- Encabezados de uso-->
 
-                                        <th>MaUSubs</th>
-                                        <th>MaUSelCons</th>
-                                        <th>MaUCom</th>
-                                        <th>SoUseFo</th>
-                                        <th>SoUseFe</th>
-                                        <th>SoUseBioconv</th>
-                                        <th>SoUseBiocont</th>
-                                        <th>SoUsePol</th>
-                                        <th>SoUsePet</th>
-                                        <th>SoUseCult</th>
-                                        <th>SoUseOth</th>
-                                        <th>ObtHar</th>
-                                        <th>ObtSHar</th>
-                                        <th>ObtPro</th>
-                                        <th>ContUtNA</th>
-                                        <th>ContUtCA</th>
-                                        <th>ContUtSA</th>
-                                        <th>ContUtAs</th>
-                                        <th>ContUtEu</th>
-                                        <th>ContUtOc</th>
-                                        <th>ContUtAf</th>
-                                        <th>MarYN</th>
-                                        <th>MarLoc</th>
-                                        <th>MarReg</th>
-                                        <th>MarNat</th>
-                                        <th>MarInt</th>
-                                        <th>MarMP</th>
-                                        <th>ScLS</th>
-                                        <th>ScMS</th>
-                                        <th>ScLaS</th>
-                                        <th>SocAccCSA</th>
-                                        <th>SocAccNA</th>
-                                        <th>SocAccAf</th>
-                                        <th>SocAccOc</th>
-                                        <th>SocAccEu</th>
-                                        <th>SocAccAs</th>
-                                        <th>LegPunc</th>
-                                        <th>LegLeg</th>
+                                        <th>Main use - <b>Subsistence</b></th>
+                                        <th>Main use - <b>Self-Consumption</b></th>
+                                        <th>Main use - <b>Commercial</b></th>
+                                        <th>Sort of use - <b>Food</b></th>
+                                        <th>Sort of use - <b>Feed</b></th>
+                                        <th>Sort of use - <b>Bioconversion</b></th>
+                                        <th>Sort of use - <b>Biocontrol</b></th>
+                                        <th>Sort of use - <b>Pollination</b></th>
+                                        <th>Sort of use - <b>Pet</b></th>
+                                        <th>Sort of use - <b>Cultural</b></th>
+                                        <th>Sort of use - <b>Other</b></th>
+                                        <th>Primary way to obtain - <b>Harvesting</b></th>
+                                        <th>Primary way to obtain - <b>Semiharvesting</b></th>
+                                        <th>Primary way to obtain - <b>Production</b></th>
+                                        <th>Primary continents of utilization - <b>North America</b></th>
+                                        <th>Primary continents of utilization - <b>Central America</b></th>
+                                        <th>Primary continents of utilization - <b>South America</b></th>
+                                        <th>Primary continents of utilization - <b>Asia</b></th>
+                                        <th>Primary continents of utilization - <b>Europe</b></th>
+                                        <th>Primary continents of utilization - <b>Oceania</b></th>
+                                        <th>Primary continents of utilization - <b>Africa</b></th>
+                                        <th>Market - <b>Y/N</b></th>
+                                        <th>Market - <b>Local</b></th>
+                                        <th>Market - <b>Regional</b></th>
+                                        <th>Market - <b>National</b></th>
+                                        <th>Market - <b>International</b></th>
+                                        <th>Market - <b>Main product of use</b></th>
+                                        <th>Production scale - <b>Low scale</b></th>
+                                        <th>Production scale - <b>Middle scale</b></th>
+                                        <th>Production scale - <b>Large scale</b></th>
+                                        <th>Social acceptability - <b>Central and South America</b></th>
+                                        <th>Social acceptability - <b>Central and North America</b></th>
+                                        <th>Social acceptability - <b>Africa</b></th>
+                                        <th>Social acceptability - <b>Oceania</b></th>
+                                        <th>Social acceptability - <b>Europe</b></th>
+                                        <th>Social acceptability - <b>Asia</b></th>
+                                        <th>Legislation - <b>Punctuation</b></th>
+                                        <th>Legislation</th>
 
                                         <!-- Encabezados de Indices-->
 
                                         <th>Use</th>
-                                        <th>ProdPot</th>
-                                        <th>EcoPot</th>
+                                        <th>Production Potential</th>
+                                        <th>Ecosystemic Potential</th>
 
                                     </tr>
                                 </thead>
@@ -1214,9 +1212,24 @@
                         </div>
                     </div>
                 </div>
-                <div class="charts-container">
-                    <canvas id="indexChart" width="300" height="300"></canvas>
-                    <canvas id="indexChart2" width="300" height="300"></canvas>
+                <div class="PrincipalChart">
+                    <div id="axis-selection">
+                        <label for="x-axis-select">Axis X:</label>
+                        <select id="x-axis-select">
+                            <!-- Las opciones se llenarán dinámicamente desde el JavaScript -->
+                        </select>
+                        
+                        <label for="y-axis-select">Axis Y:</label>
+                        <select id="y-axis-select">
+                            <!-- Las opciones se llenarán dinámicamente desde el JavaScript -->
+                        </select>
+                        
+                        <button id="update-chart" class="btnDQ" onclick="updateChart()">Update Chart</button>
+                    </div>
+                    <div class="charts-container">
+                        <!-- Espacio para la gráfica -->
+                    <canvas id="dynamicChart" width="400" height="400"></canvas>
+                    </div>
                 </div>
             </section>
         </main>
@@ -1227,6 +1240,6 @@
         <script src="scriptDQ.js"></script>
     </body>
     <footer>
-        <p>Insectonomy - Universidad Nacional de Colombia</p>
+        <p>Insectonomy  Universidad Nacional de Colombia</p>
     </footer>
 </html>
