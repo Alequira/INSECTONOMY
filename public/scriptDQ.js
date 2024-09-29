@@ -99,6 +99,211 @@ async function fetchAllData() {
     }
 }
 
+// Función para capturar clics en las filas de la tabla y abrir el modal con detalles del registro
+function makeTableInteractive() {
+    const rows = document.querySelectorAll('#results-table tbody tr');
+    rows.forEach(row => {
+        row.addEventListener('click', () => {
+            const cells = row.getElementsByTagName('td');
+            const record = {};
+
+            // Obtener los IDs de los encabezados para mapear con las celdas
+            const headers = document.querySelectorAll('#results-table th');
+
+            // Rellenar el objeto 'record' con los datos de la fila seleccionada utilizando los IDs de los th
+            Array.from(cells).forEach((cell, index) => {
+                const columnId = headers[index]?.id;  // Obtener el ID del encabezado (id del <th>)
+                if (columnId) {
+                    record[columnId] = cell.innerText.trim();  // Asignar el valor de la celda al ID del encabezado
+                }
+            });
+
+            console.log("Record Data: ", record);  // Verificar los datos extraídos de la fila
+            openModal(record);  // Abrir el modal con el registro seleccionado
+        });
+    });
+}
+
+// Variable para controlar la sección actual del modal
+let currentSection = 1;
+
+// Función para mostrar la sección correspondiente del modal
+function showSection(section) {
+    // Ocultar todas las secciones
+    document.querySelectorAll('.modal-section').forEach(sec => sec.style.display = 'none');
+
+    // Mostrar la sección correspondiente
+    document.getElementById(`section-${section}`).style.display = 'block';
+
+    // Actualizar el título del modal
+    const title = section === 1 ? ' ' : 'Insect Characteristics & Statistics';
+
+    // Mostrar u ocultar botones de navegación según la sección actual
+    document.getElementById('prev-btn').style.display = section === 1 ? 'none' : 'inline';
+    document.getElementById('next-btn').style.display = section === 2 ? 'none' : 'inline';
+}
+
+// Función para ir a la siguiente sección
+function nextSection() {
+    if (currentSection < 2) {
+        currentSection++;
+        showSection(currentSection);
+    }
+}
+
+// Función para ir a la sección anterior
+function prevSection() {
+    if (currentSection > 1) {
+        currentSection--;
+        showSection(currentSection);
+    }
+}
+
+function openModal(record) {
+    const modal = document.getElementById("record-modal");
+    
+    // Asegurarse de que el modal existe
+    if (!modal) {
+        console.error("Modal not found");
+        return;
+    }
+
+    // Asignar la imagen del registro (debe estar en la carpeta /images con el id como nombre de archivo)
+    const imageElement = document.getElementById("record-image");
+    if (imageElement) {
+        const imagePath = `/DQ/Images/${record.id}.jpeg`;
+        fetch(imagePath)
+            .then(response => {
+                if (response.ok) {
+                    imageElement.src = imagePath;
+                } else {
+                    imageElement.src = `/DQ/Images/${record.id}.jpg`; // Mostrar imagen predeterminada si no existe
+                }
+            })
+            .catch(() => {
+                imageElement.src = `/DQ/Images/placeholder.jpeg`;
+            });
+    }
+
+    // Obtener la descripción del registro
+    fetch(`/DQ/Descriptions/${record.id}.txt`)
+        .then(response => response.text())
+        .then(text => {
+            document.getElementById("record-description").innerText = text;
+        })
+        .catch(() => {
+            document.getElementById("record-description").innerText = 'Description not available for this record.';
+        });
+
+    // Mostrar nombre (común o científico)
+    document.getElementById("record-name").innerText = (record.ComNa +'   ('+ record.SciNa +') ') ;
+
+    // Mostrar la primera sección del modal
+    currentSection = 1;
+    showSection(currentSection);
+
+    // Mostrar el modal
+    modal.style.display = "block";
+
+    //Muetra las graficas
+    setTimeout(() => generateCharts(record), 300);
+}
+
+// Función para cerrar el modal
+function closeModal() {
+    const modal = document.getElementById("record-modal");
+    modal.style.display = "none";
+}
+
+let spiderChart = null;
+let pieChart = null;
+
+function generateCharts(record) {
+
+        // Verificar si las instancias de gráficos ya existen y destruirlas
+        if (spiderChart !== null) {
+            console.log("Destruyendo gráfica Spider Chart anterior.");
+            spiderChart.destroy();
+            spiderChart = null;
+        }
+        if (pieChart !== null) {
+            console.log("Destruyendo gráfica Pie Chart anterior.");
+            pieChart.destroy();
+            pieChart = null;
+        }
+
+        // Obtener los contextos de los gráficos
+        const canvas1 = document.getElementById('chart1');
+        const canvas2 = document.getElementById('chart2');
+        const ctx1 = canvas1.getContext('2d');
+        const ctx2 = canvas2.getContext('2d');
+
+        // Crear Spider Chart (Radar Chart) con los tres índices
+        spiderChart = new Chart(ctx1, {
+            type: 'radar',
+            data: {
+                labels: ['Use', 'Productive Potential', 'Ecological Potential'],
+                datasets: [{
+                    label: 'Insect score',
+                    data: [
+                        parseInt(record.Use) || 0,
+                        parseInt(record.ProdPot) || 0,
+                        parseInt(record.EcoPot) || 0
+                    ],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 2,
+                    pointBackgroundColor: 'rgba(54, 162, 235, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(54, 162, 235, 1)',
+
+                    pointRadius: 6,  
+                    pointHoverRadius: 8,  
+                    pointBorderWidth: 3,  
+                    pointStyle: 'circle'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,  // Desactivar relación de aspecto para controlar el tamaño
+                scale: {
+                    ticks: { beginAtZero: true }
+                }
+            }
+        });
+
+        // Crear Pie Chart con los valores específicos de uso
+        pieChart = new Chart(ctx2, {
+            type: 'pie',
+            data: {
+                labels: [
+                    'MaUSubs', 'MaUSelCons', 'MaUCom', 'SoUseFo', 'SoUseFe', 'SoUseBioconv',
+                    'SoUseBiocont', 'SoUsePol', 'SoUsePet', 'SoUseCult', 'SoUseOth'
+                ],
+                datasets: [{
+                    label: 'Use Details',
+                    data: [
+                        parseInt(record.MaUSubs) || 0, parseInt(record.MaUSelCons) || 0,
+                        parseInt(record.MaUCom) || 0, parseInt(record.SoUseFo) || 0,
+                        parseInt(record.SoUseFe) || 0, parseInt(record.SoUseBioconv) || 0,
+                        parseInt(record.SoUseBiocont) || 0, parseInt(record.SoUsePol) || 0,
+                        parseInt(record.SoUsePet) || 0, parseInt(record.SoUseCult) || 0,
+                        parseInt(record.SoUseOth) || 0
+                    ],
+                    backgroundColor: [
+                        '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40',
+                        '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true // Desactivar relación de aspecto para controlar el tamaño
+            }
+        });
+}
+
 function displayResults(results) {
     const tableBody = document.getElementById('results-table').getElementsByTagName('tbody')[0];
     tableBody.innerHTML = '';
@@ -218,137 +423,15 @@ function displayResults(results) {
         `;
         tableBody.appendChild(row);
     });
+
+    makeTableInteractive();
+
 }
 
-/* function displayIdsText(idsText) {
+function displayIdsText(idsText) {
     const idsTextElement = document.getElementById('ids-text');
     idsTextElement.textContent = idsText;
 }
-
-let chart1 = null;
-let chart2 = null;
-let chart3 = null; */
-
-/* function createChart(indexData) {
-
-    // Destruye las gráficas anteriores si existen
-    if (chart1) {
-        chart1.destroy();
-    }
-    if (chart2) {
-        chart2.destroy();
-    }
-    if (chart3){
-        chart3.destroy();
-    }
-
-    // Gráfica de Use vs ProdPot
-    const ctx1 = document.getElementById('indexChart').getContext('2d');
-    const chartData1 = {
-        labels: indexData.map(data => data.id),
-        datasets: [{
-            label: 'Use vs Productive Potential',
-            data: indexData.map(data => ({ x: data.use, y: data.prodPot })),
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 4
-        }]
-    };
-
-    chart1 = new Chart(ctx1, {
-        type: 'scatter',
-        data: chartData1,
-        options: {
-            scales: {
-                x: {
-                    type: 'linear',
-                    position: 'bottom',
-                    title: {
-                        display: true,
-                        text: 'Use'
-                    }
-                },
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Productive Potential'
-                    }
-                }
-            }
-        }
-    });
-
-    // Gráfica de Use vs EcoPot
-    const ctx2 = document.getElementById('indexChart2').getContext('2d');
-    const chartData2 = {
-        labels: indexData.map(data => data.id),
-        datasets: [{
-            label: 'Use vs Ecosystemic Potential',
-            data: indexData.map(data => ({ x: data.use, y: data.ecoPot })),
-            backgroundColor: 'rgba(153, 102, 255, 0.2)',
-            borderColor: 'rgba(153, 102, 255, 1)',
-            borderWidth: 4
-        }]
-    };
-
-    chart2 = new Chart(ctx2, {
-        type: 'scatter',
-        data: chartData2,
-        options: {
-            scales: {
-                x: {
-                    type: 'linear',
-                    position: 'bottom',
-                    title: {
-                        display: true,
-                        text: 'Use'
-                    }
-                },
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Ecosystemic Potential'
-                    }
-                }
-            }
-        }
-    });
-
-    const ctx3 = document.getElementById('indexChart3').getContext('2d');
-    const chartData3 = {
-        labels: indexData.map(data => data.id),
-        datasets: [{
-            label: 'Productive Potential vs Ecosystemic Potential',
-            data: indexData.map(data => ({ x: data.prodPot, y: data.ecoPot })),
-            backgroundColor: 'rgba(153, 102, 255, 0.2)',
-            borderColor: 'rgba(153, 102, 255, 1)',
-            borderWidth: 4
-        }]
-    };
-
-    chart3 = new Chart(ctx3, {
-        type: 'scatter',
-        data: chartData3,
-        options: {
-            scales: {
-                x: {
-                    type: 'linear',
-                    position: 'bottom',
-                    title: {
-                        display: true,
-                        text: 'Productive Potential'
-                    }
-                },
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Ecosystemic Potential'
-                    }
-                }
-            }
-        }
-    });
-}  */
 
 // Variables globales para la gráfica
 let dynamicChart = null;
@@ -511,6 +594,7 @@ function createDynamicChart(data, xAxis, yAxis) {
                     }
                 }
             }
+            
         }
     });
 }
