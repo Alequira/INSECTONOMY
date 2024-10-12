@@ -391,9 +391,8 @@
             font-weight: 600;
             transition: 0.4s;
             justify-content: center;
-            margin: 10px;
-            margin-top: 40px;
-            margin-bottom: 40px;
+            margin-left: 15px;
+            margin-bottom: 10px;
         }
 
         .btnDQ:hover{
@@ -510,6 +509,7 @@
             border-collapse: collapse;
             margin: auto;
             border-radius: 6px;
+            border-spacing: 0px;  
         }
 
         table th, table td {
@@ -522,7 +522,41 @@
             font-weight: 600;
             color: #200000;
             text-align: center;
+            position: sticky;
+            top: 0;
+            background: #ffffff;
+            z-index: 2;  
+            outline: 2px solid #2c0000; 
+            outline-offset: -2px;
         }
+
+/* Estilo del contenedor del popup embebido */
+.popup-content-embedded {
+    display: none; 
+    position: absolute; 
+    top: 30px; 
+    left: -50px; 
+    background: #fff; 
+    padding: 10px; 
+    border-radius: 6px; 
+    width: 270px; 
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); 
+    z-index: 3; 
+    font-size: 14px;              
+    line-height: 1.5; 
+}
+
+/* Flecha del popup */
+.popup-content-embedded::after {
+    content: '';
+    position: absolute;
+    top: -10px; 
+    left: 50%; 
+    transform: translateX(-50%);
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent #fff transparent; 
+}
 
 /* Estilos para el modal */
 .modal {
@@ -589,6 +623,14 @@
     display: block;  
     width: 450px !important;  
     height: 450px !important;  
+    margin: 0 auto; 
+}
+
+#topInsectsRadarChart {
+    width: 700px !important;   /* Ancho reducido con !important */
+    height: 700px !important;  /* Ancho máximo para adaptarse */
+    display: block;            /* Asegurarse de que sea un bloque */
+    margin: 0 auto;            /* Centrarse en el contenedor */
 }
 
     /*Estilo del footer (general)*/
@@ -602,4 +644,5 @@
         position: fixed;
         bottom: 0;
         font-size: small;
+        z-index: 3;
     }

@@ -183,7 +183,18 @@
                             <!-- Campos de eco_pot -->
 
                             <button type="button" class="collapsibleEP">Ecosystemic Potential</button>
-                            <span class="iconEP"><ion-icon name="help-circle"></ion-icon></ion-icon>
+                            <span class="iconEP">
+                                <ion-icon name="help-circle"></ion-icon></ion-icon>
+                                <div class="popup-content-embedded" id="popupEP">
+                                    <h3>Ecosystemic Potential (Info) </h3>
+                                    <p>The list shows the maximums and minimums according to categories.</p>
+                                    <ul style="margin-top: 10px;">
+                                        <li>Cultural (0-3)</li>
+                                        <li>Regulation (0-3)</li>
+                                        <li>Support (0-3)</li>
+                                        <li>Disservices (0-3)</li>
+                                    </ul>
+                                </div>
                             </span>
                             <div class="contentEP">
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
@@ -397,7 +408,23 @@
                             <!-- Campos de prod_pot -->
 
                             <button type="button" class="collapsiblePP">Productive Potential</button>
-                            <span class="iconPP"><ion-icon name="help-circle"></ion-icon></ion-icon>
+                            <span class="iconPP">
+                                <ion-icon name="help-circle"></ion-icon></ion-icon>
+                                <div class="popup-content-embedded" id="popupPP">
+                                    <h3>Productive Potential (Info) </h3>
+                                    <p>The list shows the maximums and minimums according to categories.</p>
+                                    <ul style="margin-top: 10px;">
+                                        <li>Cultural (0-3)</li>
+                                        <li>Regulation (0-3)</li>
+                                        <li>Support (0-3)</li>
+                                        <li>Disservices (0-3)</li>
+                                        <li>Cultural (0-3)</li>
+                                        <li>Regulation (0-3)</li>
+                                        <li>Support (0-3)</li>
+                                        <li>Disservices (0-3)</li>
+                                        <li>Cultural (0-3)</li>
+                                    </ul>
+                                </div>
                             </span>
                             <div class="contentPP">
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
@@ -675,7 +702,18 @@
                             <!-- Campos de use -->
 
                             <button type="button" class="collapsibleU">Use</button>
-                            <span class="iconU"><ion-icon name="help-circle"></ion-icon></ion-icon>
+                            <span class="iconU">
+                                <ion-icon name="help-circle"></ion-icon></ion-icon>
+                                <div class="popup-content-embedded" id="popupU">
+                                    <h3>Use (Info) </h3>
+                                    <p>The list shows the maximums and minimums according to categories.</p>
+                                    <ul style="margin-top: 10px;">
+                                        <li>Cultural (0-3)</li>
+                                        <li>Regulation (0-3)</li>
+                                        <li>Support (0-3)</li>
+                                        <li>Disservices (0-3)</li>
+                                    </ul>
+                                </div>
                             </span>
                             <div class="contentU">
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
@@ -1075,7 +1113,7 @@
                     </div>
                     <div class="buttons">
                         <button class="btnDQ" type="button" onclick= "searchGenAsp()"> Search </button>
-                        <button class="btnDQ" type="button" onclick="addGenAsp()"> Add</button>
+                        <!-- <button class="btnDQ" type="button" onclick="addGenAsp()"> Add</button> -->
                         <!-- <button class="btnDQ" type="button" onclick="deleteGenAsp()"> Delete</button> -->
                     </div>
 
@@ -1212,25 +1250,31 @@
                             </table>
                         </div>
                     </div>
-
+                <h3 style="margin-top: 40px;">Grafics above table</h3>
                 </div>
-                <div class="PrincipalChart">
-                    <div id="axis-selection">
-                        <label for="x-axis-select">Axis X:</label>
-                        <select id="x-axis-select">
-                            <!-- Las opciones se llenarán dinámicamente desde JS -->
-                        </select>
-                        
-                        <label for="y-axis-select">Axis Y:</label>
-                        <select id="y-axis-select">
-                            <!-- Las opciones se llenarán dinámicamente desde JS -->
-                        </select>
-                        
-                        <button id="update-chart" class="btnDQ" onclick="updateChart()">Update Chart</button>
+                <div>
+                    <div class="PrincipalChart">
+                        <div id="axis-selection">
+                            <label for="x-axis-select">Axis X:</label>
+                            <select id="x-axis-select">
+                                <!-- Las opciones se llenarán dinámicamente desde JS -->
+                            </select>
+                            
+                            <label for="y-axis-select">Axis Y:</label>
+                            <select id="y-axis-select">
+                                <!-- Las opciones se llenarán dinámicamente desde JS -->
+                            </select>
+                            
+                            <button id="update-chart" class="btnDQ" onclick="updateChart()">Update Chart</button>
+                        </div>
+                        <div class="charts-container">
+                            <!-- Espacio para la gráfica -->
+                        <canvas id="dynamicChart" width="400" height="400"></canvas>
+                        </div>
                     </div>
-                    <div class="charts-container">
-                        <!-- Espacio para la gráfica -->
-                    <canvas id="dynamicChart" width="400" height="400"></canvas>
+                    <button id="update-chart-btn" style="margin: 20px; padding: 10px 20px;">Update Chart</button>
+                    <div class="chart-container">
+                        <canvas id="topInsectsRadarChart" width="600" height="400"></canvas>
                     </div>
                 </div>
             </section>
@@ -1276,6 +1320,6 @@
         <script src="scriptDQ.js"></script>
     </body>
     <footer>
-        <p>Insectonomy  Universidad Nacional de Colombia</p>
+        <p>Insectonomy - Universidad Nacional de Colombia</p>
     </footer>
 </html>
