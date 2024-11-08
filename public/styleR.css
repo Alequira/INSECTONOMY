@@ -142,7 +142,8 @@
 
 .row .image img{
     align-items: center;
-    width: 80%;
+    width: 800px;
+    height: 800px;
     border-radius: 400px;
 }
 .row .image {
