@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 30;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.mainDQ{
+    margin-top: 100px;
+    margin-left: 40px;
+    margin-bottom: 40px;
+}
+
+
+.headerIndex {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    margin-bottom: 500px;
+    background: url('Imagenes/nature-red-photography-macro-insect-green-619452-wallhere.com.jpg') no-repeat;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+}
+
+/*Header Logo*/
+
+.headerIndex .logo{
+    color: #fff;
+    font-size: 1.5em;
+    user-select: none;
+    text-decoration: none;
+}
+
+.headerIndex .logito{
+    color: #fff;
+    font-size: 1em;
+    user-select: none;
+    text-decoration: none;
+}
+
+/*Social Media Animation*/
+
+    .socialMedia{
+        margin: 0 auto 0 50px;
+    }
+
+    .socialMedia a {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 30px;
+        height: 30px;
+        background: transparent;
+        border:2px solid #fff;
+        border-radius: 6px;
+        text-decoration: none;
+        transition: .5s;
+    }
+
+    .socialMedia a:hover{
+        background: #fff;
+    }
+
+    .socialMedia a i {
+        font-size: 20px;
+        color: #fff;
+    }
+
+    .socialMedia a:hover i{
+        color: #250404;
+    }
+
+/*Header for Navigation*/
+
+    .headerIndex .navigation a {
+        color: #fff;
+        font-size: 1em;
+        position: relative;
+        font-weight: 500;
+        text-decoration: none;
+        margin-left: 50px;
+    }
+
+    .headerIndex .navigation a::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -6px;
+        width: 100%;
+        height: 3px;
+        background: transparent;
+        border-radius: 5px;
+        transform: translateX(10px);
+        transition: 0.5s;
+    }
+
+    .headerIndex .navigation a:hover::after {
+        background: #fff;
+        transform: translateX(0);
+    }
+
+/*Button Login Css*/
+
+    .headerIndex .navigation .btlogin{
+        font-size: 1em;
+        background: transparent;
+        width: 130px;
+        height: 50px;
+        outline: none;
+        color: #fff;
+        border: 2px solid #fff;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        margin-left: 50px;
+        transition: 0.8s;
+    }
+
+    .headerIndex .navigation .btlogin:hover{
+        background-color: #fff;
+        color: #5c0404;
+    }
+
+
+
+.row{
+    display: flex;
+    align-items: center;
+    position: relative;
+    color: #000000;
+    border-radius: 20px;
+    margin: 0 15px 0 30px ;
+
+}
+
+.row .image img{
+    align-items: center;
+    width: 80%;
+    border-radius: 400px;
+}
+.row .image {
+    flex: 1 1 5rem;
+    padding: 0.4rem;
+}
+
+.row .content{
+    flex: 1 1 45rem;
+    padding: 2rem;
+}
+
+.row h2{
+    text-align: center;
+    left: -10px;
+    padding: 0.4rem;
+    font-size: 40px;
+    color: #000000;
+}
+
+.row h3{
+    position: relative;
+    left: -10px;
+    padding: 0.9rem;
+    font-size: 2rem;
+    color: #000000;
+}
+.row p{
+    padding: 0.4rem;
+    color: #000000;
+}
+
+.row button {
+    position: relative;
+    bottom: -15px;
+    font-size: 1em;
+    background: transparent;
+    width: 130px;
+    height: 50px;
+    outline: none;
+    color: #250404;
+    border: 2px solid #250404;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.4s;
+}
+
+footer {
+    background-color: #474747;
+    color: white;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    font-size: small;
+}
+

@@ -5,30 +5,41 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Data Query</title>
         <link rel="stylesheet" href="styleDQ.css">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     </head>
     <body class="bodyDQ">
         <header class="headerDQ">
             <h1 class="logo" ><a class='logito'href="index.html">INSECTONOMY</a></h1>
+
+            <div class="socialMedia">
+                <a href="#"><i class='bx bxl-instagram'></i></a>
+                <a href="#"><i class='bx bxl-facebook'></i></a>
+                <a href="#"><i class='bx bxl-telegram' ></i></a>
+                <a href="#"><i class='bx bxl-whatsapp'></i></a>
+            </div>
             
             <nav class="navigation">
-                <a href="index.html" class="anav">Research</a>
-                <a href="dataQuery.html"class="anav">Data Query</a>
+                <a href="index.html" class="anav">Home</a>
+                <a href="research.html" class="anav">Research</a>
+                <a href="howitworks.html" class="anav">How it Works</a>
+                <a href="dataQuery.html" class="anav">Species Data Explorer</a>
                 <button class="btlogin" ><a href="index.html" class="alog">Login</a></button>
             </nav>
         </header>
 
         <main class="mainDQ">
             <section id="query-section">
-                <h2>Data Query</h2>
+                <h2>Species Data Explorer</h2>
                 <div class="subsections">
                     <div class="pI">
-                        <p class="prf">Hello! Welcome to Insectonomy's website and its virtual query engine. 
-                            Here, you can perform searches only, as your registration is set as a guest. 
-                            This system operates with a distribution of categories that you can select to find your perfect insect. 
-                            Alternatively, you can browse the entire database out of curiosity by clicking <span id="click-here" onclick="fetchAllData()">here</span>. 
-                            Each category has multiple or free options depending on its nature. 
-                            You can search through four major tables: General Aspects, Productive Potential, 
-                            Ecosystem Potential, and Usage. Without further ado, let yourself be guided and enjoy your search!</p>
+                        <p class="prf">In the Species Data Explorer tab, you can access detailed information on 120 insect species across the key variables we've previously outlined: Productive Potential, Ecosystem Potential, Use, and Challenges.</p>
+                        <p class="prf">You can explore species one by one or create custom groupings based on characteristics you choose. By selecting a species or group of species, you'll see their general traits along with their potential in each of these categories.</p>
+                        <p class="prf">The Explorer also offers two interactive graph options:</p>
+                        <ul>
+                            <li>A regression graph that allows you to compare different characteristics and view the species potential.</li>
+                            <li>A ranking graph that highlights the top three species with the highest potential based on the criteria you've selected.</li>
+                        </ul>
+                        <p class="prf">This tool makes it easy to visualize and compare the potential of insect species for sustainable agrifood systems.</p>
                     </div>
                     <div class="subsection">
                         <form id="input-form">
@@ -183,7 +194,18 @@
                             <!-- Campos de eco_pot -->
 
                             <button type="button" class="collapsibleEP">Ecosystemic Potential</button>
-                            <span class="iconEP"><ion-icon name="help-circle"></ion-icon></ion-icon>
+                            <span class="iconEP">
+                                <ion-icon name="help-circle"></ion-icon></ion-icon>
+                                <div class="popup-content-embedded" id="popupEP">
+                                    <h3>Ecosystemic Potential (Info) </h3>
+                                    <p>The list shows the maximums and minimums according to categories.</p>
+                                    <ul style="margin-top: 10px;">
+                                        <li>Cultural (0-3)</li>
+                                        <li>Regulation (0-3)</li>
+                                        <li>Support (0-3)</li>
+                                        <li>Disservices (0-3)</li>
+                                    </ul>
+                                </div>
                             </span>
                             <div class="contentEP">
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
@@ -397,7 +419,23 @@
                             <!-- Campos de prod_pot -->
 
                             <button type="button" class="collapsiblePP">Productive Potential</button>
-                            <span class="iconPP"><ion-icon name="help-circle"></ion-icon></ion-icon>
+                            <span class="iconPP">
+                                <ion-icon name="help-circle"></ion-icon></ion-icon>
+                                <div class="popup-content-embedded" id="popupPP">
+                                    <h3>Productive Potential (Info) </h3>
+                                    <p>The list shows the maximums and minimums according to categories.</p>
+                                    <ul style="margin-top: 10px;">
+                                        <li>Cultural (0-3)</li>
+                                        <li>Regulation (0-3)</li>
+                                        <li>Support (0-3)</li>
+                                        <li>Disservices (0-3)</li>
+                                        <li>Cultural (0-3)</li>
+                                        <li>Regulation (0-3)</li>
+                                        <li>Support (0-3)</li>
+                                        <li>Disservices (0-3)</li>
+                                        <li>Cultural (0-3)</li>
+                                    </ul>
+                                </div>
                             </span>
                             <div class="contentPP">
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
@@ -675,7 +713,18 @@
                             <!-- Campos de use -->
 
                             <button type="button" class="collapsibleU">Use</button>
-                            <span class="iconU"><ion-icon name="help-circle"></ion-icon></ion-icon>
+                            <span class="iconU">
+                                <ion-icon name="help-circle"></ion-icon></ion-icon>
+                                <div class="popup-content-embedded" id="popupU">
+                                    <h3>Use (Info) </h3>
+                                    <p>The list shows the maximums and minimums according to categories.</p>
+                                    <ul style="margin-top: 10px;">
+                                        <li>Cultural (0-3)</li>
+                                        <li>Regulation (0-3)</li>
+                                        <li>Support (0-3)</li>
+                                        <li>Disservices (0-3)</li>
+                                    </ul>
+                                </div>
                             </span>
                             <div class="contentU">
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
@@ -1075,7 +1124,7 @@
                     </div>
                     <div class="buttons">
                         <button class="btnDQ" type="button" onclick= "searchGenAsp()"> Search </button>
-                        <button class="btnDQ" type="button" onclick="addGenAsp()"> Add</button>
+                        <!-- <button class="btnDQ" type="button" onclick="addGenAsp()"> Add</button> -->
                         <!-- <button class="btnDQ" type="button" onclick="deleteGenAsp()"> Delete</button> -->
                     </div>
 
@@ -1212,25 +1261,31 @@
                             </table>
                         </div>
                     </div>
-
+                <h3 style="margin-top: 40px;">Grafics above table</h3>
                 </div>
-                <div class="PrincipalChart">
-                    <div id="axis-selection">
-                        <label for="x-axis-select">Axis X:</label>
-                        <select id="x-axis-select">
-                            <!-- Las opciones se llenarán dinámicamente desde JS -->
-                        </select>
-                        
-                        <label for="y-axis-select">Axis Y:</label>
-                        <select id="y-axis-select">
-                            <!-- Las opciones se llenarán dinámicamente desde JS -->
-                        </select>
-                        
-                        <button id="update-chart" class="btnDQ" onclick="updateChart()">Update Chart</button>
+                <div>
+                    <div class="PrincipalChart">
+                        <div id="axis-selection">
+                            <label for="x-axis-select">Axis X:</label>
+                            <select id="x-axis-select">
+                                <!-- Las opciones se llenarán dinámicamente desde JS -->
+                            </select>
+                            
+                            <label for="y-axis-select">Axis Y:</label>
+                            <select id="y-axis-select">
+                                <!-- Las opciones se llenarán dinámicamente desde JS -->
+                            </select>
+                            
+                            <button id="update-chart" class="btnDQ" onclick="updateChart()">Update Chart</button>
+                        </div>
+                        <div class="charts-container">
+                            <!-- Espacio para la gráfica -->
+                        <canvas id="dynamicChart" width="400" height="400"></canvas>
+                        </div>
                     </div>
-                    <div class="charts-container">
-                        <!-- Espacio para la gráfica -->
-                    <canvas id="dynamicChart" width="400" height="400"></canvas>
+                    <button id="update-chart-btn" style="margin: 20px; padding: 10px 20px;">Update Chart</button>
+                    <div class="chart-container">
+                        <canvas id="topInsectsRadarChart" width="600" height="400"></canvas>
                     </div>
                 </div>
             </section>
@@ -1276,6 +1331,6 @@
         <script src="scriptDQ.js"></script>
     </body>
     <footer>
-        <p>Insectonomy  Universidad Nacional de Colombia</p>
+        <p>Insectonomy - Universidad Nacional de Colombia</p>
     </footer>
 </html>
