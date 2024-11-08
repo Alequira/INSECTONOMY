@@ -133,9 +133,12 @@ app.post('/search', async (req, res) => {
     const { categories } = req.body;
     const searchCriteria = {};
 
-    for (const [key, value] of Object.entries(categories)) {
-        if (value) {
-            searchCriteria[key] = { [Op.eq]: value };
+    // Construir criterios de búsqueda solo si hay categorías
+    if (Object.keys(categories).length > 0) {
+        for (const [key, value] of Object.entries(categories)) {
+            if (value) {
+                searchCriteria[key] = { [Op.eq]: value };
+            }
         }
     }
 
@@ -152,27 +155,43 @@ app.post('/search', async (req, res) => {
             }
         }
 
-        // Realizar las búsquedas en paralelo y agrupar resultados por GenAspId
+        // Si no hay criterios, hacer búsqueda completa en GenAsp
         const resultsMap = new Map();
-
-        for (const [tableName, conditions] of Object.entries(tableSearches)) {
-            const table = require(`./data_base/tables/${tableName}`);
-            const whereClause = conditions.reduce((acc, condition) => {
-                return { ...acc, ...condition };
-            }, {});
-            const results = await table.findAll({ where: whereClause });
-
-            results.forEach(record => {
-                const primaryKey = record.GenAspId || record.id;
-                if (!resultsMap.has(primaryKey)) {
-                    resultsMap.set(primaryKey, {});
-                }
-                const tableName = record.constructor.name;
-                resultsMap.get(primaryKey)[tableName] = record;
+        if (Object.keys(searchCriteria).length === 0) {
+            // Buscar todos los registros de GenAsp y sus relaciones
+            const allGenAspRecords = await GenAsp.findAll({
+                include: [
+                    { model: EcoPot, as: 'eco_pot', required: false },
+                    { model: ProdPot, as: 'prod_pot', required: false },
+                    { model: Use, as: 'use', required: false },
+                    { model: Indexes, as: 'index', required: false }
+                ]
             });
+
+            allGenAspRecords.forEach(record => {
+                resultsMap.set(record.id, record);
+            });
+        } else {
+            // Búsqueda filtrada por cada tabla basada en criterios
+            for (const [tableName, conditions] of Object.entries(tableSearches)) {
+                const table = require(`./data_base/tables/${tableName}`);
+                const whereClause = conditions.reduce((acc, condition) => {
+                    return { ...acc, ...condition };
+                }, {});
+                const results = await table.findAll({ where: whereClause });
+
+                results.forEach(record => {
+                    const primaryKey = record.GenAspId || record.id;
+                    if (!resultsMap.has(primaryKey)) {
+                        resultsMap.set(primaryKey, {});
+                    }
+                    const tableName = record.constructor.name;
+                    resultsMap.get(primaryKey)[tableName] = record;
+                });
+            }
         }
 
-        // Obtener registros completos de GenAsp y sus asociaciones
+        // Convertir resultsMap en un array de registros completos
         const finalResults = await Promise.all(Array.from(resultsMap.keys()).map(async primaryKey => {
             return await GenAsp.findByPk(primaryKey, {
                 include: [
@@ -195,37 +214,25 @@ app.post('/search', async (req, res) => {
             });
         });
 
-        // Extraer los IDs de los insectos que coinciden con todas las búsquedas
+        // Extraer datos para el cliente
         const insectIds = filteredResults.map(result => result.id);
-
-        // Crear un texto con los IDs de los insectos
         const idsText = `Insect IDs matching all searches: ${insectIds.join(', ')}`;
-
-        /* // Extraer datos para la gráfica de índices
         const indexData = filteredResults.map(result => ({
             id: result.id,
-            use: result.index ? result.index.Use : null,
-            prodPot: result.index ? result.index.ProdPot : null,
-            ecoPot: result.index ? result.index.EcoPot : null
-        })); */
-
-        // Recolectar todas las columnas de datos para las gráficas
-        const indexData = filteredResults.map(result => ({
-            id: result.id,
-            ...result.toJSON(), // Incluye todas las propiedades de GenAsp
-            ...(result.eco_pot ? result.eco_pot.toJSON() : {}), // Incluye todas las propiedades de EcoPot
-            ...(result.prod_pot ? result.prod_pot.toJSON() : {}), // Incluye todas las propiedades de ProdPot
-            ...(result.use ? result.use.toJSON() : {}), // Incluye todas las propiedades de Use
-            ...(result.index ? result.index.toJSON() : {}) // Incluye todas las propiedades de Indexes
+            ...result.toJSON(),
+            ...(result.eco_pot ? result.eco_pot.toJSON() : {}),
+            ...(result.prod_pot ? result.prod_pot.toJSON() : {}),
+            ...(result.use ? result.use.toJSON() : {}),
+            ...(result.index ? result.index.toJSON() : {})
         }));
 
-        // Log de datos extraídos para depuración
+        // Log de depuración
         console.log("Index Data:", indexData);
 
-        // Responder con los resultados filtrados, el texto con los IDs y los datos de la gráfica
-        res.json({results: filteredResults , idsText, indexData});
+        // Enviar respuesta al cliente
+        res.json({ results: filteredResults, idsText, indexData });
     } catch (error) {
-        console.error(error);
+        console.error('Error al realizar la búsqueda:', error);
         res.status(500).json({ error: 'Error al realizar la búsqueda' });
     }
 });
@@ -240,3 +247,24 @@ sequelize.sync().then(() => {
 }).catch(error => {
     console.error('Error synchronizing database:', error);
 });
+
+function clean() {
+    // Limpiar el contenido de la tabla de resultados
+    const tableBody = document.getElementById('results-table').getElementsByTagName('tbody')[0];
+    tableBody.innerHTML = '';
+
+    // Limpiar los selectores de ejes (opcional, si deseas que no aparezcan las categorías previas)
+    document.getElementById('x-axis-select').innerHTML = '';
+    document.getElementById('y-axis-select').innerHTML = '';
+
+    // Reiniciar el formulario de búsqueda si existe
+    document.getElementById('input-form').reset();
+
+    // Limpiar el texto de resultados, como los IDs de búsqueda
+    document.getElementById('ids-text').textContent = '';
+
+    // Resetear la variable `indexData` para comenzar desde cero
+    indexData = [];
+
+    console.log("La búsqueda ha sido limpiada. Listo para una nueva consulta.");
+}

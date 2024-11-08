@@ -130,11 +130,32 @@ async function fetchAllData() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ categories: {} }) // Enviar un cuerpo vacío
+            body: JSON.stringify({ categories: {} }) // Enviar un cuerpo vacío para obtener todos los datos
         });
 
+        if (!response.ok) {
+            throw new Error(`Error en la solicitud: ${response.status}`);
+        }
+
         const data = await response.json();
-        displayResults(data.results);
+        console.log("Data received from server:", data); // Log para verificar datos
+
+        if (data.results && data.results.length > 0) {
+            displayResults(data.results); // Mostrar resultados en la tabla
+            displayIdsText(data.idsText); // Mostrar texto con IDs
+
+            // Asignar `indexData` a los datos recibidos para ser usado en la gráfica
+            indexData = data.indexData;
+            console.log("Index Data (fetchAll):", indexData); // Verificar contenido de `indexData`
+
+            // Obtener todas las columnas y poblar los selectores de ejes
+            const allColumns = getAllColumns(indexData);
+            populateAxisSelectors(allColumns);
+
+        } else {
+            console.log("No se encontraron datos.");
+            displayIdsText("No se encontraron registros coincidentes.");
+        }
     } catch (error) {
         console.error('Error al obtener todos los datos:', error);
     }
@@ -283,7 +304,7 @@ function generateCharts(record) {
         spiderChart = new Chart(ctx1, {
             type: 'radar',
             data: {
-                labels: ['Use', 'Productive Potential', 'Ecological Potential'],
+                labels: ['Use', 'Productive Potential', 'Ecosystem Potential'],
                 datasets: [{
                     label: 'Insect score',
                     data: [
@@ -515,7 +536,7 @@ function convertCategoricalToNumerical(data, column) {
     uniqueValues.forEach((value, index) => {
         mapping[value] = index + 1; // Asignar un valor numérico a cada categoría
     });
-    
+
     return data.map(item => ({
         ...item,
         [`${column}_numeric`]: mapping[item[column]] // Crear una nueva columna con valores numéricos
@@ -562,20 +583,23 @@ function populateAxisSelectors(columns) {
     xAxisSelect.innerHTML = '';
     yAxisSelect.innerHTML = '';
 
-    // Crear opciones para cada columna
+    // Crear opciones solo para las columnas que están en el diccionario `columnNameMap`
     columns.forEach(column => {
-        const optionX = document.createElement('option');
-        optionX.value = column;
-        optionX.textContent = column;
-        xAxisSelect.appendChild(optionX);
+        if (columnNameMap[column]) { // Verificar si la columna está en el diccionario
+            const columnName = columnNameMap[column];
 
-        const optionY = document.createElement('option');
-        optionY.value = column;
-        optionY.textContent = column;
-        yAxisSelect.appendChild(optionY);
+            const optionX = document.createElement('option');
+            optionX.value = column;
+            optionX.textContent = columnName;
+            xAxisSelect.appendChild(optionX);
+
+            const optionY = document.createElement('option');
+            optionY.value = column;
+            optionY.textContent = columnName;
+            yAxisSelect.appendChild(optionY);
+        }
     });
 }
-
 // Actualizar las gráficas según la selección de ejes
 function updateChart() {
     const xAxis = document.getElementById('x-axis-select').value;
@@ -694,7 +718,7 @@ function getTableData() {
 }
 
 function generateTopInsectsRadarChart(records) {
-    // Paso 1: Calcular el promedio de los índices para cada insecto
+    // Calcular el promedio de los índices para cada insecto
     const insectScores = records.map(record => {
         const ecoPot = parseInt(record.EcoPot) || 0;
         const prodPot = parseInt(record.ProdPot) || 0;
@@ -711,7 +735,7 @@ function generateTopInsectsRadarChart(records) {
         };
     });
 
-    // Paso 2: Seleccionar los tres insectos con los mayores promedios
+    // Seleccionar los tres insectos con los mayores promedios
     const topThreeInsects = insectScores.sort((a, b) => b.averageScore - a.averageScore).slice(0, 3);
 
     // Verificar si se encontraron al menos tres insectos
@@ -720,7 +744,7 @@ function generateTopInsectsRadarChart(records) {
         return;
     }
 
-    // Paso 3: Configurar los datasets para la gráfica Radar
+    // Configurar los datasets para la gráfica Radar
     const datasets = topThreeInsects.map(insect => ({
         label: insect.name, // Nombre del insecto como etiqueta
         data: [insect.ecoPot, insect.prodPot, insect.use], // Datos de los índices
@@ -729,7 +753,7 @@ function generateTopInsectsRadarChart(records) {
         borderWidth: 2
     }));
 
-    // Paso 4: Crear la gráfica de Radar con los datos de los tres insectos
+    //  Crear la gráfica de Radar con los datos de los tres insectos
     const ctx = document.getElementById('topInsectsRadarChart').getContext('2d');
     
     // Limpiar gráfica anterior si existe
@@ -740,7 +764,7 @@ function generateTopInsectsRadarChart(records) {
     window.radarChart = new Chart(ctx, {
         type: 'radar',
         data: {
-            labels: ['Ecological Potential', 'Productive Potential', 'Use'], // Etiquetas para los índices
+            labels: ['Ecosystem Potential', 'Productive Potential', 'Use'], // Etiquetas para los índices
             datasets: datasets // Los datasets generados
         },
         options: {
@@ -771,3 +795,112 @@ document.getElementById('update-chart-btn').addEventListener('click', () => {
     const tableData = getTableData(); // Obtener los datos de la tabla
     generateTopInsectsRadarChart(tableData); // Generar la gráfica Radar con los tres mejores registros
 });
+
+const columnNameMap = {
+    'id': 'ID',
+    'Or': 'Order',
+    'Fam': 'Family',
+    'ComNa': 'Common Name',
+    'SciNa': 'Scientific Name',
+    'BiogRe': 'Biogeographic - Realm',
+    'BiogZo': 'Biogeographic - Zone',
+    'HoldBio': 'Holdridge - Biome',
+    'HoldPre': 'Holdridge - Annual Precipitation',
+    'HoldTemp': 'Holdridge - Temperature',
+    'HoldAB': 'Holdridge - Altitudinal Belts',
+    'HoldLR': 'Holdridge - Latitudinal Regions',
+    'HoldAD': 'Holdridge - Altitudinal Distribution',
+    'HabPat': 'Habitat Pattern',
+    'LSI': 'Landscape Structure Index',
+    'EcoPot': 'Ecosystem Potential',
+    'ProdPot': 'Productive Potential',
+    'Use': 'Use',
+    'CultCultIdDi': 'Cultural Identity (Ecosystem)',
+    'CultInspArt': 'Inspiration (Ecosystem)',
+    'CultEdu': 'Education (Ecosystem)',
+    'CultRecEcot': 'Recreation (Ecosystem)',
+    'CultSpiReg': 'Spiritual Relevance (Ecosystem)',
+    'RegBioind': 'Bioindicator (Regulation)',
+    'RegBiocont': 'Biocontrol (Regulation)',
+    'RegPol': 'Pollination (Regulation)',
+    'RegSeed': 'Seed Dispersal (Regulation)',
+    'SupNutCy': 'Nutrient Cycling (Supporting)',
+    'SupSoIm': 'Soil Improvement (Supporting)',
+    'ProFF': 'Food and Feed Production',
+    'ProWildF': 'Wild Food Production',
+    'ProBiomol': 'Biomolecules Production',
+    'ProBiopro': 'Bioproducts Production',
+    'ProBiom': 'Biomass',
+    'ProBiomimi': 'Biomimicry',
+    'DissVector': 'Disservices - Vector',
+    'DissPest': 'Disservices - Pest',
+    'ManSt': 'Management - Stress',
+    'ManRu': 'Management - Rusticity',
+    'ManAg': 'Management - Agility',
+    'ManSoSt': 'Management - Social Structure',
+    'ManHab': 'Management - Habits',
+    'ManTer': 'Management - Territoriality',
+    'ManTra': 'Management - Transportation',
+    'ManFac': 'Management - Facilities',
+    'NutFeed': 'Nutrition - Feeding Type',
+    'NutCost': 'Nutrition - Cost of Feed',
+    'RepSexMat': 'Reproduction - Sexual Maturity',
+    'RepNumbOff': 'Reproduction - Number of Offspring',
+    'RepCy': 'Reproduction - Cycles',
+    'RepGestInc': 'Reproduction - Gestation/Incubation',
+    'RepSexInt': 'Reproduction - Sexual Interaction',
+    'ProPopStu': 'Production - Population Study',
+    'ProProf': 'Production - Profit',
+    'ProLong': 'Production - Longevity',
+    'ProReL': 'Production - Research Level',
+    'ProOpBre': 'Production - Optimal Breeding Type',
+    'ProAddVal': 'Production - Added Value',
+    'MarCultAcc': 'Market - Cultural Acceptance',
+    'MarPri': 'Market - Price',
+    'MarCompDom': 'Market - Competition with Domestic Species',
+    'MarReg': 'Market - Regional',
+    'MarNat': 'Market - National',
+    'MarInt': 'Market - International',
+    'MarMP': 'Market - Main Product of Use',
+    'ScLS': 'Production Scale - Low',
+    'ScMS': 'Production Scale - Medium',
+    'ScLaS': 'Production Scale - Large',
+    'SocAccCSA': 'Social Acceptability - Central/South America',
+    'SocAccNA': 'Social Acceptability - North America',
+    'SocAccAf': 'Social Acceptability - Africa',
+    'SocAccOc': 'Social Acceptability - Oceania',
+    'SocAccEu': 'Social Acceptability - Europe',
+    'SocAccAs': 'Social Acceptability - Asia',
+    'LegPunc': 'Legislation - Punctuation',
+    'LegLeg': 'Legislation'
+};
+
+
+function clean() {
+    // Limpiar el contenido de la tabla de resultados
+    const tableBody = document.getElementById('results-table').getElementsByTagName('tbody')[0];
+    tableBody.innerHTML = '';
+
+    // Limpiar los selectores de ejes
+    document.getElementById('x-axis-select').innerHTML = '';
+    document.getElementById('y-axis-select').innerHTML = '';
+
+    // Reiniciar el formulario de búsqueda si existe
+    document.getElementById('input-form').reset();
+
+    // Limpiar el texto de resultados, como los IDs de búsqueda
+    document.getElementById('ids-text').textContent = '';
+
+    // Resetear la variable `indexData` para comenzar desde cero
+    indexData = [];
+
+    // Destruir las gráficas si existen
+    if (dynamicChart) {
+        dynamicChart.destroy();
+        dynamicChart = null;
+    }
+    if (window.radarChart) {
+        window.radarChart.destroy();
+        window.radarChart = null;
+    }
+}
