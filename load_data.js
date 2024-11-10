@@ -7,7 +7,7 @@ const EcoPot = require('./data_base/tables/eco_pot');
 const ProdPot = require('./data_base/tables/prod_pot');
 const Use = require('./data_base/tables/use');
 const Indexes = require('./data_base/tables/indexes');
-const Challenges = require('./data_base/tables/Challenges');
+const Challenges = require('./data_base/tables/challenges');
 
 const loadCSV = (filePath, model) => {
         console.log(`Loading data from ${filePath}`);

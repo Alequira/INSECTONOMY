@@ -1236,13 +1236,14 @@
                                     <input type="text" id="LegLeg" name="LegLeg">
                                 </div>
                                 </div>
-                            </div>
 
-                            <button type="button" class="collapsibleC">Use</button>
+                            <!-- Campos de challenges -->
+
+                            <button type="button" class="collapsibleC">Challenges</button>
                             <span class="iconC">
                                 <ion-icon name="help-circle"></ion-icon></ion-icon>
-                                <div class="popup-content-embedded" id="popupU">
-                                    <h3>Use (Info) </h3>
+                                <div class="popup-content-embedded" id="popupC">
+                                    <h3>Challenges (Info) </h3>
                                     <p>The list shows the maximums and minimums according to categories.</p>
                                     <ul style="margin-top: 10px;">
                                         <li>Cultural (0-3)</li>
@@ -1254,11 +1255,11 @@
                             </span>
                             <div class="contentC">
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-                                <h3>Main Use</h3>
+                                <h3>Challenges</h3>
                                 <div>
-                                    <div class="input-boxU">
-                                        <label for="MaUSubs">Subsistence</label>
-                                        <select id="MaUSubs" name="MaUSubs">
+                                    <div class="input-boxC">
+                                        <label for="Vector">Vector</label>
+                                        <select id="Vector" name="Vector">
                                             <option value="">N/A</option>
                                             <option value="0">0</option>
                                             <option value="1">1</option>
@@ -1266,9 +1267,9 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-boxU">
-                                        <label for="MaUSelCons">Self-Consumption</label>
-                                        <select id="MaUSelCons" name="MaUSelCons">
+                                    <div class="input-boxC">
+                                        <label for="Pest">Pest</label>
+                                        <select id="Pest" name="Pest">
                                             <option value="">N/A</option>
                                             <option value="0">0</option>
                                             <option value="1">1</option>
@@ -1276,9 +1277,9 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-boxU">
-                                        <label for="MaUCom">Commercial</label>
-                                        <select id="MaUCom" name="MaUCom">
+                                    <div class="input-boxC">
+                                        <label for="Toxins">Toxins</label>
+                                        <select id="Toxins" name="Toxins">
                                             <option value="">N/A</option>
                                             <option value="0">0</option>
                                             <option value="1">1</option>
@@ -1286,12 +1287,9 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                </div>
-                                <h3>Sort of Use</h3>
-                                <div>
-                                    <div class="input-boxU">
-                                        <label for="SoUseFo">Food</label>
-                                        <select id="SoUseFo" name="SoUseFo">
+                                    <div class="input-boxC">
+                                        <label for="Allergens">Allergens</label>
+                                        <select id="Allergens" name="Allergens">
                                             <option value="">N/A</option>
                                             <option value="0">0</option>
                                             <option value="1">1</option>
@@ -1299,9 +1297,9 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-boxU">
-                                        <label for="SoUseFe">Feed</label>
-                                        <select id="SoUseFe" name="SoUseFe">
+                                    <div class="input-boxC">
+                                        <label for="AntFact">Antinutritional factors</label>
+                                        <select id="AntFact" name="AntFact">
                                             <option value="">N/A</option>
                                             <option value="0">0</option>
                                             <option value="1">1</option>
@@ -1309,9 +1307,9 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-boxU">
-                                        <label for="SoUseBioconv">Bioconversion</label>
-                                        <select id="SoUseBioconv" name="SoUseBioconv">
+                                    <div class="input-boxC">
+                                        <label for="InvSp">Invasive species</label>
+                                        <select id="InvSp" name="InvSp">
                                             <option value="">N/A</option>
                                             <option value="0">0</option>
                                             <option value="1">1</option>
@@ -1319,9 +1317,9 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-boxU">
-                                        <label for="SoUseBiocont">Biocontrol</label>
-                                        <select id="SoUseBiocont" name="SoUseBiocont">
+                                    <div class="input-boxC">
+                                        <label for="Phobia">Phobia</label>
+                                        <select id="Phobia" name="Phobia">
                                             <option value="">N/A</option>
                                             <option value="0">0</option>
                                             <option value="1">1</option>
@@ -1329,9 +1327,9 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-boxU">
-                                        <label for="SoUsePol">Pollination</label>
-                                        <select id="SoUsePol" name="SoUsePol">
+                                    <div class="input-boxC">
+                                        <label for="Stigma">Stigmatization</label>
+                                        <select id="Stigma" name="Stigma">
                                             <option value="">N/A</option>
                                             <option value="0">0</option>
                                             <option value="1">1</option>
@@ -1339,315 +1337,11 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-                                    <div class="input-boxU">
-                                        <label for="SoUsePet">Pet</label>
-                                        <select id="SoUsePet" name="SoUsePet">
-                                            <option value="">N/A</option>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-boxU">
-                                        <label for="SoUseCult">Cultural</label>
-                                        <select id="SoUseCult" name="SoUseCult">
-                                            <option value="">N/A</option>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-boxU">
-                                        <label for="SoUseOth">Other</label>
-                                        <select id="SoUseOth" name="SoUseOth">
-                                            <option value="">N/A</option>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <h3>Primary Way to Obtain</h3>
-                                <div>
-                                    <div class="input-boxU">
-                                        <label for="ObtHar">Harvesting</label>
-                                        <select id="ObtHar" name="ObtHar">
-                                            <option value="">N/A</option>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-boxU">
-                                        <label for="ObtSHar">Semiharvesting</label>
-                                        <select id="ObtSHar" name="ObtSHar">
-                                            <option value="">N/A</option>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-boxU">
-                                        <label for="ObtPro">Production</label>
-                                        <select id="ObtPro" name="ObtPro">
-                                            <option value="">N/A</option>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <h3>Primary Continents of Utilization</h3>
-                                <div>
-                                    <div class="input-boxU">
-                                        <label for="ContUtNA">North America</label>
-                                        <select id="ContUtNA" name="ContUtNA">
-                                            <option value="">N/A</option>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-boxU">
-                                        <label for="ContUtCA">Central America</label>
-                                        <select id="ContUtCA" name="ContUtCA">
-                                            <option value="">N/A</option>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-boxU">
-                                        <label for="ContUtSA">South America</label>
-                                        <select id="ContUtSA" name="ContUtSA">
-                                            <option value="">N/A</option>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-boxU">
-                                        <label for="ContUtAs">Asia</label>
-                                        <select id="ContUtAs" name="ContUtAs">
-                                            <option value="">N/A</option>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-boxU">
-                                        <label for="ContUtEu">Europe</label>
-                                        <select id="ContUtEu" name="ContUtEu">
-                                            <option value="">N/A</option>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-boxU">
-                                        <label for="ContUtOc">Oceania</label>
-                                        <select id="ContUtOc" name="ContUtOc">
-                                            <option value="">N/A</option>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-boxU">
-                                        <label for="ContUtAf">Africa</label>
-                                        <select id="ContUtAf" name="ContUtAf">
-                                            <option value="">N/A</option>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <h3>Market</h3>
-                                <div>
-                                    <div class="input-boxU">
-                                        <label for="MarYN">Y/N</label>
-                                        <select id="MarYN" name="MarYN">
-                                            <option value="">N/A</option>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-boxU">
-                                        <label for="MarLoc">Local</label>
-                                        <select id="MarLoc" name="MarLoc">
-                                            <option value="">N/A</option>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-boxU">
-                                        <label for="MarReg">Regional</label>
-                                        <select id="MarReg" name="MarReg">
-                                            <option value="">N/A</option>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-boxU">
-                                        <label for="MarNat">National</label>
-                                        <select id="MarNat" name="MarNat">
-                                            <option value="">N/A</option>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-boxU">
-                                        <label for="MarInt">International</label>
-                                        <select id="MarInt" name="MarInt">
-                                            <option value="">N/A</option>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-boxU">
-                                        <label for="MarMP">Main Product of Use</label>
-                                        <select id="MarMP" name="MarMP">
-                                            <option value="">N/A</option>
-                                            <option value="Feed">Feed</option>
-                                            <option value="Food">Food</option>
-                                            <option value="Biomolecules">Biomolecules</option>
-                                            <option value="Pet">Pet</option>
-                                            <option value="Biocontrol">Biocontrol</option>
-                                            <option value="Pollination">Pollination</option>
-                                            <option value="Laboratory- reared">Laboratory- reared</option>
-                                            <option value="Biomodel">Biomodel</option>
-                                            <option value="N/A">N/A</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <h3>Production Scale</h3>
-                                <div>
-                                    <div class="input-boxU">
-                                        <label for="ScLS">Low Scale</label>
-                                        <select id="ScLS" name="ScLS">
-                                            <option value="">N/A</option>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-boxU">
-                                        <label for="ScMS">Middle Scale</label>
-                                        <select id="ScMS" name="ScMS">
-                                            <option value="">N/A</option>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-boxU">
-                                        <label for="ScLaS">Large Scale</label>
-                                        <select id="ScLaS" name="ScLaS">
-                                            <option value="">N/A</option>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <h3>Social Acceptability</h3>
-                                <div>
-                                    <div class="input-boxU">
-                                        <label for="SocAccCSA">Central and South America</label>
-                                        <select id="SocAccCSA" name="SocAccCSA">
-                                            <option value="">N/A</option>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-boxU">
-                                        <label for="SocAccNA">Central and North America</label>
-                                        <select id="SocAccNA" name="SocAccNA">
-                                            <option value="">N/A</option>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-boxU">
-                                        <label for="SocAccAf">Africa</label>
-                                        <select id="SocAccAf" name="SocAccAf">
-                                            <option value="">N/A</option>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-boxU">
-                                        <label for="SocAccOc">Oceania</label>
-                                        <select id="SocAccOc" name="SocAccOc">
-                                            <option value="">N/A</option>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-boxU">
-                                        <label for="SocAccEu">Europe</label>
-                                        <select id="SocAccEu" name="SocAccEu">
-                                            <option value="">N/A</option>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-boxU">
-                                        <label for="SocAccAs">Asia</label>
-                                        <select id="SocAccAs" name="SocAccAs">
-                                            <option value="">N/A</option>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="input-boxU">
-                                    <label for="LegLeg">Legislation</label>
-                                    <input type="text" id="LegLeg" name="LegLeg">
-                                </div>
                                 </div>
                             </div>
                         </form>
                     </div>
+                    
                     <div class="buttons">
                         <button class="btnDQ" type="button" onclick= "executeSearchAndUpdate()"> Search </button>
                         <button class="btnDQ" type="button" onclick="executeFetchAllAndUpdate()"> Fetch All</button>
@@ -1700,8 +1394,6 @@
                                         <th id="ProBiopro">Provision - <b>Bioproducts</b></th>
                                         <th id="ProBiom">Provision - <b>Biomodels</b></th>
                                         <th id="ProBiomimi">Provision - <b>Biomimicry</b></th>
-                                        <th id="DissVector">Disservices - <b>Vector</b></th>
-                                        <th id="DissPest">Disservices - <b>Pest</b></th>
 
                                         <!-- Encabezados de prod_pot-->
 
@@ -1773,11 +1465,24 @@
                                         <th id="LegPunc">Legislation - <b>Punctuation</b></th>
                                         <th id="LegLeg">Legislation</th>
 
+                                        <!-- Encabezados de Challenges-->
+
+                                        <th id="Vector">Vector</th>
+                                        <th id="Pest">Pest</th>
+                                        <th id="Toxins">Toxins</th>
+                                        <th id="Allergens">Allergens</th>
+                                        <th id="AntFact">Antinutritional factors</th>
+                                        <th id="InvSp">Invasive species</th>
+                                        <th id="Phobia">Phobia</th>
+                                        <th id="Stigma">Stigmatization</th>
+
                                         <!-- Encabezados de Indices-->
 
                                         <th id="Use">Use</th>
                                         <th id="ProdPot">Production Potential</th>
                                         <th id="EcoPot">Ecosystem Potential</th>
+                                        <th id="Challenges">Challenges</th>
+                                        <th id="Average">Average</th>
 
                                     </tr>
                                 </thead>
@@ -1808,7 +1513,7 @@
                             <!-- Espacio para la gráfica -->
                         <canvas id="dynamicChart" width="400" height="400"></canvas>
                         <div id="customTooltip" style="font-size: 10px; display:none; position:absolute; background-color:white; padding:8px; border:1px solid #ccc; border-radius:4px; box-shadow:0px 4px 10px rgba(0, 0, 0, 0.25) ;"></div>
-                        <canvas id="topInsectsRadarChart" ></canvas>
+                        <canvas id="topInsectsRadarChart" style="width: 50%; max-width: 750px; margin: auto;"></canvas>
                         </div>
                         <div class="chart-container-btn">
                             

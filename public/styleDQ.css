@@ -400,6 +400,41 @@
         padding: 10px;
     }
 
+    .iconC{
+        position: absolute;
+        font-size: 1.8em;
+        line-height: 130px;
+    }
+
+    .input-boxC{
+        display: inline;
+        align-items: center;
+        margin: 10px;
+    }
+
+
+    .contentC.POP{
+        margin-left: 200px;
+        margin-right: 300px;
+        align-items: center;
+        display: block;
+        line-height: 40px;
+        border: 1px solid #240202;
+        border-radius: 6px;
+        padding: 10px;
+    }
+
+    .contentC{
+        margin-left: 200px;
+        margin-right: 300px;
+        align-items: center;
+        display: none;
+        line-height: 40px;
+        border: 1px solid #240202;
+        border-radius: 6px;
+        padding: 10px;
+    }
+
     .texti{
         justify-content: center;
         display: flex;
@@ -427,6 +462,7 @@
             justify-content: center;
             margin-left: 15px;
             margin-bottom: 10px;
+            margin-top: 15px;
         }
 
         .btnDQ:hover{
@@ -523,6 +559,30 @@
             }
 
             .collapsibleU:hover{
+                background-color: #220000;
+                color: #ffffff;
+            }
+
+            /**/
+            .collapsibleC{
+                margin: 40px;
+                margin-left: 100px;
+                position: relative;
+                font-size: 1em;
+                background: transparent;
+                width: 250px;
+                height: 40px;
+                outline: none;
+                color: #250000;
+                border: 2px solid #240202;
+                border-radius: 6px;
+                cursor: pointer;
+                font-weight: 600;
+                transition: 0.4s;
+                justify-content: center;
+            }
+
+            .collapsibleC:hover{
                 background-color: #220000;
                 color: #ffffff;
             }
@@ -661,8 +721,8 @@
 }
 
 #topInsectsRadarChart {
-    width: 700px !important;   /* Ancho reducido con !important */
-    height: 700px !important;  /* Ancho máximo para adaptarse */
+    width: 100% !important;   /* Ancho reducido con !important */
+    height: auto !important;  /* Ancho máximo para adaptarse */
     display: block;            /* Asegurarse de que sea un bloque */
     margin: 0 auto;            /* Centrarse en el contenedor */
 }

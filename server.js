@@ -7,6 +7,7 @@ const GenAsp = require('./data_base/tables/gen_asp');
 const EcoPot = require('./data_base/tables/eco_pot');
 const ProdPot = require('./data_base/tables/prod_pot');
 const Use = require('./data_base/tables/use');
+const Challenges = require('./data_base/tables/challenges');
 const Indexes = require('./data_base/tables/indexes');
 
 console.log('Modules loaded...');
@@ -55,8 +56,6 @@ const columnTableMap = {
     ProBiopro: EcoPot,
     ProBiom: EcoPot,
     ProBiomimi: EcoPot,
-    DissVector: EcoPot,
-    DissPest: EcoPot,
 
 
     ManSt: ProdPot,
@@ -124,7 +123,22 @@ const columnTableMap = {
     SocAccEu: Use,
     SocAccAs: Use,
     LegPunc: Use,
-    LegLeg: Use
+    LegLeg: Use,
+
+    Vector: Challenges,
+    Pest: Challenges,
+    Toxins: Challenges,
+    Allergens: Challenges,
+    AntFact: Challenges,
+    InvSp: Challenges,
+    Phobia: Challenges,
+    Stigma: Challenges,
+
+    /* Use: Indexes,
+    ProdPot: Indexes,
+    EcoPot: Indexes,
+    Challenges: Indexes,
+    Average: Indexes, */
 
 };
 
@@ -164,6 +178,7 @@ app.post('/search', async (req, res) => {
                     { model: EcoPot, as: 'eco_pot', required: false },
                     { model: ProdPot, as: 'prod_pot', required: false },
                     { model: Use, as: 'use', required: false },
+                    { model: Challenges, as: 'challenges', required: false },
                     { model: Indexes, as: 'index', required: false }
                 ]
             });
@@ -198,6 +213,7 @@ app.post('/search', async (req, res) => {
                     { model: EcoPot, as: 'eco_pot', required: false },
                     { model: ProdPot, as: 'prod_pot', required: false },
                     { model: Use, as: 'use', required: false },
+                    { model: Challenges, as: 'challenges', required: false },
                     { model: Indexes, as: 'index', required: false }
                 ]
             });
@@ -210,7 +226,8 @@ app.post('/search', async (req, res) => {
                         (result.eco_pot && result.eco_pot[key] !== undefined) ||
                         (result.prod_pot && result.prod_pot[key] !== undefined) ||
                         (result.use && result.use[key] !== undefined) ||
-                        (result.index && result.index[key] !== undefined);
+                        (result.challenges && result.challenges[key] !== undefined)||
+                        (result.indexes && result.indexes[key] !== undefined);
             });
         });
 
@@ -223,6 +240,7 @@ app.post('/search', async (req, res) => {
             ...(result.eco_pot ? result.eco_pot.toJSON() : {}),
             ...(result.prod_pot ? result.prod_pot.toJSON() : {}),
             ...(result.use ? result.use.toJSON() : {}),
+            ...(result.challenges ? result.challenges.toJSON() : {}),
             ...(result.index ? result.index.toJSON() : {})
         }));
 
