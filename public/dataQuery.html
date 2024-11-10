@@ -530,29 +530,6 @@
                                         </select>
                                     </div>
                                 </div>
-                                <h3>Disservices</h3>
-                                <div>
-                                    <div class="input-boxEP">
-                                        <label for="DissVector">Vector</label>
-                                        <select id="DissVector" name="DissVector">
-                                            <option value="">N/A</option>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-boxEP">
-                                        <label for="DissPest">Pest</label>
-                                        <select id="DissPest" name="DissPest">
-                                            <option value="">N/A</option>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                    </div>
-                                </div>
                             </div>
 
                             <!-- Campos de prod_pot -->
@@ -819,6 +796,7 @@
                                             <option value="Low">Low</option>
                                             <option value="Middle">Middle</option>
                                             <option value="High">High</option>
+                                            <option value="High">Undetermined</option>
                                         </select>
                                     </div>
                                     <div class="input-boxPP">
@@ -1258,12 +1236,115 @@
                                     <input type="text" id="LegLeg" name="LegLeg">
                                 </div>
                                 </div>
+
+                            <!-- Campos de challenges -->
+
+                            <button type="button" class="collapsibleC">Challenges</button>
+                            <span class="iconC">
+                                <ion-icon name="help-circle"></ion-icon></ion-icon>
+                                <div class="popup-content-embedded" id="popupC">
+                                    <h3>Challenges (Info) </h3>
+                                    <p>The list shows the maximums and minimums according to categories.</p>
+                                    <ul style="margin-top: 10px;">
+                                        <li>Cultural (0-3)</li>
+                                        <li>Regulation (0-3)</li>
+                                        <li>Support (0-3)</li>
+                                        <li>Disservices (0-3)</li>
+                                    </ul>
+                                </div>
+                            </span>
+                            <div class="contentC">
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                                <h3>Challenges</h3>
+                                <div>
+                                    <div class="input-boxC">
+                                        <label for="Vector">Vector</label>
+                                        <select id="Vector" name="Vector">
+                                            <option value="">N/A</option>
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-boxC">
+                                        <label for="Pest">Pest</label>
+                                        <select id="Pest" name="Pest">
+                                            <option value="">N/A</option>
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-boxC">
+                                        <label for="Toxins">Toxins</label>
+                                        <select id="Toxins" name="Toxins">
+                                            <option value="">N/A</option>
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-boxC">
+                                        <label for="Allergens">Allergens</label>
+                                        <select id="Allergens" name="Allergens">
+                                            <option value="">N/A</option>
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-boxC">
+                                        <label for="AntFact">Antinutritional factors</label>
+                                        <select id="AntFact" name="AntFact">
+                                            <option value="">N/A</option>
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-boxC">
+                                        <label for="InvSp">Invasive species</label>
+                                        <select id="InvSp" name="InvSp">
+                                            <option value="">N/A</option>
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-boxC">
+                                        <label for="Phobia">Phobia</label>
+                                        <select id="Phobia" name="Phobia">
+                                            <option value="">N/A</option>
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-boxC">
+                                        <label for="Stigma">Stigmatization</label>
+                                        <select id="Stigma" name="Stigma">
+                                            <option value="">N/A</option>
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>
+                    
                     <div class="buttons">
-                        <button class="btnDQ" type="button" onclick= "searchGenAsp()"> Search </button>
-                        <button class="btnDQ" type="button" onclick="fetchAllData()"> Fetch All</button>
+                        <button class="btnDQ" type="button" onclick= "executeSearchAndUpdate()"> Search </button>
+                        <button class="btnDQ" type="button" onclick="executeFetchAllAndUpdate()"> Fetch All</button>
                         <button class="btnDQ" type="button" onclick="clean()"> Clean</button> 
                     </div>
 
@@ -1313,8 +1394,6 @@
                                         <th id="ProBiopro">Provision - <b>Bioproducts</b></th>
                                         <th id="ProBiom">Provision - <b>Biomodels</b></th>
                                         <th id="ProBiomimi">Provision - <b>Biomimicry</b></th>
-                                        <th id="DissVector">Disservices - <b>Vector</b></th>
-                                        <th id="DissPest">Disservices - <b>Pest</b></th>
 
                                         <!-- Encabezados de prod_pot-->
 
@@ -1386,11 +1465,24 @@
                                         <th id="LegPunc">Legislation - <b>Punctuation</b></th>
                                         <th id="LegLeg">Legislation</th>
 
+                                        <!-- Encabezados de Challenges-->
+
+                                        <th id="Vector">Vector</th>
+                                        <th id="Pest">Pest</th>
+                                        <th id="Toxins">Toxins</th>
+                                        <th id="Allergens">Allergens</th>
+                                        <th id="AntFact">Antinutritional factors</th>
+                                        <th id="InvSp">Invasive species</th>
+                                        <th id="Phobia">Phobia</th>
+                                        <th id="Stigma">Stigmatization</th>
+
                                         <!-- Encabezados de Indices-->
 
                                         <th id="Use">Use</th>
                                         <th id="ProdPot">Production Potential</th>
                                         <th id="EcoPot">Ecosystem Potential</th>
+                                        <th id="Challenges">Challenges</th>
+                                        <th id="Average">Average</th>
 
                                     </tr>
                                 </thead>
@@ -1405,26 +1497,27 @@
                 <div>
                     <div class="PrincipalChart">
                         <div id="axis-selection">
-                            <label for="x-axis-select">Axis X:</label>
+                            <label for="x-axis-select" style="padding: 6px;"><b>X:</b></label>
                             <select id="x-axis-select">
                                 <!-- Las opciones se llenarán dinámicamente desde JS -->
                             </select>
                             
-                            <label for="y-axis-select">Axis Y:</label>
+                            <label for="y-axis-select" style="padding: 6px;"><b>Y:</b></label>
                             <select id="y-axis-select">
                                 <!-- Las opciones se llenarán dinámicamente desde JS -->
                             </select>
                             
-                            <button id="update-chart" class="btnDQ" onclick="updateChart()">Update Chart</button>
+                            <button id="update-chart" class="btnDQ" onclick="updateChart(),TopRadarinsects()">Show Charts</button>
                         </div>
                         <div class="charts-container">
                             <!-- Espacio para la gráfica -->
                         <canvas id="dynamicChart" width="400" height="400"></canvas>
+                        <div id="customTooltip" style="font-size: 10px; display:none; position:absolute; background-color:white; padding:8px; border:1px solid #ccc; border-radius:4px; box-shadow:0px 4px 10px rgba(0, 0, 0, 0.25) ;"></div>
+                        <canvas id="topInsectsRadarChart" style="width: 50%; max-width: 750px; margin: auto;"></canvas>
                         </div>
-                    </div>
-                    <button id="update-chart-btn" style="margin: 20px; padding: 10px 20px;">Update Chart</button>
-                    <div class="chart-container">
-                        <canvas id="topInsectsRadarChart" width="600" height="400"></canvas>
+                        <div class="chart-container-btn">
+                            
+                        </div>
                     </div>
                 </div>
             </section>

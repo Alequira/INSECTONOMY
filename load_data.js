@@ -7,6 +7,7 @@ const EcoPot = require('./data_base/tables/eco_pot');
 const ProdPot = require('./data_base/tables/prod_pot');
 const Use = require('./data_base/tables/use');
 const Indexes = require('./data_base/tables/indexes');
+const Challenges = require('./data_base/tables/challenges');
 
 const loadCSV = (filePath, model) => {
         console.log(`Loading data from ${filePath}`);
@@ -33,6 +34,7 @@ const loadCSV = (filePath, model) => {
         loadCSV(path.join('./data_base/CSV', 'Ecopot.csv'), EcoPot);
         loadCSV(path.join('./data_base/CSV', 'ProdPot.csv'), ProdPot);
         loadCSV(path.join('./data_base/CSV', 'Use.csv'), Use);
+        loadCSV(path.join('./data_base/CSV', 'Challenges.csv'), Challenges);
         loadCSV(path.join('./data_base/CSV', 'Indexes.csv'), Indexes)
     }catch (error) {
     console.error('Error synchronizing database:', error);

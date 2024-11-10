@@ -2,10 +2,12 @@ const btnGA = document.querySelector('.collapsibleGA')
 const btnEP = document.querySelector('.collapsibleEP')
 const btnPP = document.querySelector('.collapsiblePP')
 const btnU = document.querySelector('.collapsibleU')
+const btnC = document.querySelector('.collapsibleC')
 const contentGA = document.querySelector('.contentGA')
 const contentEP = document.querySelector('.contentEP')
 const contentPP = document.querySelector('.contentPP')
 const contentU = document.querySelector('.contentU')
+const contentC = document.querySelector('.contentC')
 
 
 // Botones collapsible para aparecer y desaparecer cuadros de caracteristicas
@@ -42,10 +44,19 @@ btnU.addEventListener('click', () => {
     }
 });
 
+btnC.addEventListener('click', () => {
+    if (contentC.classList.contains('POP')) {
+        contentC.classList.remove('POP');
+    } else {
+        contentC.classList.add('POP');
+    }
+});
+
 // Seleccionar todos los iconos con las clases de iconos y los popups correspondientes
 const iconEP = document.querySelector(".iconEP");
 const iconPP = document.querySelector(".iconPP");
 const iconU = document.querySelector(".iconU");
+const iconC = document.querySelector(".iconC");
 
 // Asignar eventos de clic a cada ícono y mostrar/ocultar su respectivo popup
 iconEP.addEventListener("click", function () {
@@ -59,6 +70,11 @@ iconPP.addEventListener("click", function () {
 iconU.addEventListener("click", function () {
     togglePopup(this.querySelector(".popup-content-embedded"));
 });
+
+iconC.addEventListener("click", function () {
+    togglePopup(this.querySelector(".popup-content-embedded"));
+});
+
 
 // Función para mostrar/ocultar un popup
 function togglePopup(popup) {
@@ -75,7 +91,7 @@ function togglePopup(popup) {
 
 // Cerrar los popups al hacer clic fuera de ellos
 window.addEventListener("click", function (event) {
-    if (!event.target.closest('.iconEP') && !event.target.closest('.iconPP') && !event.target.closest('.iconU')) {
+    if (!event.target.closest('.iconEP') && !event.target.closest('.iconPP') && !event.target.closest('.iconU') && !event.target.closest('.iconC')) {
         document.querySelectorAll(".popup-content-embedded").forEach(p => {
             p.style.display = 'none';
         });
@@ -304,19 +320,25 @@ function generateCharts(record) {
         spiderChart = new Chart(ctx1, {
             type: 'radar',
             data: {
-                labels: ['Use', 'Productive Potential', 'Ecosystem Potential'],
+                labels: ['Use', 'Productive Potential', 'Ecosystem Potential', 'Challenges','Average'],
                 datasets: [{
                     label: 'Insect score',
                     data: [
                         parseInt(record.Use) || 0,
                         parseInt(record.ProdPot) || 0,
-                        parseInt(record.EcoPot) || 0
+                        parseInt(record.EcoPot) || 0,
+                        parseInt(record.Challenges) || 0,
+                        parseInt(record.Average) || 0
                     ],
                     backgroundColor: 'rgba(140, 9, 9, 0.2)',
                     borderColor: 'rgba(140, 9, 9, 1)',
                     borderWidth: 2,
                     pointBackgroundColor: 'rgba(140, 9, 9, 1)',
                     pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(140, 9, 9, 1)',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(140, 9, 9, 1)',
                     pointHoverBackgroundColor: '#fff',
                     pointHoverBorderColor: 'rgba(140, 9, 9, 1)',
 
@@ -439,8 +461,6 @@ function displayResults(results) {
             <td>${showValue(result.eco_pot?.ProBiopro)}</td>
             <td>${showValue(result.eco_pot?.ProBiom)}</td>
             <td>${showValue(result.eco_pot?.ProBiomimi)}</td>
-            <td>${showValue(result.eco_pot?.DissVector)}</td>
-            <td>${showValue(result.eco_pot?.DissPest)}</td>
 
             <td>${showValue(result.prod_pot?.ManSt)}</td>
             <td>${showValue(result.prod_pot?.ManRu)}</td>
@@ -508,9 +528,20 @@ function displayResults(results) {
             <td>${showValue(result.use?.LegPunc)}</td>
             <td>${showValue(result.use?.LegLeg)}</td>
 
+            <td>${showValue(result.challenges?.Vector)}</td>
+            <td>${showValue(result.challenges?.Pest)}</td>
+            <td>${showValue(result.challenges?.Toxins)}</td>
+            <td>${showValue(result.challenges?.Allergens)}</td>
+            <td>${showValue(result.challenges?.AntFact)}</td>
+            <td>${showValue(result.challenges?.InvSp)}</td>
+            <td>${showValue(result.challenges?.Phobia)}</td>
+            <td>${showValue(result.challenges?.Stigma)}</td>
+
             <td>${showValue(result.index?.Use)}</td>
             <td>${showValue(result.index?.ProdPot)}</td>
             <td>${showValue(result.index?.EcoPot)}</td>
+            <td>${showValue(result.index?.Challenges)}</td>
+            <td>${showValue(result.index?.Average)}</td>
         `;
         tableBody.appendChild(row);
     });
@@ -613,7 +644,7 @@ function updateChart() {
     createDynamicChart(indexData, xAxis, yAxis);
 }
 
-// Crear la gráfica dinámica basada en la selección de ejes
+
 function createDynamicChart(data, xAxis, yAxis) {
     const ctx = document.getElementById('dynamicChart').getContext('2d');
 
@@ -635,29 +666,32 @@ function createDynamicChart(data, xAxis, yAxis) {
 
     // Configuración de la nueva gráfica
     dynamicChart = new Chart(ctx, {
-        type: 'scatter', // Usar un gráfico de dispersión sin conectar los puntos
+        type: 'scatter',
         data: {
             datasets: [
                 {
-                    label: `${xAxis} vs ${yAxis}`,
+                    label: `${columnNameMap[xAxis]} vs ${columnNameMap[yAxis]}`,
                     data: data.map(item => ({
                         x: item[xAxis],
                         y: item[yAxis],
-                        insectId: item.id // Añadir el ID del insecto para mostrar en el tooltip
+                        insectSciNa: item.SciNa,
+                        insectComNa: item.ComNa,
+                        insectid: item.id
                     })),
                     backgroundColor: 'rgba(75, 192, 192, 0.6)',
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 2,
-                    pointRadius: 5,
-                    pointHoverRadius: 7
+                    pointHoverRadius: 10,
+                    pointBorderWidth: 2,
+                    pointRadius: 4
                 },
                 {
-                    label: 'Linear Regression',
+                    label: 'Regression',
                     data: regressionPoints,
-                    type: 'line', // Tipo de gráfico para la regresión lineal
+                    type: 'line',
                     borderColor: 'rgba(255, 99, 132, 1)',
                     borderWidth: 2,
-                    fill: false
+                    fill: true
                 }
             ]
         },
@@ -668,27 +702,92 @@ function createDynamicChart(data, xAxis, yAxis) {
                     position: 'bottom',
                     title: {
                         display: true,
-                        text: xAxis
+                        text: columnNameMap[xAxis],
+                        font: {
+                            size: 16,
+                            family: 'Poppins',
+                            weight: 'bold'
+                        }
+                    },
+                    ticks: {
+                        font: {
+                            size: 14, // Tamaño de fuente para los números en el eje x
+                            family: 'Poppins'
+                        }
                     }
                 },
                 y: {
                     title: {
                         display: true,
-                        text: yAxis
+                        text: columnNameMap[yAxis],
+                        font: {
+                            size: 16,
+                            family: 'Poppins',
+                            weight: 'bold'
+                        }
+                    },
+                    ticks: {
+                        font: {
+                            size: 14, // Tamaño de fuente para los números en el eje y
+                            family: 'Poppins'
+                        }
                     }
                 }
             },
             plugins: {
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            const { x, y, insectId } = context.raw;
-                            return `ID: ${insectId} (${xAxis}: ${x}, ${yAxis}: ${y})`;
+                tooltip: { enabled: false }, // Deshabilitar el tooltip de Chart.js
+                legend: {
+                    labels: {
+                        font: {
+                            family: 'Poppins', // Fuente para los labels de la leyenda
+                            size: 16
                         }
                     }
                 }
+            },
+            onHover: function(event, elements) {
+                const tooltip = document.getElementById('customTooltip');
+                if (elements.length) {
+                    const position = elements[0].element.getCenterPoint();
+                    const uniqueItems = new Set();
+
+                    // Crear el contenido del tooltip
+                    const tooltipContent = `<ul style="margin: 0; padding: 0; list-style-type: none;">` +
+                        elements.map(el => {
+                            const { x, y, insectSciNa, insectComNa, insectid } = el.element.$context.raw;
+                            const itemText = `${insectid}. <b>${insectComNa}</b>, <em>${insectSciNa}</em> (${columnNameMap[xAxis]}: ${x}, ${columnNameMap[yAxis]}: ${y})`;
+                            if (!uniqueItems.has(itemText)) {
+                                uniqueItems.add(itemText);
+                                return `<li>${itemText}</li>`;
+                            }
+                            return '';
+                        }).join('') + `</ul>`;
+
+                    tooltip.innerHTML = tooltipContent;
+
+                    // Posicionar el tooltip con margen adicional y dentro del canvas
+                    let newLeft = position.x + ctx.canvas.offsetLeft + 20;
+                    let newTop = position.y + ctx.canvas.offsetTop + 20;
+                    
+                    const tooltipHeight = tooltip.offsetHeight;
+
+                    if (tooltipHeight < position.y + 30) {
+                        newTop = position.y + ctx.canvas.offsetTop - tooltipHeight; // Mover hacia arriba
+                    }
+
+                    // Aplicar la posición fija como prueba
+                    tooltip.style.left = `${newLeft}px`;
+                    tooltip.style.top = `${newTop}px`;
+                    tooltip.style.display = 'block';
+                } else {
+                    tooltip.style.display = 'none';
+                }
+            },
+            interaction: {
+                mode: 'nearest',
+                intersect: true,
+                axis: 'xy'
             }
-            
         }
     });
 }
@@ -702,14 +801,16 @@ function getTableData() {
 
         const record = {
             id: cells[0] ? cells[0].innerText.trim() : '',    // ID del registro (1ra columna)
-            ComNa: cells[3] ? cells[3].innerText.trim() : 'N/A',  // Nombre común (4ta columna)
-            Use: cells[98] ? parseInt(cells[98].innerText) || 0 : 0,     // Índice de uso (15va columna)
-            ProdPot: cells[99] ? parseInt(cells[99].innerText) || 0 : 0, // Potencial Productivo (16va columna)
-            EcoPot: cells[100] ? parseInt(cells[100].innerText) || 0 : 0   // Potencial Ecológico (17va columna)
+            ComNa: cells[3] ? cells[3].innerText.trim() : 'N/A',  
+            Use: cells[104] ? parseInt(cells[104].innerText) || 0 : 0,    
+            ProdPot: cells[105] ? parseInt(cells[105].innerText) || 0 : 0, 
+            EcoPot: cells[106] ? parseInt(cells[106].innerText) || 0 : 0,   
+            Challenges: cells[107] ? parseInt(cells[107].innerText) || 0 : 0,  
+            Average: cells[108] ? parseInt(cells[108].innerText) || 0 : 0   
         };
 
         // Agregar el registro a los datos si tiene valores válidos
-        if (record.Use || record.ProdPot || record.EcoPot) {
+        if (record.Use || record.ProdPot || record.EcoPot || record.Challenges || record.Average) {
             data.push(record);
         }
     });
@@ -723,7 +824,9 @@ function generateTopInsectsRadarChart(records) {
         const ecoPot = parseInt(record.EcoPot) || 0;
         const prodPot = parseInt(record.ProdPot) || 0;
         const use = parseInt(record.Use) || 0;
-        const averageScore = (ecoPot + prodPot + use) / 3;
+        const challenges = parseInt(record.Challenges) || 0;
+        const average = parseInt(record.Average) || 0;
+        const averageScore = (ecoPot + prodPot + use + Average + Challenges) / 5;
 
         return {
             id: record.id,
@@ -731,6 +834,8 @@ function generateTopInsectsRadarChart(records) {
             ecoPot,
             prodPot,
             use,
+            challenges,
+            average,
             averageScore
         };
     });
@@ -747,9 +852,9 @@ function generateTopInsectsRadarChart(records) {
     // Configurar los datasets para la gráfica Radar
     const datasets = topThreeInsects.map(insect => ({
         label: insect.name, // Nombre del insecto como etiqueta
-        data: [insect.ecoPot, insect.prodPot, insect.use], // Datos de los índices
-        backgroundColor: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.2)`, // Color de fondo aleatorio
-        borderColor: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 1)`, // Borde aleatorio
+        data: [insect.ecoPot, insect.prodPot, insect.use, insect.challenges, insect.average], // Datos de los índices
+        backgroundColor: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.2)`,
+        borderColor: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 1)`,
         borderWidth: 2
     }));
 
@@ -764,15 +869,35 @@ function generateTopInsectsRadarChart(records) {
     window.radarChart = new Chart(ctx, {
         type: 'radar',
         data: {
-            labels: ['Ecosystem Potential', 'Productive Potential', 'Use'], // Etiquetas para los índices
+            labels: ['Ecosystem Potential', 'Productive Potential', 'Use','Challenges', 'Average'], // Etiquetas para los índices
             datasets: datasets // Los datasets generados
         },
         options: {
-            responsive: true,
-            maintainAspectRatio: true,
+            scale: {
+                ticks: {
+                    beginAtZero: true,
+                    font: {
+                        size: 16 ,
+                        family: 'Poppins',
+                        weight: 'bold'// Tamaño de fuente de los números en los ejes
+                    }
+                },
+                pointLabels: {
+                    font: {
+                        size: 14,
+                        family: 'Poppins',
+                        weight: 'bold' }
+                }
+            },
             plugins: {
                 legend: {
-                    position: 'top' // Posición de la leyenda
+                    position: 'top' ,
+                    labels: {
+                            font: {
+                                family: 'Poppins', // Fuente para los labels de la leyenda
+                                size: 16
+                            }
+                        }
                 },
                 title: {
                     display: true,
@@ -784,17 +909,19 @@ function generateTopInsectsRadarChart(records) {
                     }
                 }
             },
-            scale: {
-                ticks: { beginAtZero: true }
+            interaction: {
+                mode: 'nearest', // Encuentra el punto más cercano
+                intersect: true // Requiere que el mouse esté directamente sobre el punto
             }
+            
         }
     });
 }
 
-document.getElementById('update-chart-btn').addEventListener('click', () => {
+function TopRadarinsects(){
     const tableData = getTableData(); // Obtener los datos de la tabla
-    generateTopInsectsRadarChart(tableData); // Generar la gráfica Radar con los tres mejores registros
-});
+    generateTopInsectsRadarChart(tableData);
+}
 
 const columnNameMap = {
     'id': 'ID',
@@ -832,8 +959,6 @@ const columnNameMap = {
     'ProBiopro': 'Bioproducts Production',
     'ProBiom': 'Biomass',
     'ProBiomimi': 'Biomimicry',
-    'DissVector': 'Disservices - Vector',
-    'DissPest': 'Disservices - Pest',
     'ManSt': 'Management - Stress',
     'ManRu': 'Management - Rusticity',
     'ManAg': 'Management - Agility',
@@ -872,7 +997,92 @@ const columnNameMap = {
     'SocAccEu': 'Social Acceptability - Europe',
     'SocAccAs': 'Social Acceptability - Asia',
     'LegPunc': 'Legislation - Punctuation',
-    'LegLeg': 'Legislation'
+    'LegLeg': 'Legislation',
+    'Or_numeric':'Order (numeric)',
+    'Fam_numeric':'Family (numeric)',
+    'ComNa_numeric':'Common Name (numeric)',
+    'SciNa_numeric':'Scientific Name (numeric)',
+    'BiogRe_numeric':'Biogeographic - Realm (numeric)',
+    'BiogZo_numeric':'Biogeographic - Zone (numeric)',
+    'HoldBio_numeric':'Holdridge - Biome (numeric)',
+    'HoldPre_numeric':'Holdridge - Annual Precipitation (numeric)',
+    'HoldTemp_numeric':'Holdridge - Temperature (numeric)',
+    'HoldAB_numeric':'Holdridge - Altitudinal Belts (numeric)',
+    'HoldLR_numeric':'Holdridge - Latitudinal Regions (numeric)',
+    'HoldAD_numeric':'Holdridge - Altitudinal Distribution (numeric)',
+    'HabPat_numeric':'Habitat Pattern (numeric)',
+    'LSI_numeric':'Landscape Structure Index (numeric)',
+    'EcoPot_numeric':'Ecosystem Potential (numeric)',
+    'ProdPot_numeric':'Productive Potential (numeric)',
+    'Use_numeric':'Use (numeric)',
+    'CultCultIdDi_numeric':'Cultural Identity (Ecosystem) (numeric)',
+    'CultInspArt_numeric':'Inspiration (Ecosystem) (numeric)',
+    'CultEdu_numeric':'Education (Ecosystem) (numeric)',
+    'CultRecEcot_numeric':'Recreation (Ecosystem) (numeric)',
+    'CultSpiReg_numeric':'Spiritual Relevance (Ecosystem) (numeric)',
+    'RegBioind_numeric':'Bioindicator (Regulation) (numeric)',
+    'RegBiocont_numeric':'Biocontrol (Regulation) (numeric)',
+    'RegPol_numeric':'Pollination (Regulation) (numeric)',
+    'RegSeed_numeric':'Seed Dispersal (Regulation) (numeric)',
+    'SupNutCy_numeric':'Nutrient Cycling (Supporting) (numeric)',
+    'SupSoIm_numeric':'Soil Improvement (Supporting) (numeric)',
+    'ProFF_numeric':'Food and Feed Production (numeric)',
+    'ProWildF_numeric':'Wild Food Production (numeric)',
+    'ProBiomol_numeric':'Biomolecules Production (numeric)',
+    'ProBiopro_numeric':'Bioproducts Production (numeric)',
+    'ProBiom_numeric':'Biomass (numeric)',
+    'ProBiomimi_numeric':'Biomimicry (numeric)',
+    'DissVector_numeric':'Disservices - Vector (numeric)',
+    'DissPest_numeric':'Disservices - Pest (numeric)',
+    'ManSt_numeric':'Management - Stress (numeric)',
+    'ManRu_numeric':'Management - Rusticity (numeric)',
+    'ManAg_numeric':'Management - Agility (numeric)',
+    'ManSoSt_numeric':'Management - Social Structure (numeric)',
+    'ManHab_numeric':'Management - Habits (numeric)',
+    'ManTer_numeric':'Management - Territoriality (numeric)',
+    'ManTra_numeric':'Management - Transportation (numeric)',
+    'ManFac_numeric':'Management - Facilities (numeric)',
+    'NutFeed_numeric':'Nutrition - Feeding Type (numeric)',
+    'NutCost_numeric':'Nutrition - Cost of Feed (numeric)',
+    'RepSexMat_numeric':'Reproduction - Sexual Maturity (numeric)',
+    'RepNumbOff_numeric':'Reproduction - Number of Offspring (numeric)',
+    'RepCy_numeric':'Reproduction - Cycles (numeric)',
+    'RepGestInc_numeric':'Reproduction - Gestation/Incubation (numeric)',
+    'RepSexInt_numeric':'Reproduction - Sexual Interaction (numeric)',
+    'ProPopStu_numeric':'Production - Population Study (numeric)',
+    'ProProf_numeric':'Production - Profit (numeric)',
+    'ProLong_numeric':'Production - Longevity (numeric)',
+    'ProReL_numeric':'Production - Research Level (numeric)',
+    'ProOpBre_numeric':'Production - Optimal Breeding Type (numeric)',
+    'ProAddVal_numeric':'Production - Added Value (numeric)',
+    'MarCultAcc_numeric':'Market - Cultural Acceptance (numeric)',
+    'MarPri_numeric':'Market - Price (numeric)',
+    'MarCompDom_numeric':'Market - Competition with Domestic Species (numeric)',
+    'MarReg_numeric':'Market - Regional (numeric)',
+    'MarNat_numeric':'Market - National (numeric)',
+    'MarInt_numeric':'Market - International (numeric)',
+    'MarMP_numeric':'Market - Main Product of Use (numeric)',
+    'ScLS_numeric':'Production Scale - Low (numeric)',
+    'ScMS_numeric':'Production Scale - Medium (numeric)',
+    'ScLaS_numeric':'Production Scale - Large (numeric)',
+    'SocAccCSA_numeric':'Social Acceptability - Central/South America (numeric)',
+    'SocAccNA_numeric':'Social Acceptability - North America (numeric)',
+    'SocAccAf_numeric':'Social Acceptability - Africa (numeric)',
+    'SocAccOc_numeric':'Social Acceptability - Oceania (numeric)',
+    'SocAccEu_numeric':'Social Acceptability - Europe (numeric)',
+    'SocAccAs_numeric':'Social Acceptability - Asia (numeric)',
+    'LegPunc_numeric':'Legislation - Punctuation (numeric)',
+    'LegLeg_numeric':'Legislation numeric',
+    'Vector':'Vector',
+    'Pest':'Pest',
+    'Toxins':'Toxins',
+    'Allergens':'Allergens',
+    'AntFact':'Antinutritional factors',
+    'InvSp':'Invasive species',
+    'Phobia':'Phobia',
+    'Stigma':'Stigmatization',
+    'Challenges':'Challenges',
+    'Average':'Average'
 };
 
 
@@ -903,4 +1113,20 @@ function clean() {
         window.radarChart.destroy();
         window.radarChart = null;
     }
+}
+
+async function executeSearchAndUpdate() {
+    await searchGenAsp();
+
+    updateChart();
+
+    TopRadarinsects();
+}
+
+async function executeFetchAllAndUpdate() {
+    await fetchAllData();
+
+    updateChart();
+
+    TopRadarinsects();
 }

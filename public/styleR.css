@@ -142,12 +142,14 @@
 
 .row .image img{
     align-items: center;
+    width: 700px;
+    height: 700px;
     width: 800px;
     height: 800px;
     border-radius: 400px;
 }
 .row .image {
-    flex: 1 1 5rem;
+    flex: 1 1 15rem;
     padding: 0.4rem;
 }
 
