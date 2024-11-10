@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../../Insectonomy');
 const GenAsp = require('./gen_asp'); 
 
-const Indexes = sequelize.define('indexes', {
+const Challenges = sequelize.define('challenges', {
     GenAspId: {
         type: DataTypes.INTEGER,
         primaryKey: true, // Definimos GenAspId como la clave primaria
@@ -12,23 +12,35 @@ const Indexes = sequelize.define('indexes', {
         },
         allowNull: false
     },
-    Use: {
+    Vector: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    ProdPot: {
+    Pest: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    EcoPot: {
+    Toxins: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    Challenges:{
+    Allergens: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    Average:{
+    AntFact: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    InvSp: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    Phobia: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    Stigma: {
         type: DataTypes.INTEGER,
         allowNull: false
     }
@@ -36,7 +48,7 @@ const Indexes = sequelize.define('indexes', {
     timestamps: false
 });
 
-GenAsp.hasOne(Indexes, { foreignKey: 'GenAspId' , as: 'index'});
-Indexes.belongsTo(GenAsp, { foreignKey: 'GenAspId' , as: 'index'});
+GenAsp.hasOne(Challenges, { foreignKey: 'GenAspId', as: 'challenges' });
+Challenges.belongsTo(GenAsp, { foreignKey: 'GenAspId', as: 'challenges' });
 
-module.exports = Indexes;
+module.exports = Challenges;

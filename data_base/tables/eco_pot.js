@@ -79,14 +79,6 @@ const EcoPot = sequelize.define('eco_pot', {
     ProBiomimi: {
         type: DataTypes.INTEGER,
         allowNull: false
-    },
-    DissVector: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    DissPest: {
-        type: DataTypes.INTEGER,
-        allowNull: false
     }
 }, {
     timestamps: false

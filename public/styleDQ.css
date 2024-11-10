@@ -680,32 +680,3 @@
         font-size: small;
         z-index: 3;
     }
-
-    @media screen and (max-width: 1024px) {
-        body {
-            font-size: 75%;
-            transform: scale(0.75);
-            transform-origin: top left;
-        }
-    
-        .headerDQ,
-        .mainDQ,
-        .iconGA,
-        .contentGA,
-        .contentEP,
-        .contentPP,
-        .contentU,
-        .charts-container,
-        .btnDQ,
-        .collapsibleGA,
-        .collapsibleEP,
-        .collapsiblePP,
-        .collapsibleU,
-        .table-container,
-        .popup-content-embedded,
-        .modal,
-        #topInsectsRadarChart {
-            transform: scale(0.75);
-            transform-origin: top left;
-        }
-    }
