@@ -509,6 +509,25 @@
         text-decoration: underline;
     }
 
+@media screen and (max-width: 1024px) {
+    body {
+        font-size: 75%;
+        transform: scale(0.75);
+        transform-origin: top left;
+    }
+    
+    .headerIndex,
+    .socialMedia,
+    .banner,
+    .slider .slide,
+    .slide .leftInfo,
+    .slide .rightInfo,
+    footer {
+        transform: scale(0.75);
+        transform-origin: top left;
+    }
+}
+
 footer {
     background-color: #474747;
     color: white;

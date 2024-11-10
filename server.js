@@ -247,24 +247,3 @@ sequelize.sync().then(() => {
 }).catch(error => {
     console.error('Error synchronizing database:', error);
 });
-
-function clean() {
-    // Limpiar el contenido de la tabla de resultados
-    const tableBody = document.getElementById('results-table').getElementsByTagName('tbody')[0];
-    tableBody.innerHTML = '';
-
-    // Limpiar los selectores de ejes (opcional, si deseas que no aparezcan las categorías previas)
-    document.getElementById('x-axis-select').innerHTML = '';
-    document.getElementById('y-axis-select').innerHTML = '';
-
-    // Reiniciar el formulario de búsqueda si existe
-    document.getElementById('input-form').reset();
-
-    // Limpiar el texto de resultados, como los IDs de búsqueda
-    document.getElementById('ids-text').textContent = '';
-
-    // Resetear la variable `indexData` para comenzar desde cero
-    indexData = [];
-
-    console.log("La búsqueda ha sido limpiada. Listo para una nueva consulta.");
-}

@@ -613,7 +613,7 @@ function updateChart() {
     createDynamicChart(indexData, xAxis, yAxis);
 }
 
-// Crear la gráfica dinámica basada en la selección de ejes
+
 function createDynamicChart(data, xAxis, yAxis) {
     const ctx = document.getElementById('dynamicChart').getContext('2d');
 
@@ -635,29 +635,32 @@ function createDynamicChart(data, xAxis, yAxis) {
 
     // Configuración de la nueva gráfica
     dynamicChart = new Chart(ctx, {
-        type: 'scatter', // Usar un gráfico de dispersión sin conectar los puntos
+        type: 'scatter',
         data: {
             datasets: [
                 {
-                    label: `${xAxis} vs ${yAxis}`,
+                    label: `${columnNameMap[xAxis]} vs ${columnNameMap[yAxis]}`,
                     data: data.map(item => ({
                         x: item[xAxis],
                         y: item[yAxis],
-                        insectId: item.id // Añadir el ID del insecto para mostrar en el tooltip
+                        insectSciNa: item.SciNa,
+                        insectComNa: item.ComNa,
+                        insectid: item.id
                     })),
                     backgroundColor: 'rgba(75, 192, 192, 0.6)',
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 2,
-                    pointRadius: 5,
-                    pointHoverRadius: 7
+                    pointHoverRadius: 10,
+                    pointBorderWidth: 2,
+                    pointRadius: 4
                 },
                 {
-                    label: 'Linear Regression',
+                    label: 'Regression',
                     data: regressionPoints,
-                    type: 'line', // Tipo de gráfico para la regresión lineal
+                    type: 'line',
                     borderColor: 'rgba(255, 99, 132, 1)',
                     borderWidth: 2,
-                    fill: false
+                    fill: true
                 }
             ]
         },
@@ -668,27 +671,70 @@ function createDynamicChart(data, xAxis, yAxis) {
                     position: 'bottom',
                     title: {
                         display: true,
-                        text: xAxis
+                        text: columnNameMap[xAxis]
                     }
                 },
                 y: {
                     title: {
                         display: true,
-                        text: yAxis
+                        text: columnNameMap[yAxis]
                     }
                 }
             },
             plugins: {
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            const { x, y, insectId } = context.raw;
-                            return `ID: ${insectId} (${xAxis}: ${x}, ${yAxis}: ${y})`;
+                tooltip: { enabled: false }, // Deshabilitar el tooltip de Chart.js
+                legend: {
+                    labels: {
+                        font: {
+                            family: 'Poppins', // Fuente para los labels de la leyenda
+                            size: 16
                         }
                     }
                 }
+            },
+            onHover: function(event, elements) {
+                const tooltip = document.getElementById('customTooltip');
+                if (elements.length) {
+                    const position = elements[0].element.getCenterPoint();
+                    const uniqueItems = new Set();
+
+                    // Crear el contenido del tooltip
+                    const tooltipContent = `<ul style="margin: 0; padding: 0; list-style-type: none;">` +
+                        elements.map(el => {
+                            const { x, y, insectSciNa, insectComNa, insectid } = el.element.$context.raw;
+                            const itemText = `${insectid}. <b>${insectComNa}</b>, <em>${insectSciNa}</em> (${columnNameMap[xAxis]}: ${x}, ${columnNameMap[yAxis]}: ${y})`;
+                            if (!uniqueItems.has(itemText)) {
+                                uniqueItems.add(itemText);
+                                return `<li>${itemText}</li>`;
+                            }
+                            return '';
+                        }).join('') + `</ul>`;
+
+                    tooltip.innerHTML = tooltipContent;
+
+                    // Posicionar el tooltip con margen adicional y dentro del canvas
+                    let newLeft = position.x + ctx.canvas.offsetLeft + 20;
+                    let newTop = position.y + ctx.canvas.offsetTop + 20;
+                    
+                    const tooltipHeight = tooltip.offsetHeight;
+
+                    if (tooltipHeight < position.y + 30) {
+                        newTop = position.y + ctx.canvas.offsetTop - tooltipHeight; // Mover hacia arriba
+                    }
+
+                    // Aplicar la posición fija como prueba
+                    tooltip.style.left = `${newLeft}px`;
+                    tooltip.style.top = `${newTop}px`;
+                    tooltip.style.display = 'block';
+                } else {
+                    tooltip.style.display = 'none';
+                }
+            },
+            interaction: {
+                mode: 'nearest',
+                intersect: true,
+                axis: 'xy'
             }
-            
         }
     });
 }
@@ -768,8 +814,9 @@ function generateTopInsectsRadarChart(records) {
             datasets: datasets // Los datasets generados
         },
         options: {
-            responsive: true,
-            maintainAspectRatio: true,
+            scale: {
+                    ticks: { beginAtZero: true }
+                },
             plugins: {
                 legend: {
                     position: 'top' // Posición de la leyenda
@@ -784,17 +831,20 @@ function generateTopInsectsRadarChart(records) {
                     }
                 }
             },
-            scale: {
-                ticks: { beginAtZero: true }
-            }
+            
         }
     });
 }
 
-document.getElementById('update-chart-btn').addEventListener('click', () => {
+function TopRadarinsects(){
+    const tableData = getTableData(); // Obtener los datos de la tabla
+    generateTopInsectsRadarChart(tableData);
+}
+
+/* document.getElementById('update-chart-btn').addEventListener('click', () => {
     const tableData = getTableData(); // Obtener los datos de la tabla
     generateTopInsectsRadarChart(tableData); // Generar la gráfica Radar con los tres mejores registros
-});
+}); */
 
 const columnNameMap = {
     'id': 'ID',
@@ -872,7 +922,82 @@ const columnNameMap = {
     'SocAccEu': 'Social Acceptability - Europe',
     'SocAccAs': 'Social Acceptability - Asia',
     'LegPunc': 'Legislation - Punctuation',
-    'LegLeg': 'Legislation'
+    'LegLeg': 'Legislation',
+    'Or_numeric':'Order (numeric)',
+    'Fam_numeric':'Family (numeric)',
+    'ComNa_numeric':'Common Name (numeric)',
+    'SciNa_numeric':'Scientific Name (numeric)',
+    'BiogRe_numeric':'Biogeographic - Realm (numeric)',
+    'BiogZo_numeric':'Biogeographic - Zone (numeric)',
+    'HoldBio_numeric':'Holdridge - Biome (numeric)',
+    'HoldPre_numeric':'Holdridge - Annual Precipitation (numeric)',
+    'HoldTemp_numeric':'Holdridge - Temperature (numeric)',
+    'HoldAB_numeric':'Holdridge - Altitudinal Belts (numeric)',
+    'HoldLR_numeric':'Holdridge - Latitudinal Regions (numeric)',
+    'HoldAD_numeric':'Holdridge - Altitudinal Distribution (numeric)',
+    'HabPat_numeric':'Habitat Pattern (numeric)',
+    'LSI_numeric':'Landscape Structure Index (numeric)',
+    'EcoPot_numeric':'Ecosystem Potential (numeric)',
+    'ProdPot_numeric':'Productive Potential (numeric)',
+    'Use_numeric':'Use (numeric)',
+    'CultCultIdDi_numeric':'Cultural Identity (Ecosystem) (numeric)',
+    'CultInspArt_numeric':'Inspiration (Ecosystem) (numeric)',
+    'CultEdu_numeric':'Education (Ecosystem) (numeric)',
+    'CultRecEcot_numeric':'Recreation (Ecosystem) (numeric)',
+    'CultSpiReg_numeric':'Spiritual Relevance (Ecosystem) (numeric)',
+    'RegBioind_numeric':'Bioindicator (Regulation) (numeric)',
+    'RegBiocont_numeric':'Biocontrol (Regulation) (numeric)',
+    'RegPol_numeric':'Pollination (Regulation) (numeric)',
+    'RegSeed_numeric':'Seed Dispersal (Regulation) (numeric)',
+    'SupNutCy_numeric':'Nutrient Cycling (Supporting) (numeric)',
+    'SupSoIm_numeric':'Soil Improvement (Supporting) (numeric)',
+    'ProFF_numeric':'Food and Feed Production (numeric)',
+    'ProWildF_numeric':'Wild Food Production (numeric)',
+    'ProBiomol_numeric':'Biomolecules Production (numeric)',
+    'ProBiopro_numeric':'Bioproducts Production (numeric)',
+    'ProBiom_numeric':'Biomass (numeric)',
+    'ProBiomimi_numeric':'Biomimicry (numeric)',
+    'DissVector_numeric':'Disservices - Vector (numeric)',
+    'DissPest_numeric':'Disservices - Pest (numeric)',
+    'ManSt_numeric':'Management - Stress (numeric)',
+    'ManRu_numeric':'Management - Rusticity (numeric)',
+    'ManAg_numeric':'Management - Agility (numeric)',
+    'ManSoSt_numeric':'Management - Social Structure (numeric)',
+    'ManHab_numeric':'Management - Habits (numeric)',
+    'ManTer_numeric':'Management - Territoriality (numeric)',
+    'ManTra_numeric':'Management - Transportation (numeric)',
+    'ManFac_numeric':'Management - Facilities (numeric)',
+    'NutFeed_numeric':'Nutrition - Feeding Type (numeric)',
+    'NutCost_numeric':'Nutrition - Cost of Feed (numeric)',
+    'RepSexMat_numeric':'Reproduction - Sexual Maturity (numeric)',
+    'RepNumbOff_numeric':'Reproduction - Number of Offspring (numeric)',
+    'RepCy_numeric':'Reproduction - Cycles (numeric)',
+    'RepGestInc_numeric':'Reproduction - Gestation/Incubation (numeric)',
+    'RepSexInt_numeric':'Reproduction - Sexual Interaction (numeric)',
+    'ProPopStu_numeric':'Production - Population Study (numeric)',
+    'ProProf_numeric':'Production - Profit (numeric)',
+    'ProLong_numeric':'Production - Longevity (numeric)',
+    'ProReL_numeric':'Production - Research Level (numeric)',
+    'ProOpBre_numeric':'Production - Optimal Breeding Type (numeric)',
+    'ProAddVal_numeric':'Production - Added Value (numeric)',
+    'MarCultAcc_numeric':'Market - Cultural Acceptance (numeric)',
+    'MarPri_numeric':'Market - Price (numeric)',
+    'MarCompDom_numeric':'Market - Competition with Domestic Species (numeric)',
+    'MarReg_numeric':'Market - Regional (numeric)',
+    'MarNat_numeric':'Market - National (numeric)',
+    'MarInt_numeric':'Market - International (numeric)',
+    'MarMP_numeric':'Market - Main Product of Use (numeric)',
+    'ScLS_numeric':'Production Scale - Low (numeric)',
+    'ScMS_numeric':'Production Scale - Medium (numeric)',
+    'ScLaS_numeric':'Production Scale - Large (numeric)',
+    'SocAccCSA_numeric':'Social Acceptability - Central/South America (numeric)',
+    'SocAccNA_numeric':'Social Acceptability - North America (numeric)',
+    'SocAccAf_numeric':'Social Acceptability - Africa (numeric)',
+    'SocAccOc_numeric':'Social Acceptability - Oceania (numeric)',
+    'SocAccEu_numeric':'Social Acceptability - Europe (numeric)',
+    'SocAccAs_numeric':'Social Acceptability - Asia (numeric)',
+    'LegPunc_numeric':'Legislation - Punctuation (numeric)',
+    'LegLeg_numeric':'Legislation numeric'
 };
 
 
@@ -903,4 +1028,20 @@ function clean() {
         window.radarChart.destroy();
         window.radarChart = null;
     }
+}
+
+async function executeSearchAndUpdate() {
+    await searchGenAsp();
+
+    updateChart();
+
+    TopRadarinsects();
+}
+
+async function executeFetchAllAndUpdate() {
+    await fetchAllData();
+
+    updateChart();
+
+    TopRadarinsects();
 }

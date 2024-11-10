@@ -142,11 +142,12 @@
 
 .row .image img{
     align-items: center;
-    width: 80%;
+    width: 700px;
+    height: 700px;
     border-radius: 400px;
 }
 .row .image {
-    flex: 1 1 5rem;
+    flex: 1 1 15rem;
     padding: 0.4rem;
 }
 
@@ -202,3 +203,18 @@ footer {
     font-size: small;
 }
 
+@media screen and (max-width: 1024px) {
+    body {
+        font-size: 75%;
+        transform: scale(0.75);
+        transform-origin: top left;
+    }
+
+    .mainDQ,
+    .headerIndex,
+    .row,
+    footer {
+        transform: scale(0.75);
+        transform-origin: top left;
+    }
+}

@@ -1262,8 +1262,8 @@
                         </form>
                     </div>
                     <div class="buttons">
-                        <button class="btnDQ" type="button" onclick= "searchGenAsp()"> Search </button>
-                        <button class="btnDQ" type="button" onclick="fetchAllData()"> Fetch All</button>
+                        <button class="btnDQ" type="button" onclick= "executeSearchAndUpdate()"> Search </button>
+                        <button class="btnDQ" type="button" onclick="executeFetchAllAndUpdate()"> Fetch All</button>
                         <button class="btnDQ" type="button" onclick="clean()"> Clean</button> 
                     </div>
 
@@ -1405,26 +1405,27 @@
                 <div>
                     <div class="PrincipalChart">
                         <div id="axis-selection">
-                            <label for="x-axis-select">Axis X:</label>
+                            <label for="x-axis-select" style="padding: 6px;"><b>X:</b></label>
                             <select id="x-axis-select">
                                 <!-- Las opciones se llenarán dinámicamente desde JS -->
                             </select>
                             
-                            <label for="y-axis-select">Axis Y:</label>
+                            <label for="y-axis-select" style="padding: 6px;"><b>Y:</b></label>
                             <select id="y-axis-select">
                                 <!-- Las opciones se llenarán dinámicamente desde JS -->
                             </select>
                             
-                            <button id="update-chart" class="btnDQ" onclick="updateChart()">Update Chart</button>
+                            <button id="update-chart" class="btnDQ" onclick="updateChart(),TopRadarinsects()">Show Charts</button>
                         </div>
                         <div class="charts-container">
                             <!-- Espacio para la gráfica -->
                         <canvas id="dynamicChart" width="400" height="400"></canvas>
+                        <div id="customTooltip" style="font-size: 10px; display:none; position:absolute; background-color:white; padding:8px; border:1px solid #ccc; border-radius:4px; box-shadow:0px 4px 10px rgba(0, 0, 0, 0.25) ;"></div>
+                        <canvas id="topInsectsRadarChart" ></canvas>
                         </div>
-                    </div>
-                    <button id="update-chart-btn" style="margin: 20px; padding: 10px 20px;">Update Chart</button>
-                    <div class="chart-container">
-                        <canvas id="topInsectsRadarChart" width="600" height="400"></canvas>
+                        <div class="chart-container-btn">
+                            
+                        </div>
                     </div>
                 </div>
             </section>
