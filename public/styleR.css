@@ -142,10 +142,7 @@
 
 .row .image img{
     align-items: center;
-    width: 700px;
-    height: 700px;
-    width: 800px;
-    height: 800px;
+    max-width: 800px;
 }
 .row .image {
     flex: 1 1 15rem;
@@ -175,6 +172,7 @@
 .row p{
     padding: 0.4rem;
     color: #000000;
+    text-align: justify;
 }
 
 .row button {
