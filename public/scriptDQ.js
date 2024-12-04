@@ -179,25 +179,49 @@ async function fetchAllData() {
 
 // Función para capturar clics en las filas de la tabla y abrir el modal con detalles del registro
 function makeTableInteractive() {
+    console.log("makeTableInteractive ejecutada");
     const rows = document.querySelectorAll('#results-table tbody tr');
+    console.log("Filas encontradas:", rows.length);
     rows.forEach(row => {
+        let clickTimeout = null;
+
         row.addEventListener('click', () => {
+            if (clickTimeout) return; // Evitar conflictos con doble clic
+            console.log("Fila clickeada:", row);
+            clickTimeout = setTimeout(() => {
+                const recordId = row.getAttribute('data-id');
+                if (!recordId) {
+                    console.error("No se encontró el atributo data-id en la fila seleccionada.");
+                    return;
+                }
+
+                // Manejar selección/deselección
+                toggleRowSelection(row, recordId);
+
+                clearTimeout(clickTimeout);
+                clickTimeout = null;
+            }, 200); // Confirmar que no es doble clic
+        });
+
+        row.addEventListener('dblclick', () => {
+            if (clickTimeout) {
+                clearTimeout(clickTimeout);
+                clickTimeout = null;
+            }
+
             const cells = row.getElementsByTagName('td');
             const record = {};
 
-            // Obtener los IDs de los encabezados para mapear con las celdas
             const headers = document.querySelectorAll('#results-table th');
-
-            // Rellenar el objeto 'record' con los datos de la fila seleccionada utilizando los IDs de los th
             Array.from(cells).forEach((cell, index) => {
-                const columnId = headers[index]?.id;  // Obtener el ID del encabezado (id del <th>)
+                const columnId = headers[index]?.id;
                 if (columnId) {
-                    record[columnId] = cell.innerText.trim();  // Asignar el valor de la celda al ID del encabezado
+                    record[columnId] = cell.innerText.trim();
                 }
             });
 
-            console.log("Record Data: ", record);  // Verificar los datos extraídos de la fila
-            openModal(record);  // Abrir el modal con el registro seleccionado
+            console.log("Record Data:", record);
+            openModal(record); // Abrir modal con detalles del registro
         });
     });
 }
@@ -320,7 +344,7 @@ function generateCharts(record) {
         spiderChart = new Chart(ctx1, {
             type: 'radar',
             data: {
-                labels: ['Use', 'Productive Potential', 'Ecosystem Potential', 'Challenges','Average'],
+                labels: ['Use', 'Productive Potential', 'Ecosystem Potential', 'Challenges'],
                 datasets: [{
                     label: 'Insect score',
                     data: [
@@ -335,8 +359,6 @@ function generateCharts(record) {
                     borderWidth: 2,
                     pointBackgroundColor: 'rgba(140, 9, 9, 1)',
                     pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgba(140, 9, 9, 1)',
                     pointHoverBackgroundColor: '#fff',
                     pointHoverBorderColor: 'rgba(140, 9, 9, 1)',
                     pointHoverBackgroundColor: '#fff',
@@ -423,6 +445,7 @@ function displayResults(results) {
 
     results.forEach(result => {
         const row = document.createElement('tr');
+        row.setAttribute('data-id', result.id);
 
         // Función para mostrar valores "0" correctamente
         const showValue = (value) => (value === null || value === undefined) ? '' : value;
@@ -641,9 +664,20 @@ function updateChart() {
         return;
     }
 
-    createDynamicChart(indexData, xAxis, yAxis);
+    // Determinar qué datos usar
+    const dataToUse = buffer.length > 0 ? bufferRecords() : indexData;
+
+    if (dataToUse.length === 0) {
+        alert('No hay datos disponibles para generar la gráfica.');
+        return;
+    }
+
+    createDynamicChart(dataToUse, xAxis, yAxis);
 }
 
+function bufferRecords() {
+    return indexData.filter(record => buffer.includes(record.id.toString()));
+}
 
 function createDynamicChart(data, xAxis, yAxis) {
     const ctx = document.getElementById('dynamicChart').getContext('2d');
@@ -826,7 +860,7 @@ function generateTopInsectsRadarChart(records) {
         const use = parseInt(record.Use) || 0;
         const challenges = parseInt(record.Challenges) || 0;
         const average = parseInt(record.Average) || 0;
-        const averageScore = (ecoPot + prodPot + use + Average + Challenges) / 5;
+        const averageScore = (ecoPot + prodPot + use + Challenges) / 4;
 
         return {
             id: record.id,
@@ -852,7 +886,7 @@ function generateTopInsectsRadarChart(records) {
     // Configurar los datasets para la gráfica Radar
     const datasets = topThreeInsects.map(insect => ({
         label: insect.name, // Nombre del insecto como etiqueta
-        data: [insect.ecoPot, insect.prodPot, insect.use, insect.challenges, insect.average], // Datos de los índices
+        data: [insect.ecoPot, insect.prodPot, insect.use, insect.challenges], // Datos de los índices
         backgroundColor: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.2)`,
         borderColor: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 1)`,
         borderWidth: 2
@@ -869,7 +903,7 @@ function generateTopInsectsRadarChart(records) {
     window.radarChart = new Chart(ctx, {
         type: 'radar',
         data: {
-            labels: ['Ecosystem Potential', 'Productive Potential', 'Use','Challenges', 'Average'], // Etiquetas para los índices
+            labels: ['Ecosystem Potential', 'Productive Potential', 'Use','Challenges'], // Etiquetas para los índices
             datasets: datasets // Los datasets generados
         },
         options: {
@@ -1082,7 +1116,6 @@ const columnNameMap = {
     'Phobia':'Phobia',
     'Stigma':'Stigmatization',
     'Challenges':'Challenges',
-    'Average':'Average'
 };
 
 
@@ -1129,4 +1162,207 @@ async function executeFetchAllAndUpdate() {
     updateChart();
 
     TopRadarinsects();
+}
+
+let buffer = [];
+
+function toggleRowSelection(row, recordId) {
+    if (!buffer.includes(recordId)) {
+        buffer.push(recordId);
+        row.classList.add('selected-row'); // Agregar estilo
+    } else {
+        buffer = buffer.filter(id => id !== recordId);
+        row.classList.remove('selected-row'); // Quitar estilo
+    }
+    console.log("Buffer actual:", buffer);
+}
+
+document.getElementById('update-graphs-button').addEventListener('click', () => {
+    if (buffer.length === 0) {
+        alert("Selecciona al menos un registro para actualizar las gráficas.");
+        return;
+    }
+    updateChart();
+    generateTopInsectsRadarChart(bufferRecords());
+});
+
+function bufferRecords() {
+    return indexData.filter(record => buffer.includes(record.id.toString()));
+}
+
+function updateDynamicChart() {
+    const records = bufferRecords();
+
+    if (records.length === 0) {
+        console.warn("No hay datos seleccionados para la gráfica.");
+        return;
+    }
+
+    const labels = records.map(item => item.ComNa || `ID: ${item.id}`);
+    const data = records.map(item => parseInt(item.Average) || 0);
+
+    const ctx = document.getElementById('dynamicChart').getContext('2d');
+    if (!dynamicChart) {
+        dynamicChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Datos Seleccionados',
+                    data: data,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    } else {
+        dynamicChart.data.labels = labels;
+        dynamicChart.data.datasets[0].data = data;
+        dynamicChart.update();
+    }
+}
+
+// Botón de comparación
+document.getElementById('compare-button').addEventListener('click', () => {
+    if (buffer.length < 2) {
+        alert('Selecciona al menos dos registros para comparar.');
+        return;
+    }
+    console.log("Comparando registros:", buffer);
+});
+
+function updateBufferDisplay() {
+    const bufferList = document.getElementById('buffer-list');
+    bufferList.innerHTML = ''; // Limpiar el contenido actual
+
+    buffer.forEach(recordId => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `Record ID: ${recordId}`;
+        bufferList.appendChild(listItem);
+    });
+}
+
+const insectData = {
+    ordersToFamilies: {
+        "Ortoptera": ["Gryllidae", "Acrididae", "Tettigoniidae", "Pyrgomorphidae", "Rhaphidophoridae"],
+        "Hymenoptera": ["Formicidae", "Apidae", "Braconidae", "Trichogrammatidae", "Vespidae"],
+        "Blattodea": ["Blaberidae", "Termitidae", "Blattidae"],
+        "Lepidoptera": ["Bombycidae", "Nymphalide", "Erebidae", "Papilionidae", "Notodontidae", "Crambidae", "Saturniidae"],
+        "Coleoptera": ["Carabidae", "Cerambycidae", "Coccinellidae", "Lucanidae", "Tenebrionidae", "Scarabaeidae", "Passalidae", "Elateroidea", "Lampyridae"],
+        "Diptera": ["Stratiomyidae", "Muscidae", "Asilidae", "Culicidae", "Syrphidae", "Tephritidae", "Calliphoridae", "Chaobiridae", "Oestridae", "Drosophilidae"],
+        "Mantodea": ["Mantidae"],
+        "Hemiptera": ["Pentatomidae", "Tessaratomidae", "Belostomatidae", "Dactylopiidae", "Cicadidae", "Reduviidae"],
+        "Ephemeroptera": ["Leptohyphidae"],
+        "Megaloptera": ["Corydalidae"],
+        "Siphonaptera": ["Pulicidae"],
+        "Psocodea": ["Pediculidae"],
+        "Thysanoptera": ["Thripidae"]
+    },
+    familiesToOrders: {
+        "Gryllidae": "Ortoptera",
+        "Acrididae": "Ortoptera",
+        "Tettigoniidae": "Ortoptera",
+        "Pyrgomorphidae": "Ortoptera",
+        "Rhaphidophoridae": "Ortoptera",
+        "Formicidae": "Hymenoptera",
+        "Apidae": "Hymenoptera",
+        "Braconidae": "Hymenoptera",
+        "Trichogrammatidae": "Hymenoptera",
+        "Vespidae": "Hymenoptera",
+        "Blaberidae": "Blattodea",
+        "Termitidae": "Blattodea",
+        "Blattidae": "Blattodea",
+        "Bombycidae": "Lepidoptera",
+        "Nymphalide": "Lepidoptera",
+        "Erebidae": "Lepidoptera",
+        "Papilionidae": "Lepidoptera",
+        "Notodontidae": "Lepidoptera",
+        "Crambidae": "Lepidoptera",
+        "Saturniidae": "Lepidoptera",
+        "Carabidae": "Coleoptera",
+        "Cerambycidae": "Coleoptera",
+        "Coccinellidae": "Coleoptera",
+        "Lucanidae": "Coleoptera",
+        "Tenebrionidae": "Coleoptera",
+        "Scarabaeidae": "Coleoptera",
+        "Passalidae": "Coleoptera",
+        "Elateroidea": "Coleoptera",
+        "Lampyridae": "Coleoptera",
+        "Stratiomyidae": "Diptera",
+        "Muscidae": "Diptera",
+        "Asilidae": "Diptera",
+        "Culicidae": "Diptera",
+        "Syrphidae": "Diptera",
+        "Tephritidae": "Diptera",
+        "Calliphoridae": "Diptera",
+        "Chaobiridae": "Diptera",
+        "Oestridae": "Diptera",
+        "Drosophilidae": "Diptera",
+        "Mantidae": "Mantodea",
+        "Pentatomidae": "Hemiptera",
+        "Tessaratomidae": "Hemiptera",
+        "Belostomatidae": "Hemiptera",
+        "Dactylopiidae": "Hemiptera",
+        "Cicadidae": "Hemiptera",
+        "Reduviidae": "Hemiptera",
+        "Leptohyphidae": "Ephemeroptera",
+        "Corydalidae": "Megaloptera",
+        "Pulicidae": "Siphonaptera",
+        "Pediculidae": "Psocodea",
+        "Thripidae": "Thysanoptera"
+    }
+};
+
+// Actualizar familias al seleccionar un orden
+document.getElementById('Or').addEventListener('change', function() {
+    const selectedOrder = this.value;
+    const familySelect = document.getElementById('Fam');
+
+    // Limpiar las opciones actuales
+    familySelect.innerHTML = '<option value="">N/A</option>';
+
+    if (selectedOrder && insectData.ordersToFamilies[selectedOrder]) {
+        insectData.ordersToFamilies[selectedOrder].forEach(family => {
+            const option = document.createElement('option');
+            option.value = family;
+            option.textContent = family;
+            familySelect.appendChild(option);
+        });
+    }
+});
+
+// Actualizar orden al seleccionar una familia
+document.getElementById('Fam').addEventListener('change', function() {
+    const selectedFamily = this.value;
+    const orderSelect = document.getElementById('Or');
+
+    // Buscar el orden correspondiente
+    if (selectedFamily && insectData.familiesToOrders[selectedFamily]) {
+        orderSelect.value = insectData.familiesToOrders[selectedFamily];
+    } else {
+        orderSelect.value = ""; // Restablecer a N/A si no se encuentra
+    }
+});
+
+function updateFamilyOptions(selectedOrder) {
+    const familySelect = document.getElementById("Fam");
+    familySelect.innerHTML = `<option value="">N/A</option>`; // Limpia las opciones
+
+    if (insectData[selectedOrder]) {
+        insectData[selectedOrder].forEach(family => {
+            const option = document.createElement("option");
+            option.value = family;
+            option.textContent = family;
+            familySelect.appendChild(option);
+        });
+    }
 }

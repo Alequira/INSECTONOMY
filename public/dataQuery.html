@@ -50,7 +50,7 @@
                             <div class="contentGA">
                                 <p>All general information on the insect.</p>
                                 <div class="input-boxGA">
-                                    <label for="Or" id="Or">Order</label>
+                                    <label for="Or">Order</label>
                                     <select id="Or" name="Or">
                                         <option value="">N/A</option>
                                         <option value="Ortoptera">Ortoptera</option>
@@ -72,63 +72,7 @@
                                     <label for="Fam">Family</label>
                                     <select id="Fam" name="Fam">
                                         <option value="">N/A</option>
-                                        <option value="Gryllidae">Gryllidae</option>
-                                        <option value="Formicidae">Formicidae</option>
-                                        <option value="Blaberidae">Blaberidae</option>
-                                        <option value="Bombycidae">Bombycidae</option>
-                                        <option value="Nymphalide">Nymphalide</option>
-                                        <option value="Scarabaeidae">Scarabaeidae</option>
-                                        <option value="Pyralidae">Pyralidae</option>
-                                        <option value="Stratiomyidae">Stratiomyidae</option>
-                                        <option value="Mantidae">Mantidae</option>
-                                        <option value="Muscidae">Muscidae</option>
-                                        <option value="Curculionidae">Curculionidae</option>
-                                        <option value="Apidae">Apidae</option>
-                                        <option value="Tenebrionidae">Tenebrionidae</option>
-                                        <option value="Trichogrammatidae">Trichogrammatidae</option>
-                                        <option value="Lucanidae">Lucanidae</option>
-                                        <option value="Erebidae">Erebidae</option>
-                                        <option value="Papilionidae">Papilionidae</option>
-                                        <option value="Dactylopiidae">Dactylopiidae</option>
-                                        <option value="Cossidae">Cossidae</option>
-                                        <option value="Braconidae">Braconidae</option>
-                                        <option value="Pyrgomorphidae">Pyrgomorphidae</option>
-                                        <option value="Asilidae">Asilidae</option>
-                                        <option value="Syrphidae">Syrphidae</option>
-                                        <option value="Pentatomidae">Pentatomidae</option>
-                                        <option value="Elateroidea">Elateroidea</option>
-                                        <option value="Cerambycidae">Cerambycidae</option>
-                                        <option value="Carabidae">Carabidae</option>
-                                        <option value="Reduviidae">Reduviidae</option>
-                                        <option value="Leptohyphidae">Leptohyphidae</option>
-                                        <option value="Lycidae">Lycidae</option>
-                                        <option value="Cicadidae">Cicadidae</option>
-                                        <option value="Tephritidae">Tephritidae</option>
-                                        <option value="Calliphoridae">Calliphoridae</option>
-                                        <option value="Belostomatidae">Belostomatidae</option>
-                                        <option value="Saturniidae">Saturniidae</option>
-                                        <option value="Notodontidae">Notodontidae</option>
-                                        <option value="Tettigoniidae">Tettigoniidae</option>
-                                        <option value="Chaobiridae">Chaobiridae</option>
-                                        <option value="Tessaratomidae">Tessaratomidae</option>
-                                        <option value="Acrididae">Acrididae</option>
-                                        <option value="Termitidae">Termitidae</option>
-                                        <option value="Crambidae">Crambidae</option>
-                                        <option value="Coccinellidae">Coccinellidae</option>
-                                        <option value="Lampyridae">Lampyridae</option>
-                                        <option value="Noctuidae">Noctuidae</option>
-                                        <option value="Rhaphidophoridae">Rhaphidophoridae</option>
-                                        <option value="Passalidae">Passalidae</option>
-                                        <option value="Corydalidae">Corydalidae</option>
-                                        <option value="Oestridae">Oestridae</option>
-                                        <option value="Blattidae">Blattidae</option>
-                                        <option value="Drosophilidae">Drosophilidae</option>
-                                        <option value="Cuclicidae">Cuclicidae</option>
-                                        <option value="Pulicidae">Pulicidae</option>
-                                        <option value="Gelechiidae">Gelechiidae</option>
-                                        <option value="Pediculidae">Pediculidae</option>
-                                        <option value="Aphididae">Aphididae</option>
-                                        <option value="Thripidae">Thripidae</option>
+                                        
                                     </select>
                                 </div>
                                 <div class="input-boxGA">
@@ -1508,6 +1452,8 @@
                             </select>
                             
                             <button id="update-chart" class="btnDQ" onclick="updateChart(),TopRadarinsects()">Show Charts</button>
+                            <button id="update-graphs-button" class="btnDQ">Compare</button>
+
                         </div>
                         <div class="charts-container">
                             <!-- Espacio para la gráfica -->
@@ -1515,8 +1461,10 @@
                         <div id="customTooltip" style="font-size: 10px; display:none; position:absolute; background-color:white; padding:8px; border:1px solid #ccc; border-radius:4px; box-shadow:0px 4px 10px rgba(0, 0, 0, 0.25) ;"></div>
                         <canvas id="topInsectsRadarChart" style="width: 50%; max-width: 750px; margin: auto;"></canvas>
                         </div>
+                        <div id="buffer-display">
+                            <ul id="buffer-list"></ul>
+                        </div>
                         <div class="chart-container-btn">
-                            
                         </div>
                     </div>
                 </div>

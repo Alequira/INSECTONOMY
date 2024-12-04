@@ -720,6 +720,12 @@
     margin: 0 auto; 
 }
 
+.selected-row {
+    background-color: #440000; 
+    color: #ffffff;
+    font-weight: bold;
+}
+
 #topInsectsRadarChart {
     width: 100% !important;   /* Ancho reducido con !important */
     height: auto !important;  /* Ancho máximo para adaptarse */
