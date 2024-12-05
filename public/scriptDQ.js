@@ -298,7 +298,7 @@ function openModal(record) {
         });
 
     // Mostrar nombre (común o científico)
-    document.getElementById("record-name").innerText = (record.ComNa +'   ('+ record.SciNa +') ') ;
+    document.getElementById("record-name").innerHTML = (record.ComNa +  ', <i>' + record.SciNa + '</i>' ) ;
 
     // Mostrar la primera sección del modal
     currentSection = 1;
@@ -344,7 +344,7 @@ function generateCharts(record) {
         spiderChart = new Chart(ctx1, {
             type: 'radar',
             data: {
-                labels: ['Use', 'Productive Potential', 'Ecosystem Potential', 'Challenges'],
+                labels: ['Use', 'Productive Potential', 'Ecosystem Potential', 'Challenges', 'Average'],
                 datasets: [{
                     label: 'Insect score',
                     data: [
@@ -372,69 +372,132 @@ function generateCharts(record) {
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: true,  // Desactivar relación de aspecto para controlar el tamaño
+                maintainAspectRatio: true,
                 scale: {
-                    ticks: { beginAtZero: true }
+                    ticks: {
+                        beginAtZero: true,
+                        font: {
+                            size: 16,
+                            family: 'Poppins',
+                            weight: 'bold'
+                        }
+                    },
+                    pointLabels: {
+                        font: {
+                            size: 16,
+                            family: 'Poppins',
+                            weight: 'bold' }
+                    }
                 },
                 plugins: {
+                    legend: {
+                        position: 'top' ,
+                        labels: {
+                                font: {
+                                    family: 'Poppins', 
+                                    size: 16
+                                }
+                            }
+                    },
                     title: {
-                        display: true,                  
-                        text: 'Total Values of Insect Indexes', 
+                        display: true,
+                        text: 'Total Values of Insect Indexes',
                         font: {
-                            size: 16,                    
-                            family: 'Poppins',            
-                            weight: 'bold',              
-                        },
-                        color: '#000',                   
-                        padding: {
-                            top: 10,                     
-                            bottom: 10                   
-                        },
-                        align: 'center'                  
-                    }
+                            size: 14,
+                            family: 'Poppins',
+                            weight: 'bold'
+                        }
+                    },
+                    color: '#000',                   
+                    padding: {
+                        top: 10,                     
+                        bottom: 10                   
+                    },
+                    align: 'center' 
+                },
+                interaction: {
+                    mode: 'nearest', // Encuentra el punto más cercano
+                    intersect: true // Requiere que el mouse esté directamente sobre el punto
                 }
+                
             }
         });
 
         // Crear Pie Chart con los valores específicos de uso
         pieChart = new Chart(ctx2, {
-            type: 'doughnut',
+            type: 'line',
             data: {
                 labels: [
                     'Food', 'Feed', 'Bioconversion','Biocontrol', 'Pollination', 'Pet', 'Cultural', 'Other'
                 ],
                 datasets: [{
-                    label: 'score',
+                    label: 'Score',
                     data: [
                         parseInt(record.SoUseFo) || 0, parseInt(record.SoUseFe) || 0, parseInt(record.SoUseBioconv) || 0,
                         parseInt(record.SoUseBiocont) || 0, parseInt(record.SoUsePol) || 0, parseInt(record.SoUsePet) || 0, 
                         parseInt(record.SoUseCult) || 0, parseInt(record.SoUseOth) || 0
                     ],
-                    backgroundColor: [
-                        '#E68773', '#98D261', '#CB2929','#CF0E4F', '#21EA95', '#E1A718', '#08AB08', '#930000'
-                    ]
+                    fill: true,
+                    backgroundColor: 'rgba(140, 9, 9, 0.2)',
+                    borderColor: 'rgba(140, 9, 9, 1)',
+                    tension: 0.1,
+                    borderWidth: 2,
+                    pointBackgroundColor: 'rgba(140, 9, 9, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(140, 9, 9, 1)',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(140, 9, 9, 1)',
+
+                    pointRadius: 6,  
+                    pointHoverRadius: 8,  
+                    pointBorderWidth: 3,  
+                    pointStyle: 'circle'
                 }]
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: true, 
-                plugins: {
-                    title: {
-                        display: true,                  
-                        text: 'Use - Sort of Use', 
+                maintainAspectRatio: true,
+                scale: {
+                    ticks: {
+                        beginAtZero: true,
                         font: {
-                            size: 20,                    
-                            family: 'Poppins',            
-                            weight: 'bold',              
-                        },
-                        color: '#000',                   
-                        padding: {
-                            top: 10,                     
-                            bottom: 10                   
-                        },
-                        align: 'center'                 
+                            size: 16,
+                            family: 'Poppins',
+                            weight: 'bold'
+                        }
+                    },
+                    pointLabels: {
+                        font: {
+                            size: 20,
+                            family: 'Poppins',
+                            weight: 'bold' }
                     }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top' ,
+                        labels: {
+                                font: {
+                                    family: 'Poppins', // Fuente para los labels de la leyenda
+                                    size: 16
+                                }
+                            }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Use - Sort of Use',
+                        font: {
+                            size: 16,
+                            family: 'Poppins',
+                            weight: 'bold'
+                        }
+                    }
+                },
+                interaction: {// Encuentra el punto más cercano
+                    intersect: true // Requiere que el mouse esté directamente sobre el punto
                 }
+                
             }
         });
 }
@@ -451,11 +514,11 @@ function displayResults(results) {
         const showValue = (value) => (value === null || value === undefined) ? '' : value;
 
         row.innerHTML = `
-            <td>${showValue(result.id)}</td>
+            <td><b>${showValue(result.id)}</b></td>
             <td>${showValue(result.Or)}</td>
             <td>${showValue(result.Fam)}</td>
-            <td>${showValue(result.ComNa)}</td>
-            <td>${showValue(result.SciNa)}</td>
+            <td><b>${showValue(result.ComNa)}<b></td>
+            <td><i>${showValue(result.SciNa)}</i></td>
             <td>${showValue(result.BiogRe)}</td>
             <td>${showValue(result.BiogZo)}</td>
             <td>${showValue(result.HoldBio)}</td>
@@ -580,7 +643,7 @@ function displayIdsText(idsText) {
 
 // Variables globales para la gráfica
 let dynamicChart = null;
-let indexData = []; // Almacenar los datos recibidos del servidor
+let indexData = []; 
 
 // Convertir categorías de texto a valores numéricos
 function convertCategoricalToNumerical(data, column) {
@@ -860,7 +923,7 @@ function generateTopInsectsRadarChart(records) {
         const use = parseInt(record.Use) || 0;
         const challenges = parseInt(record.Challenges) || 0;
         const average = parseInt(record.Average) || 0;
-        const averageScore = (ecoPot + prodPot + use + Challenges) / 4;
+        const averageScore = (ecoPot + prodPot + use + challenges + average) / 5;
 
         return {
             id: record.id,
@@ -886,7 +949,7 @@ function generateTopInsectsRadarChart(records) {
     // Configurar los datasets para la gráfica Radar
     const datasets = topThreeInsects.map(insect => ({
         label: insect.name, // Nombre del insecto como etiqueta
-        data: [insect.ecoPot, insect.prodPot, insect.use, insect.challenges], // Datos de los índices
+        data: [insect.ecoPot, insect.prodPot, insect.use, insect.challenges, insect.average], // Datos de los índices
         backgroundColor: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.2)`,
         borderColor: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 1)`,
         borderWidth: 2
@@ -903,7 +966,7 @@ function generateTopInsectsRadarChart(records) {
     window.radarChart = new Chart(ctx, {
         type: 'radar',
         data: {
-            labels: ['Ecosystem Potential', 'Productive Potential', 'Use','Challenges'], // Etiquetas para los índices
+            labels: ['Ecosystem Potential', 'Productive Potential', 'Use','Challenges', 'Average'], // Etiquetas para los índices
             datasets: datasets // Los datasets generados
         },
         options: {
@@ -911,14 +974,14 @@ function generateTopInsectsRadarChart(records) {
                 ticks: {
                     beginAtZero: true,
                     font: {
-                        size: 16 ,
+                        size: 16,
                         family: 'Poppins',
                         weight: 'bold'// Tamaño de fuente de los números en los ejes
                     }
                 },
                 pointLabels: {
                     font: {
-                        size: 14,
+                        size: 20,
                         family: 'Poppins',
                         weight: 'bold' }
                 }
@@ -928,7 +991,7 @@ function generateTopInsectsRadarChart(records) {
                     position: 'top' ,
                     labels: {
                             font: {
-                                family: 'Poppins', // Fuente para los labels de la leyenda
+                                family: 'Poppins', 
                                 size: 16
                             }
                         }
@@ -944,8 +1007,8 @@ function generateTopInsectsRadarChart(records) {
                 }
             },
             interaction: {
-                mode: 'nearest', // Encuentra el punto más cercano
-                intersect: true // Requiere que el mouse esté directamente sobre el punto
+                mode: 'nearest', 
+                intersect: true 
             }
             
         }
@@ -953,8 +1016,13 @@ function generateTopInsectsRadarChart(records) {
 }
 
 function TopRadarinsects(){
-    const tableData = getTableData(); // Obtener los datos de la tabla
+    if ( buffer.length == 0){
+        const tableData = getTableData(); // Obtener los datos de la tabla
     generateTopInsectsRadarChart(tableData);
+    }
+    else {
+        generateTopInsectsRadarChart(bufferRecords());
+    }
 }
 
 const columnNameMap = {
@@ -1169,86 +1237,16 @@ let buffer = [];
 function toggleRowSelection(row, recordId) {
     if (!buffer.includes(recordId)) {
         buffer.push(recordId);
-        row.classList.add('selected-row'); // Agregar estilo
+        row.classList.add('selected-row'); 
     } else {
         buffer = buffer.filter(id => id !== recordId);
-        row.classList.remove('selected-row'); // Quitar estilo
+        row.classList.remove('selected-row'); 
     }
     console.log("Buffer actual:", buffer);
 }
 
-document.getElementById('update-graphs-button').addEventListener('click', () => {
-    if (buffer.length === 0) {
-        alert("Selecciona al menos un registro para actualizar las gráficas.");
-        return;
-    }
-    updateChart();
-    generateTopInsectsRadarChart(bufferRecords());
-});
-
 function bufferRecords() {
     return indexData.filter(record => buffer.includes(record.id.toString()));
-}
-
-function updateDynamicChart() {
-    const records = bufferRecords();
-
-    if (records.length === 0) {
-        console.warn("No hay datos seleccionados para la gráfica.");
-        return;
-    }
-
-    const labels = records.map(item => item.ComNa || `ID: ${item.id}`);
-    const data = records.map(item => parseInt(item.Average) || 0);
-
-    const ctx = document.getElementById('dynamicChart').getContext('2d');
-    if (!dynamicChart) {
-        dynamicChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Datos Seleccionados',
-                    data: data,
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    } else {
-        dynamicChart.data.labels = labels;
-        dynamicChart.data.datasets[0].data = data;
-        dynamicChart.update();
-    }
-}
-
-// Botón de comparación
-document.getElementById('compare-button').addEventListener('click', () => {
-    if (buffer.length < 2) {
-        alert('Selecciona al menos dos registros para comparar.');
-        return;
-    }
-    console.log("Comparando registros:", buffer);
-});
-
-function updateBufferDisplay() {
-    const bufferList = document.getElementById('buffer-list');
-    bufferList.innerHTML = ''; // Limpiar el contenido actual
-
-    buffer.forEach(recordId => {
-        const listItem = document.createElement('li');
-        listItem.textContent = `Record ID: ${recordId}`;
-        bufferList.appendChild(listItem);
-    });
 }
 
 const insectData = {
@@ -1325,40 +1323,16 @@ const insectData = {
 // Actualizar familias al seleccionar un orden
 document.getElementById('Or').addEventListener('change', function() {
     const selectedOrder = this.value;
-    const familySelect = document.getElementById('Fam');
+    updateFamilyOptions(selectedOrder);
+});
 
-    // Limpiar las opciones actuales
-    familySelect.innerHTML = '<option value="">N/A</option>';
+// Función para actualizar las familias dinámicamente
+function updateFamilyOptions(selectedOrder) {
+    const familySelect = document.getElementById("Fam");
+    familySelect.innerHTML = `<option value="">N/A</option>`; 
 
     if (selectedOrder && insectData.ordersToFamilies[selectedOrder]) {
         insectData.ordersToFamilies[selectedOrder].forEach(family => {
-            const option = document.createElement('option');
-            option.value = family;
-            option.textContent = family;
-            familySelect.appendChild(option);
-        });
-    }
-});
-
-// Actualizar orden al seleccionar una familia
-document.getElementById('Fam').addEventListener('change', function() {
-    const selectedFamily = this.value;
-    const orderSelect = document.getElementById('Or');
-
-    // Buscar el orden correspondiente
-    if (selectedFamily && insectData.familiesToOrders[selectedFamily]) {
-        orderSelect.value = insectData.familiesToOrders[selectedFamily];
-    } else {
-        orderSelect.value = ""; // Restablecer a N/A si no se encuentra
-    }
-});
-
-function updateFamilyOptions(selectedOrder) {
-    const familySelect = document.getElementById("Fam");
-    familySelect.innerHTML = `<option value="">N/A</option>`; // Limpia las opciones
-
-    if (insectData[selectedOrder]) {
-        insectData[selectedOrder].forEach(family => {
             const option = document.createElement("option");
             option.value = family;
             option.textContent = family;

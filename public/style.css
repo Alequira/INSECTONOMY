@@ -40,7 +40,7 @@
 /*Social Media Animation*/
 
     .socialMedia{
-        margin: 0 auto 0 50px;
+        margin: 0 auto 0 5%;
     }
 
     .socialMedia a {
@@ -188,10 +188,11 @@
 }
 
 .content p {
-    font-size: 16px;
+    font-size: 15px;
     margin: 10px 0 15px;
     padding-right: 5%;
     font-family: 'Montserrat', sans-serif;
+    text-align: justify;
 }
 
 .content .btn2 {
