@@ -104,7 +104,7 @@ window.addEventListener("click", function (event) {
 async function searchGenAsp() {
     const formData = new FormData(document.getElementById('input-form'));
     const searchCriteria = Object.fromEntries(formData.entries());
-
+    
     // Filtrar solo los criterios que tienen valores
     const categories = {};
     for (const [key, value] of Object.entries(searchCriteria)) {
@@ -123,12 +123,13 @@ async function searchGenAsp() {
         });
 
         const data = await response.json();
-        console.log("Data received from server:", data); // Log para verificar datos
+        console.log("Data received from server:", data); 
 
         if (data.indexData && data.indexData.length > 0) {
-            indexData = data.indexData; // Almacena los datos para uso futuro
+            buffer = [];
+            indexData = data.indexData; 
             const allColumns = getAllColumns(indexData);
-            populateAxisSelectors(allColumns); // Poblamos los selectores dinámicamente
+            populateAxisSelectors(allColumns); 
             displayResults(data.results);
             displayIdsText(data.idsText);
         } else {
@@ -146,7 +147,7 @@ async function fetchAllData() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ categories: {} }) // Enviar un cuerpo vacío para obtener todos los datos
+            body: JSON.stringify({ categories: {} }) 
         });
 
         if (!response.ok) {
@@ -154,17 +155,15 @@ async function fetchAllData() {
         }
 
         const data = await response.json();
-        console.log("Data received from server:", data); // Log para verificar datos
+        console.log("Data received from server:", data); 
 
         if (data.results && data.results.length > 0) {
-            displayResults(data.results); // Mostrar resultados en la tabla
-            displayIdsText(data.idsText); // Mostrar texto con IDs
+            displayResults(data.results); 
+            displayIdsText(data.idsText); 
 
-            // Asignar `indexData` a los datos recibidos para ser usado en la gráfica
             indexData = data.indexData;
-            console.log("Index Data (fetchAll):", indexData); // Verificar contenido de `indexData`
+            console.log("Index Data (fetchAll):", indexData); 
 
-            // Obtener todas las columnas y poblar los selectores de ejes
             const allColumns = getAllColumns(indexData);
             populateAxisSelectors(allColumns);
 
@@ -728,14 +727,14 @@ function updateChart() {
     }
 
     // Determinar qué datos usar
-    const dataToUse = buffer.length > 0 ? bufferRecords() : indexData;
-
-    if (dataToUse.length === 0) {
-        alert('No hay datos disponibles para generar la gráfica.');
-        return;
+    if (buffer.length == 0){
+        createDynamicChart(indexData, xAxis, yAxis);
     }
-
-    createDynamicChart(dataToUse, xAxis, yAxis);
+    else{
+        const dataToUse = buffer.length > 0 ? bufferRecords() : indexData;
+        createDynamicChart(dataToUse, xAxis, yAxis);
+    }
+    
 }
 
 function bufferRecords() {
