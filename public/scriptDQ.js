@@ -1036,7 +1036,7 @@ function generateTopInsectsRadarChart(records) {
                     const value = dataset[rawKey];
             
                     if (!label || value === undefined) {
-                        console.error("No se pudieron encontrar los datos del tooltip.");
+                        console.error("No se pudieron encontrar los datos del tooltip. revisar");
                         tooltip.style.display = 'none';
                         return;
                     }
