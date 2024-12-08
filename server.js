@@ -1,6 +1,7 @@
 console.log('Starting server...');
 
 const express = require('express');
+const path = require('path');
 const { Op } = require('sequelize');
 const sequelize = require('./Insectonomy');
 const GenAsp = require('./data_base/tables/gen_asp');
@@ -18,6 +19,20 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.static('public'));
+
+// Middleware para manejar URLs sin extensión .html
+app.use((req, res, next) => {
+    if (!req.path.endsWith('.html') && !req.path.includes('.')) {
+        const filePath = path.join(__dirname, 'public', `${req.path}.html`);
+        res.sendFile(filePath, (err) => {
+            if (err) {
+                next(); // Si no se encuentra el archivo, sigue con el siguiente middleware
+            }
+        });
+    } else {
+        next();
+    }
+});
 
 
 // Diccionario para mapear columnas a sus respectivas tablas
