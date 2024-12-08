@@ -943,7 +943,7 @@ function generateTopInsectsRadarChart(records) {
 
     // Verificar si se encontraron al menos tres insectos
     if (topThreeInsects.length < 3) {
-        alert("No hay suficientes insectos con índices válidos para crear la gráfica.");
+        alert("There is not enough data to make a graph.");
         return;
     }
 
