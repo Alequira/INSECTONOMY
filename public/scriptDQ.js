@@ -1018,40 +1018,48 @@ function generateTopInsectsRadarChart(records) {
                 const tooltip = document.getElementById('customTooltip2');
             
                 if (elements.length) {
-                    const element = elements[0].element;
-                    const dataset = element.$context.dataset.raw; 
-                    const valueIndex = element.$context.index; 
+                    const uniqueItems = new Set(); // Para evitar duplicados en el tooltip
+                    const tooltipContent = elements
+                        .map((el) => {
+                            const element = el.element;
+                            const dataset = element.$context.dataset.raw; 
+                            const valueIndex = element.$context.index; 
+                            const label = element.$context.chart.data.labels[valueIndex];
             
-                    const label = element.$context.chart.data.labels[valueIndex];
+                            // Mapa entre etiquetas y propiedades
+                            const labelToRawKeyMap = {
+                                'Ecosystem Potential': 'ecoPot',
+                                'Productive Potential': 'prodPot',
+                                'Use': 'use',
+                                'Challenges': 'challenges',
+                                'Average': 'average'
+                            };
             
-                    const labelToRawKeyMap = {
-                        'Ecosystem Potential': 'ecoPot',
-                        'Productive Potential': 'prodPot',
-                        'Use': 'use',
-                        'Challenges': 'challenges',
-                        'Average': 'average'
-                    };
+                            const rawKey = labelToRawKeyMap[label];
+                            const value = dataset[rawKey];
             
-                    const rawKey = labelToRawKeyMap[label];
-                    const value = dataset[rawKey];
+                            if (!label || value === undefined) {
+                                console.error("No se pudieron encontrar los datos del tooltip.");
+                                return null;
+                            }
             
-                    if (!label || value === undefined) {
-                        console.error("No se pudieron encontrar los datos del tooltip. revisar");
-                        tooltip.style.display = 'none';
-                        return;
-                    }
-        
-                    const tooltipContent = `
-                        <ul style="list-style: none; margin: 0; padding: 0;">
-                            <li>${dataset.InsectId}. <b>${dataset.InsectComNa}</b>, <i>${dataset.InsectSciNa || "N/A"}</i> (<b>${label}:</b> ${value})</li>
-                        </ul>
-                    `;
-                    tooltip.innerHTML = tooltipContent;
+                            const itemText = `${dataset.InsectId}. <b>${dataset.InsectComNa}</b>, <i>${dataset.InsectSciNa || "N/A"}</i> (<b>${label}:</b> ${value})`;
+                            if (!uniqueItems.has(itemText)) {
+                                uniqueItems.add(itemText);
+                                return `<li>${itemText}</li>`;
+                            }
+                            return null;
+                        })
+                        .filter((item) => item !== null)
+                        .join("");
             
-                    const position = element.getCenterPoint();
-                    tooltip.style.left = `${position.x + element.$context.chart.canvas.offsetLeft + 20}px`;
-                    tooltip.style.top = `${position.y + element.$context.chart.canvas.offsetTop + 20}px`;
+                    tooltip.innerHTML = `<ul style="list-style: none; margin: 0; padding: 0;">${tooltipContent}</ul>`;
                     tooltip.style.display = 'block';
+            
+                    // Ajustar la posición del tooltip
+                    const position = elements[0].element.getCenterPoint(); 
+                    tooltip.style.left = `${position.x + elements[0].element.$context.chart.canvas.offsetLeft + 20}px`;
+                    tooltip.style.top = `${position.y + elements[0].element.$context.chart.canvas.offsetTop + 20}px`;
                 } else {
                     tooltip.style.display = 'none';
                 }
