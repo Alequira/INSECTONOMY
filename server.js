@@ -20,6 +20,11 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.static('public'));
 
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'home.html'));
+});
+
+
 // Middleware para manejar URLs sin extensión .html
 app.use((req, res, next) => {
     if (!req.path.endsWith('.html') && !req.path.includes('.')) {
