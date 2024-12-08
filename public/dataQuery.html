@@ -20,7 +20,7 @@
             
             <nav class="navigation">
                 <a href="index.html" class="anav">Home</a>
-                <a href="research.html" class="anav">Research</a>
+                <a href="research.html" class="anav">Insectonomy</a>
                 <a href="howitworks.html" class="anav">How it Works</a>
                 <a href="dataQuery.html" class="anav">Species Data Explorer</a>
                 <button class="btlogin" ><a href="index.html" class="alog">Login</a></button>
@@ -39,13 +39,40 @@
                             <li>A regression graph that allows you to compare <b>different characteristics and view the species potential.</b></li>
                             <li>A ranking graph that highlights <b>the top three species</b> with the highest potential based on the criteria you've selected.</li>
                         </ul>
+                        </br>
                         <br>
-                        <p class="prf">This tool makes it easy to visualize and compare the potential of insect species for sustainable agrifood systems.
-                            You can access the full database under the "Fetch all" tab or choose a specific order or
-                            select an area to see which insects are found in a chosen region by selecting
-                            "Biogeographic Zone". Once you've selected the species of interest, the database displays
-                            general information and details on Use, Challenges, Productive Potential, and Ecosystem
-                            Potential for each species.</p>
+                        <p class="prf">This tool makes it easy to visualize and compare the potential of insect species.
+                            You can:</p>
+                            <ul>
+                                <li>Access the full database under the "<b>Fetch all</b>" tab.</li>
+                                <li>Filter by various categories such as taxonomy, geography, climate, or
+                                    habitat to find insects matching your specific criteria.</li>
+                                <li>Once you've selected a species of interest, the database provides general
+                                    information and details on Use, Challenges, Productive Potential, and
+                                    Ecosystem Potential.</li>
+                            </ul>
+                        </br>
+                        <br>
+                        <p class="prf">For even more in-depth information, simply double-click on a specific species in the
+                            database. This will take you to a page with:</p>
+                            <ul>
+                                <li>A direct link to the species' Wikipedia page.</li>
+                                <li>A graph showcasing detailed characteristics related to the studied
+                                    variables.</li>
+                                <li>Insights into the species' potential uses and applications.</li>
+                            </ul>
+                        </br>
+                        <br>
+                        <p class="prf">The Explorer also offers two interactive graph options:</p>
+                            <ul>
+                                <li>A regression graph that allows you to compare different characteristics and
+                                    view the species potential.</li>
+                                <li>A ranking graph that highlights the top three species with the highest
+                                    potential based on the criteria you've selected. <i>Note:</i> If you select fewer
+                                    than three species (one or two), the graph will not display.</li>
+                            </ul>
+                        </br>
+
                     </div>
                     <div class="subsection">
                         <form id="input-form">
@@ -1507,8 +1534,8 @@
 
                 <!-- Botones de navegación -->
                 <div id="modal-navigation" style="text-align: center; margin-top: 20px;">
-                    <button id="prev-btn" class="btnDQ" style="display: none;" onclick="prevSection()">Previous</button>
-                    <button id="next-btn" class="btnDQ" onclick="nextSection()">Next</button>
+                    <button id="prev-btn" class="btnDQ" style="display: none;" onclick="prevSection()">Description</button>
+                    <button id="next-btn" class="btnDQ" onclick="nextSection()">Insect Characteristics</button>
                 </div>
             </div>
         </div>
