@@ -898,6 +898,7 @@ function getTableData() {
         const record = {
             id: cells[0] ? cells[0].innerText.trim() : '',    // ID del registro (1ra columna)
             ComNa: cells[3] ? cells[3].innerText.trim() : 'N/A',  
+            SciNa: cells[4] ? cells[4].innerText.trim() : 'N/A', 
             Use: cells[104] ? parseInt(cells[104].innerText) || 0 : 0,    
             ProdPot: cells[105] ? parseInt(cells[105].innerText) || 0 : 0, 
             EcoPot: cells[106] ? parseInt(cells[106].innerText) || 0 : 0,   
@@ -925,8 +926,9 @@ function generateTopInsectsRadarChart(records) {
         const averageScore = (ecoPot + prodPot + use + challenges + average) / 5;
 
         return {
-            id: record.id,
-            name: record.ComNa || `ID: ${record.id}`, // Usar el nombre común si está disponible, o el ID
+            InsectId: record.id,
+            InsectComNa: record.ComNa,
+            InsectSciNa: record.SciNa || "Unknown Scientific Name",
             ecoPot,
             prodPot,
             use,
@@ -941,20 +943,24 @@ function generateTopInsectsRadarChart(records) {
 
     // Verificar si se encontraron al menos tres insectos
     if (topThreeInsects.length < 3) {
-        console.error("No hay suficientes insectos con índices válidos para crear la gráfica.");
+        alert("No hay suficientes insectos con índices válidos para crear la gráfica.");
         return;
     }
 
     // Configurar los datasets para la gráfica Radar
     const datasets = topThreeInsects.map(insect => ({
-        label: insect.name, // Nombre del insecto como etiqueta
-        data: [insect.ecoPot, insect.prodPot, insect.use, insect.challenges, insect.average], // Datos de los índices
-        backgroundColor: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.2)`,
-        borderColor: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 1)`,
-        borderWidth: 2
+        label: insect.InsectSciNa, // Usar el nombre científico como etiqueta
+        data: [insect.ecoPot, insect.prodPot, insect.use, insect.challenges, insect.average],
+        raw: insect,
+        backgroundColor: `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.2)`,
+        borderColor: `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 1)`,
+        borderWidth: 2,
+        pointHoverRadius: 10,
+        pointBorderWidth: 2,
+        pointRadius: 4
     }));
 
-    //  Crear la gráfica de Radar con los datos de los tres insectos
+    // Crear la gráfica de Radar
     const ctx = document.getElementById('topInsectsRadarChart').getContext('2d');
     
     // Limpiar gráfica anterior si existe
@@ -965,8 +971,8 @@ function generateTopInsectsRadarChart(records) {
     window.radarChart = new Chart(ctx, {
         type: 'radar',
         data: {
-            labels: ['Ecosystem Potential', 'Productive Potential', 'Use','Challenges', 'Average'], // Etiquetas para los índices
-            datasets: datasets // Los datasets generados
+            labels: ['Ecosystem Potential', 'Productive Potential', 'Use', 'Challenges', 'Average'],
+            datasets: datasets
         },
         options: {
             scale: {
@@ -975,25 +981,28 @@ function generateTopInsectsRadarChart(records) {
                     font: {
                         size: 16,
                         family: 'Poppins',
-                        weight: 'bold'// Tamaño de fuente de los números en los ejes
+                        weight: 'bold'
                     }
                 },
                 pointLabels: {
                     font: {
                         size: 20,
                         family: 'Poppins',
-                        weight: 'bold' }
+                        weight: 'bold'
+                    }
                 }
             },
             plugins: {
+                tooltip: { enabled: false }, // Tooltip deshabilitado
                 legend: {
-                    position: 'top' ,
+                    position: 'top',
                     labels: {
-                            font: {
-                                family: 'Poppins', 
-                                size: 16
-                            }
+                        font: {
+                            style: 'italic',
+                            family: 'Poppins',
+                            size: 16
                         }
+                    }
                 },
                 title: {
                     display: true,
@@ -1005,11 +1014,48 @@ function generateTopInsectsRadarChart(records) {
                     }
                 }
             },
-            interaction: {
-                mode: 'nearest', 
-                intersect: true 
-            }
+            onHover: function (event, elements) {
+                const tooltip = document.getElementById('customTooltip2');
             
+                if (elements.length) {
+                    const element = elements[0].element;
+                    const dataset = element.$context.dataset.raw; 
+                    const valueIndex = element.$context.index; 
+            
+                    const label = element.$context.chart.data.labels[valueIndex];
+            
+                    const labelToRawKeyMap = {
+                        'Ecosystem Potential': 'ecoPot',
+                        'Productive Potential': 'prodPot',
+                        'Use': 'use',
+                        'Challenges': 'challenges',
+                        'Average': 'average'
+                    };
+            
+                    const rawKey = labelToRawKeyMap[label];
+                    const value = dataset[rawKey];
+            
+                    if (!label || value === undefined) {
+                        console.error("No se pudieron encontrar los datos del tooltip.");
+                        tooltip.style.display = 'none';
+                        return;
+                    }
+        
+                    const tooltipContent = `
+                        <ul style="list-style: none; margin: 0; padding: 0;">
+                            <li>${dataset.InsectId}. <b>${dataset.InsectComNa}</b>, <i>${dataset.InsectSciNa || "N/A"}</i> (<b>${label}:</b> ${value})</li>
+                        </ul>
+                    `;
+                    tooltip.innerHTML = tooltipContent;
+            
+                    const position = element.getCenterPoint();
+                    tooltip.style.left = `${position.x + element.$context.chart.canvas.offsetLeft + 20}px`;
+                    tooltip.style.top = `${position.y + element.$context.chart.canvas.offsetTop + 20}px`;
+                    tooltip.style.display = 'block';
+                } else {
+                    tooltip.style.display = 'none';
+                }
+            }
         }
     });
 }
