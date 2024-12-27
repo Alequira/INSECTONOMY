@@ -644,19 +644,26 @@ function displayIdsText(idsText) {
 let dynamicChart = null;
 let indexData = []; 
 
-// Convertir categorías de texto a valores numéricos
 function convertCategoricalToNumerical(data, column) {
-    const uniqueValues = [...new Set(data.map(item => item[column]))]; // Obtener valores únicos
+    const uniqueValues = [...new Set(data.map(item => item[column]).filter(value => value !== null && value !== undefined))];
     const mapping = {};
+    const reverseMapping = {};
 
     uniqueValues.forEach((value, index) => {
-        mapping[value] = index + 1; // Asignar un valor numérico a cada categoría
+        mapping[value] = index + 1; 
+        reverseMapping[index + 1] = value; 
     });
 
-    return data.map(item => ({
-        ...item,
-        [`${column}_numeric`]: mapping[item[column]] // Crear una nueva columna con valores numéricos
-    }));
+    console.log(`Mapping for column "${column}":`, mapping);
+    console.log(`Reverse Mapping for column "${column}":`, reverseMapping);
+
+    return {
+        convertedData: data.map(item => ({
+            ...item,
+            [`${column}_numeric`]: mapping[item[column]] || 0
+        })),
+        reverseMapping
+    };
 }
 
 // Calcular la regresión lineal de los puntos
@@ -686,37 +693,40 @@ function calculateLinearRegression(data, xKey, yKey) {
 
 // Obtener todas las columnas del dataset dinámicamente desde los datos
 function getAllColumns(data) {
-    const firstItem = data[0] || {}; // Toma el primer elemento o un objeto vacío si no hay datos
-    return Object.keys(firstItem); // Devuelve todas las claves como columnas
+    const firstItem = data[0] || {};
+    return Object.keys(firstItem); 
 }
 
-// Llenar las opciones de los selectores de ejes con todas las columnas posibles
 function populateAxisSelectors(columns) {
     const xAxisSelect = document.getElementById('x-axis-select');
     const yAxisSelect = document.getElementById('y-axis-select');
 
-    // Limpiar opciones previas
     xAxisSelect.innerHTML = '';
     yAxisSelect.innerHTML = '';
 
-    // Crear opciones solo para las columnas que están en el diccionario `columnNameMap`
     columns.forEach(column => {
-        if (columnNameMap[column]) { // Verificar si la columna está en el diccionario
-            const columnName = columnNameMap[column];
+        if (columnNameMapx[column]) { 
+            const columnNamex = columnNameMapx[column];
 
             const optionX = document.createElement('option');
             optionX.value = column;
-            optionX.textContent = columnName;
+            optionX.textContent = columnNamex;
             xAxisSelect.appendChild(optionX);
+        }
+    });
+
+    columns.forEach(column => {
+        if (columnNameMapy[column]){
+            const columnNamey = columnNameMapy[column];
 
             const optionY = document.createElement('option');
             optionY.value = column;
-            optionY.textContent = columnName;
+            optionY.textContent = columnNamey;
             yAxisSelect.appendChild(optionY);
         }
     });
 }
-// Actualizar las gráficas según la selección de ejes
+
 function updateChart() {
     const xAxis = document.getElementById('x-axis-select').value;
     const yAxis = document.getElementById('y-axis-select').value;
@@ -744,32 +754,38 @@ function bufferRecords() {
 function createDynamicChart(data, xAxis, yAxis) {
     const ctx = document.getElementById('dynamicChart').getContext('2d');
 
-    // Limpiar gráfica anterior
     if (dynamicChart) dynamicChart.destroy();
 
-    // Verificar si alguno de los ejes es categórico (string)
+    let xReverseMapping = null;
+    let yReverseMapping = null;
+
+    // Convertir valores categóricos a numéricos
     if (typeof data[0][xAxis] === 'string') {
-        data = convertCategoricalToNumerical(data, xAxis);
-        xAxis += '_numeric'; // Cambiar el nombre de la columna para usar la versión numérica
+        const conversion = convertCategoricalToNumerical(data, xAxis);
+        data = conversion.convertedData;
+        xReverseMapping = conversion.reverseMapping;
+        xAxis += '_numeric';
     }
     if (typeof data[0][yAxis] === 'string') {
-        data = convertCategoricalToNumerical(data, yAxis);
-        yAxis += '_numeric'; // Cambiar el nombre de la columna para usar la versión numérica
+        const conversion = convertCategoricalToNumerical(data, yAxis);
+        data = conversion.convertedData;
+        yReverseMapping = conversion.reverseMapping;
+        yAxis += '_numeric';
     }
 
-    // Calcular los puntos de la regresión lineal
     const regressionPoints = calculateLinearRegression(data, xAxis, yAxis);
 
-    // Configuración de la nueva gráfica
     dynamicChart = new Chart(ctx, {
         type: 'scatter',
         data: {
             datasets: [
                 {
-                    label: `${columnNameMap[xAxis]} vs ${columnNameMap[yAxis]}`,
+                    label: `${columnNameMapx[xAxis.replace('_numeric', '')]} vs ${columnNameMapy[yAxis.replace('_numeric', '')]}`,
                     data: data.map(item => ({
                         x: item[xAxis],
                         y: item[yAxis],
+                        originalX: xReverseMapping ? xReverseMapping[item[xAxis]] : item[xAxis],
+                        originalY: yReverseMapping ? yReverseMapping[item[yAxis]] : item[yAxis],
                         insectSciNa: item.SciNa,
                         insectComNa: item.ComNa,
                         insectid: item.id
@@ -782,7 +798,7 @@ function createDynamicChart(data, xAxis, yAxis) {
                     pointRadius: 4
                 },
                 {
-                    label: 'Regression',
+                    label: 'Linear regression for calculated indexes',
                     data: regressionPoints,
                     type: 'line',
                     borderColor: 'rgba(255, 99, 132, 1)',
@@ -798,7 +814,7 @@ function createDynamicChart(data, xAxis, yAxis) {
                     position: 'bottom',
                     title: {
                         display: true,
-                        text: columnNameMap[xAxis],
+                        text: columnNameMapx[xAxis.replace('_numeric', '')],
                         font: {
                             size: 16,
                             family: 'Poppins',
@@ -815,7 +831,7 @@ function createDynamicChart(data, xAxis, yAxis) {
                 y: {
                     title: {
                         display: true,
-                        text: columnNameMap[yAxis],
+                        text: columnNameMapy[yAxis.replace('_numeric', '')],
                         font: {
                             size: 16,
                             family: 'Poppins',
@@ -850,8 +866,8 @@ function createDynamicChart(data, xAxis, yAxis) {
                     // Crear el contenido del tooltip
                     const tooltipContent = `<ul style="margin: 0; padding: 0; list-style-type: none;">` +
                         elements.map(el => {
-                            const { x, y, insectSciNa, insectComNa, insectid } = el.element.$context.raw;
-                            const itemText = `${insectid}. <b>${insectComNa}</b>, <em>${insectSciNa}</em> (${columnNameMap[xAxis]}: ${x}, ${columnNameMap[yAxis]}: ${y})`;
+                            const { originalX, originalY, insectSciNa, insectComNa, insectid } = el.element.$context.raw;
+                            const itemText = `${insectid}. <b>${insectComNa}</b>, <em>${insectSciNa}</em> (${columnNameMapx[xAxis]}: ${originalX}, ${columnNameMapy[yAxis]}: ${originalY})`;
                             if (!uniqueItems.has(itemText)) {
                                 uniqueItems.add(itemText);
                                 return `<li>${itemText}</li>`;
@@ -949,7 +965,7 @@ function generateTopInsectsRadarChart(records) {
 
     // Configurar los datasets para la gráfica Radar
     const datasets = topThreeInsects.map(insect => ({
-        label: insect.InsectSciNa, // Usar el nombre científico como etiqueta
+        label: insect.InsectSciNa, 
         data: [insect.ecoPot, insect.prodPot, insect.use, insect.challenges, insect.average],
         raw: insect,
         backgroundColor: `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.2)`,
@@ -957,7 +973,7 @@ function generateTopInsectsRadarChart(records) {
         borderWidth: 2,
         pointHoverRadius: 10,
         pointBorderWidth: 2,
-        pointRadius: 4
+        pointRadius: 4,
     }));
 
     // Crear la gráfica de Radar
@@ -975,20 +991,30 @@ function generateTopInsectsRadarChart(records) {
             datasets: datasets
         },
         options: {
-            scale: {
-                ticks: {
-                    beginAtZero: true,
-                    font: {
-                        size: 16,
-                        family: 'Poppins',
-                        weight: 'bold'
-                    }
-                },
-                pointLabels: {
-                    font: {
-                        size: 20,
-                        family: 'Poppins',
-                        weight: 'bold'
+            scales: {
+                r: {
+                    angleLines: {
+                        color: 'rgba(0, 0, 0, 0.25)', 
+                        lineWidth: 1 
+                    },
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.25)', 
+                        lineWidth: 1
+                    },
+                    ticks: {
+                        beginAtZero: true,
+                        font: {
+                            size: 14,
+                            family: 'Poppins',
+                            weight: 'bold'
+                        }
+                    },
+                    pointLabels: {
+                        font: {
+                            size: 12,
+                            family: 'Poppins',
+                            weight: 'bold'
+                        }
                     }
                 }
             },
@@ -1078,12 +1104,8 @@ function TopRadarinsects(){
     }
 }
 
-const columnNameMap = {
+const columnNameMapx = {
     'id': 'ID',
-    'Or': 'Order',
-    'Fam': 'Family',
-    'ComNa': 'Common Name',
-    'SciNa': 'Scientific Name',
     'BiogRe': 'Biogeographic - Realm',
     'BiogZo': 'Biogeographic - Zone',
     'HoldBio': 'Holdridge - Biome',
@@ -1152,81 +1174,73 @@ const columnNameMap = {
     'SocAccEu': 'Social Acceptability - Europe',
     'SocAccAs': 'Social Acceptability - Asia',
     'LegPunc': 'Legislation - Punctuation',
-    'LegLeg': 'Legislation',
-    'Or_numeric':'Order (numeric)',
-    'Fam_numeric':'Family (numeric)',
-    'ComNa_numeric':'Common Name (numeric)',
-    'SciNa_numeric':'Scientific Name (numeric)',
-    'BiogRe_numeric':'Biogeographic - Realm (numeric)',
-    'BiogZo_numeric':'Biogeographic - Zone (numeric)',
-    'HoldBio_numeric':'Holdridge - Biome (numeric)',
-    'HoldPre_numeric':'Holdridge - Annual Precipitation (numeric)',
-    'HoldTemp_numeric':'Holdridge - Temperature (numeric)',
-    'HoldAB_numeric':'Holdridge - Altitudinal Belts (numeric)',
-    'HoldLR_numeric':'Holdridge - Latitudinal Regions (numeric)',
-    'HoldAD_numeric':'Holdridge - Altitudinal Distribution (numeric)',
-    'HabPat_numeric':'Habitat Pattern (numeric)',
-    'LSI_numeric':'Landscape Structure Index (numeric)',
-    'EcoPot_numeric':'Ecosystem Potential (numeric)',
-    'ProdPot_numeric':'Productive Potential (numeric)',
-    'Use_numeric':'Use (numeric)',
-    'CultCultIdDi_numeric':'Cultural Identity (Ecosystem) (numeric)',
-    'CultInspArt_numeric':'Inspiration (Ecosystem) (numeric)',
-    'CultEdu_numeric':'Education (Ecosystem) (numeric)',
-    'CultRecEcot_numeric':'Recreation (Ecosystem) (numeric)',
-    'CultSpiReg_numeric':'Spiritual Relevance (Ecosystem) (numeric)',
-    'RegBioind_numeric':'Bioindicator (Regulation) (numeric)',
-    'RegBiocont_numeric':'Biocontrol (Regulation) (numeric)',
-    'RegPol_numeric':'Pollination (Regulation) (numeric)',
-    'RegSeed_numeric':'Seed Dispersal (Regulation) (numeric)',
-    'SupNutCy_numeric':'Nutrient Cycling (Supporting) (numeric)',
-    'SupSoIm_numeric':'Soil Improvement (Supporting) (numeric)',
-    'ProFF_numeric':'Food and Feed Production (numeric)',
-    'ProWildF_numeric':'Wild Food Production (numeric)',
-    'ProBiomol_numeric':'Biomolecules Production (numeric)',
-    'ProBiopro_numeric':'Bioproducts Production (numeric)',
-    'ProBiom_numeric':'Biomass (numeric)',
-    'ProBiomimi_numeric':'Biomimicry (numeric)',
-    'DissVector_numeric':'Disservices - Vector (numeric)',
-    'DissPest_numeric':'Disservices - Pest (numeric)',
-    'ManSt_numeric':'Management - Stress (numeric)',
-    'ManRu_numeric':'Management - Rusticity (numeric)',
-    'ManAg_numeric':'Management - Agility (numeric)',
-    'ManSoSt_numeric':'Management - Social Structure (numeric)',
-    'ManHab_numeric':'Management - Habits (numeric)',
-    'ManTer_numeric':'Management - Territoriality (numeric)',
-    'ManTra_numeric':'Management - Transportation (numeric)',
-    'ManFac_numeric':'Management - Facilities (numeric)',
-    'NutFeed_numeric':'Nutrition - Feeding Type (numeric)',
-    'NutCost_numeric':'Nutrition - Cost of Feed (numeric)',
-    'RepSexMat_numeric':'Reproduction - Sexual Maturity (numeric)',
-    'RepNumbOff_numeric':'Reproduction - Number of Offspring (numeric)',
-    'RepCy_numeric':'Reproduction - Cycles (numeric)',
-    'RepGestInc_numeric':'Reproduction - Gestation/Incubation (numeric)',
-    'RepSexInt_numeric':'Reproduction - Sexual Interaction (numeric)',
-    'ProPopStu_numeric':'Production - Population Study (numeric)',
-    'ProProf_numeric':'Production - Profit (numeric)',
-    'ProLong_numeric':'Production - Longevity (numeric)',
-    'ProReL_numeric':'Production - Research Level (numeric)',
-    'ProOpBre_numeric':'Production - Optimal Breeding Type (numeric)',
-    'ProAddVal_numeric':'Production - Added Value (numeric)',
-    'MarCultAcc_numeric':'Market - Cultural Acceptance (numeric)',
-    'MarPri_numeric':'Market - Price (numeric)',
-    'MarCompDom_numeric':'Market - Competition with Domestic Species (numeric)',
-    'MarReg_numeric':'Market - Regional (numeric)',
-    'MarNat_numeric':'Market - National (numeric)',
-    'MarInt_numeric':'Market - International (numeric)',
-    'MarMP_numeric':'Market - Main Product of Use (numeric)',
-    'ScLS_numeric':'Production Scale - Low (numeric)',
-    'ScMS_numeric':'Production Scale - Medium (numeric)',
-    'ScLaS_numeric':'Production Scale - Large (numeric)',
-    'SocAccCSA_numeric':'Social Acceptability - Central/South America (numeric)',
-    'SocAccNA_numeric':'Social Acceptability - North America (numeric)',
-    'SocAccAf_numeric':'Social Acceptability - Africa (numeric)',
-    'SocAccOc_numeric':'Social Acceptability - Oceania (numeric)',
-    'SocAccEu_numeric':'Social Acceptability - Europe (numeric)',
-    'SocAccAs_numeric':'Social Acceptability - Asia (numeric)',
-    'LegPunc_numeric':'Legislation - Punctuation (numeric)',
+    'BiogRe_numeric':'Biogeographic - Realm ',
+    'BiogZo_numeric':'Biogeographic - Zone ',
+    'HoldBio_numeric':'Holdridge - Biome ',
+    'HoldPre_numeric':'Holdridge - Annual Precipitation ',
+    'HoldTemp_numeric':'Holdridge - Temperature ',
+    'HoldAB_numeric':'Holdridge - Altitudinal Belts ',
+    'HoldLR_numeric':'Holdridge - Latitudinal Regions ',
+    'HoldAD_numeric':'Holdridge - Altitudinal Distribution ',
+    'HabPat_numeric':'Habitat Pattern ',
+    'LSI_numeric':'Landscape Structure Index ',
+    'CultCultIdDi_numeric':'Cultural Identity (Ecosystem) ',
+    'CultInspArt_numeric':'Inspiration (Ecosystem) ',
+    'CultEdu_numeric':'Education (Ecosystem) ',
+    'CultRecEcot_numeric':'Recreation (Ecosystem) ',
+    'CultSpiReg_numeric':'Spiritual Relevance (Ecosystem) ',
+    'RegBioind_numeric':'Bioindicator (Regulation) ',
+    'RegBiocont_numeric':'Biocontrol (Regulation) ',
+    'RegPol_numeric':'Pollination (Regulation) ',
+    'RegSeed_numeric':'Seed Dispersal (Regulation) ',
+    'SupNutCy_numeric':'Nutrient Cycling (Supporting) ',
+    'SupSoIm_numeric':'Soil Improvement (Supporting) ',
+    'ProFF_numeric':'Food and Feed Production ',
+    'ProWildF_numeric':'Wild Food Production ',
+    'ProBiomol_numeric':'Biomolecules Production ',
+    'ProBiopro_numeric':'Bioproducts Production ',
+    'ProBiom_numeric':'Biomass ',
+    'ProBiomimi_numeric':'Biomimicry ',
+    'DissVector_numeric':'Disservices - Vector ',
+    'DissPest_numeric':'Disservices - Pest ',
+    'ManSt_numeric':'Management - Stress ',
+    'ManRu_numeric':'Management - Rusticity ',
+    'ManAg_numeric':'Management - Agility ',
+    'ManSoSt_numeric':'Management - Social Structure ',
+    'ManHab_numeric':'Management - Habits ',
+    'ManTer_numeric':'Management - Territoriality ',
+    'ManTra_numeric':'Management - Transportation ',
+    'ManFac_numeric':'Management - Facilities ',
+    'NutFeed_numeric':'Nutrition - Feeding Type ',
+    'NutCost_numeric':'Nutrition - Cost of Feed ',
+    'RepSexMat_numeric':'Reproduction - Sexual Maturity ',
+    'RepNumbOff_numeric':'Reproduction - Number of Offspring ',
+    'RepCy_numeric':'Reproduction - Cycles ',
+    'RepGestInc_numeric':'Reproduction - Gestation/Incubation ',
+    'RepSexInt_numeric':'Reproduction - Sexual Interaction ',
+    'ProPopStu_numeric':'Production - Population Study ',
+    'ProProf_numeric':'Production - Profit ',
+    'ProLong_numeric':'Production - Longevity ',
+    'ProReL_numeric':'Production - Research Level ',
+    'ProOpBre_numeric':'Production - Optimal Breeding Type ',
+    'ProAddVal_numeric':'Production - Added Value ',
+    'MarCultAcc_numeric':'Market - Cultural Acceptance ',
+    'MarPri_numeric':'Market - Price ',
+    'MarCompDom_numeric':'Market - Competition with Domestic Species ',
+    'MarReg_numeric':'Market - Regional ',
+    'MarNat_numeric':'Market - National ',
+    'MarInt_numeric':'Market - International ',
+    'MarMP_numeric':'Market - Main Product of Use ',
+    'ScLS_numeric':'Production Scale - Low ',
+    'ScMS_numeric':'Production Scale - Medium ',
+    'ScLaS_numeric':'Production Scale - Large ',
+    'SocAccCSA_numeric':'Social Acceptability - Central/South America ',
+    'SocAccNA_numeric':'Social Acceptability - North America ',
+    'SocAccAf_numeric':'Social Acceptability - Africa ',
+    'SocAccOc_numeric':'Social Acceptability - Oceania ',
+    'SocAccEu_numeric':'Social Acceptability - Europe ',
+    'SocAccAs_numeric':'Social Acceptability - Asia ',
+    'LegPunc_numeric':'Legislation - Punctuation ',
     'LegLeg_numeric':'Legislation numeric',
     'Vector':'Vector',
     'Pest':'Pest',
@@ -1237,6 +1251,13 @@ const columnNameMap = {
     'Phobia':'Phobia',
     'Stigma':'Stigmatization',
     'Challenges':'Challenges',
+};
+
+const columnNameMapy = {
+    'EcoPot': 'Ecosystem Potential',
+    'ProdPot': 'Productive Potential',
+    'Use': 'Use',
+    'Challenges':'Challenges'
 };
 
 
@@ -1275,6 +1296,8 @@ async function executeSearchAndUpdate() {
     updateChart();
 
     TopRadarinsects();
+
+    generateHeatmapFromExistingData(indexData);
 }
 
 async function executeFetchAllAndUpdate() {
@@ -1392,4 +1415,88 @@ function updateFamilyOptions(selectedOrder) {
             familySelect.appendChild(option);
         });
     }
+}
+
+function generateHeatmapFromExistingData(indexData) {
+    if (!indexData || indexData.length === 0) {
+        console.error('No data available for heatmap');
+        return;
+    }
+
+    console.log("Index data received:", indexData); // Verifica los datos recibidos
+    const subcategories = ['CultCultIdDi', 'CultInspArt', 'CultEdu', 'CultRecEcot', 'CultSpiReg']; // Ajustar según las columnas
+
+    const heatmapData = [];
+
+    // Extraer datos de subcategorías
+    indexData.forEach(record => {
+        subcategories.forEach(subcategory => {
+            const value = record.eco_pot?.[subcategory];
+            if (value !== undefined) {
+                heatmapData.push({
+                    x: subcategory, // Nombre de la subcategoría
+                    y: value,       // Valor de 0 a 3
+                    value: 1        // Cada registro cuenta como una unidad
+                });
+            }
+        });
+    });
+
+    // Agrupar los datos
+    const groupedData = heatmapData.reduce((acc, { x, y, value }) => {
+        const key = `${x}-${y}`;
+        if (!acc[key]) {
+            acc[key] = { x, y, value: 0 };
+        }
+        acc[key].value += value;
+        return acc;
+    }, {});
+
+    const groupedArray = Object.values(groupedData);
+
+    console.log("Grouped data for heatmap:", groupedArray); // Verifica los datos agrupados
+    generateHeatmapChart(groupedArray); // Llama al renderizado del gráfico
+}
+
+function generateHeatmapChart(data) {
+    const ctx = document.getElementById('heatmapCanvas').getContext('2d');
+    const maxDensity = Math.max(...data.map(d => d.value));
+
+    new Chart(ctx, {
+        type: 'bubble',
+        data: {
+            datasets: [{
+                label: 'Species Density',
+                data: data.map(item => ({
+                    x: item.x, // Subcategoría
+                    y: item.y, // Valor de 0-3
+                    r: Math.sqrt(item.value) * 5 // Radio del punto proporcional a la densidad
+                })),
+                backgroundColor: data.map(item => `rgba(75, 192, 192, ${item.value / maxDensity})`)
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    type: 'category',
+                    labels: [...new Set(data.map(d => d.x))],
+                    title: { display: true, text: 'Subcategories' }
+                },
+                y: {
+                    title: { display: true, text: 'Scores (0-3)' },
+                    ticks: { stepSize: 1 }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: context => {
+                            const { x, y, r } = context.raw;
+                            return `Subcategory: ${x}, Score: ${y}, Count: ${Math.round(r / 5)}`;
+                        }
+                    }
+                }
+            }
+        }
+    });
 }

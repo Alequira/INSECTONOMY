@@ -627,6 +627,12 @@
             outline-offset: -2px;
         }
 
+        #heatmapCanvas {
+            margin: 20px auto;
+            display: block;
+            max-width: 100%;
+        }
+
 /* Estilo del contenedor del popup embebido */
 .popup-content-embedded {
     display: none; 

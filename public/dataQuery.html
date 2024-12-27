@@ -34,12 +34,6 @@
                     <div class="pI">
                         <p class="prf">In the <i>Species Data Explorer tab</i>, you can access detailed information on <b>120 insect species</b> across the key variables we've previously outlined: Productive Potential, Ecosystem Potential, Use, and Challenges. You can explore species one by one or create custom groupings based on characteristics you choose. By selecting a species or group of species, you'll see their general traits along with their potential in each of these categories.</p>
                         <br>
-                        <p class="prf">The Explorer also offers two interactive graph options:</p>
-                        <ul>
-                            <li>A regression graph that allows you to compare <b>different characteristics and view the species potential.</b></li>
-                            <li>A ranking graph that highlights <b>the top three species</b> with the highest potential based on the criteria you've selected.</li>
-                        </ul>
-                        <br>
                         <p class="prf">This tool makes it easy to visualize and compare the potential of insect species.
                             You can:</p>
                             <ul>
@@ -62,8 +56,8 @@
                         <br>
                         <p class="prf">The Explorer also offers two interactive graph options:</p>
                             <ul>
-                                <li>A regression graph that allows you to compare different characteristics and
-                                    view the species potential.</li>
+                                <li>A regression graph that allows you to <b>compare</b> different characteristics and
+                                    view <i>the species potential</i>.</li>
                                 <li>A ranking graph that highlights the top three species with the highest
                                     potential based on the criteria you've selected. <i>Note:</i> If you select fewer
                                     than three species (one or two), the graph will not display.</li>
@@ -1469,8 +1463,8 @@
                             </table>
                         </div>
                     </div>
-                <h3 style="margin-top: 40px;">Grafics above table</h3>
                 </div>
+                <h3 style="margin-top: 40px;">Graphics above table</h3>
                 <div>
                     <div class="PrincipalChart">
                         <div id="axis-selection">
@@ -1484,7 +1478,7 @@
                                 <!-- Las opciones se llenarán dinámicamente desde JS -->
                             </select>
                             
-                            <button id="update-chart" class="btnDQ" onclick="updateChart(),TopRadarinsects()">Show Charts</button>
+                            <button id="update-chart" class="btnDQ" onclick="updateChart();TopRadarinsects(); generateHeatmapFromExistingData(indexData)">Show Charts</button>
                         </div>
                         <div class="charts-container">
                             <!-- Espacio para la gráfica -->
@@ -1498,6 +1492,10 @@
                         </div>
                         <div class="chart-container-btn">
                         </div>
+                    </div>
+                    <div>
+                        <h3>2D Heatmap of Species</h3>
+                        <canvas id="heatmapCanvas" width="400" height="400"></canvas>
                     </div>
                 </div>
             </section>
