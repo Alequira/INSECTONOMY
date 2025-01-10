@@ -18,10 +18,11 @@
         top: 0;
         left: 0;
         width: 100%;
-        padding: 20px 100px;
+        padding: 1% 10%;
         background: transparent;
         display: flex;
         justify-content: space-between;
+        background-size: cover;
         align-items: center;
         z-index: 99;
         background: url('Imagenes/nature-red-photography-macro-insect-green-619452-wallhere.com.jpg') no-repeat;
@@ -178,6 +179,13 @@
 
     .headerDQ .navigation .btlogin:hover{
         background-color: #fff;
+    }
+
+    #div-graph-pop {
+        margin: 20px auto;
+        padding: 20px;
+        display: none; 
+        transition: all 0.3s ease-in-out;
     }
 
     /*Social Media Animation*/
@@ -734,10 +742,10 @@
 }
 
 #topInsectsRadarChart {
-    width: 100% !important;   /* Ancho reducido con !important */
-    height: auto !important;  /* Ancho máximo para adaptarse */
-    display: block;            /* Asegurarse de que sea un bloque */
-    margin: 0 auto;            /* Centrarse en el contenedor */
+    width: 100% !important;  
+    height: auto !important;  
+    display: block;            
+    margin: 0 auto;            
 }
 
     /*Estilo del footer (general)*/
@@ -748,7 +756,7 @@
         width: 100%;
         text-align: center;
         padding: 10px 0;
-        position: fixed;
+        position: sticky;
         bottom: 0;
         font-size: small;
         z-index: 3;

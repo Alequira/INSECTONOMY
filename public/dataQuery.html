@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
         <link rel="stylesheet" href="styleDQ.css">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     </head>
+
     <body class="bodyDQ">
         <header class="headerDQ">
             <h1 class="logo" ><a class='logito'href="home">INSECTONOMY</a></h1>
@@ -71,7 +73,7 @@
 
                             <button type="button" class="collapsibleGA">General Aspects</button>
                             <div class="contentGA">
-                                <p>All general information on the insect.</p>
+                                <p><i><b>All general information on the insect.</b></i></p>
                                 <div class="input-boxGA">
                                     <label for="Or">Order</label>
                                     <select id="Or" name="Or">
@@ -307,18 +309,18 @@
                                 <ion-icon name="help-circle"></ion-icon></ion-icon>
                                 <div class="popup-content-embedded" id="popupEP">
                                     <h3>Ecosystemic Potential (Info) </h3>
-                                    <p>The list shows the maximums and minimums according to categories.</p>
+                                    <p>The list shows the maximums (3) and minimums (0) according to categories.</p>
                                     <ul style="margin-top: 10px;">
                                         <li>Cultural (0-3)</li>
                                         <li>Regulation (0-3)</li>
                                         <li>Support (0-3)</li>
-                                        <li>Disservices (0-3)</li>
+                                        <li>Provision (0-3)</li>
                                     </ul>
                                 </div>
                             </span>
 
                             <div class="contentEP">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                                <p><i><b>The insect's contribution to ecological systems and processes.</b></i></p>
                                 <h3>Cultural</h3>
                                 <div>
                                     <div class="input-boxEP">
@@ -510,22 +512,18 @@
                                 <ion-icon name="help-circle"></ion-icon></ion-icon>
                                 <div class="popup-content-embedded" id="popupPP">
                                     <h3>Productive Potential (Info) </h3>
-                                    <p>The list shows the maximums and minimums according to categories.</p>
+                                    <p>The list shows the different categories and the overall score of the content for each sub-category. -> (All depends on sub-category)</p>
                                     <ul style="margin-top: 10px;">
-                                        <li>Cultural (0-3)</li>
-                                        <li>Regulation (0-3)</li>
-                                        <li>Support (0-3)</li>
-                                        <li>Disservices (0-3)</li>
-                                        <li>Cultural (0-3)</li>
-                                        <li>Regulation (0-3)</li>
-                                        <li>Support (0-3)</li>
-                                        <li>Disservices (0-3)</li>
-                                        <li>Cultural (0-3)</li>
+                                        <li>Management</li>
+                                        <li>Nutrition </li>
+                                        <li>Reproduction </li>
+                                        <li>Production </li>
+                                        <li>Market </li>
                                     </ul>
                                 </div>
                             </span>
                             <div class="contentPP">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                                <p><i><b>The insect's ability to be used for productive purposes in agriculture or insect farming. </b></i></p>
                                 <h3>Management</h3>
                                 <div>
                                     <div class="input-boxPP">
@@ -807,15 +805,18 @@
                                     <h3>Use (Info) </h3>
                                     <p>The list shows the maximums and minimums according to categories.</p>
                                     <ul style="margin-top: 10px;">
-                                        <li>Cultural (0-3)</li>
-                                        <li>Regulation (0-3)</li>
-                                        <li>Support (0-3)</li>
-                                        <li>Disservices (0-3)</li>
+                                        <li>Main Use (0-3)</li>
+                                        <li>Sort of Use (0-3)</li>
+                                        <li>Primary Way to Obtain (0-3)</li>
+                                        <li>Primary Continents of Utilization (0-3)</li>
+                                        <li>Market (Depends on sub-category)</li>
+                                        <li>Production Scale (0-3)</li>
+                                        <li>Social Acceptability (0-3)</li>
                                     </ul>
                                 </div>
                             </span>
                             <div class="contentU">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                                <p><i><b>The insect's ability to meet human needs and preferences through practical, cultural, and environmental applications. </b></i></p>
                                 <h3>Main Use</h3>
                                 <div>
                                     <div class="input-boxU">
@@ -1217,15 +1218,12 @@
                                     <h3>Challenges (Info) </h3>
                                     <p>The list shows the maximums and minimums according to categories.</p>
                                     <ul style="margin-top: 10px;">
-                                        <li>Cultural (0-3)</li>
-                                        <li>Regulation (0-3)</li>
-                                        <li>Support (0-3)</li>
-                                        <li>Disservices (0-3)</li>
+                                        <li>Challenges (0-3)</li>
                                     </ul>
                                 </div>
                             </span>
                             <div class="contentC">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                                <p><i><b>The obstacles and risks insects pose, including regulatory barriers, pests, toxins, and public acceptance issues. </b></i></p>
                                 <h3>Challenges</h3>
                                 <div>
                                     <div class="input-boxC">
@@ -1325,7 +1323,7 @@
                         </div>
                     </div>
                     <div class="subsection">
-                        <div class="table-container">
+                        <div class="table-container" style="margin-bottom: 2%;">
                             <table id="results-table">
                                 <thead>
                                     <tr>
@@ -1464,38 +1462,41 @@
                         </div>
                     </div>
                 </div>
-                <h3 style="margin-top: 40px;">Graphics above table</h3>
-                <div>
-                    <div class="PrincipalChart">
-                        <div id="axis-selection">
-                            <label for="x-axis-select" style="padding: 6px;"><b>X:</b></label>
-                            <select id="x-axis-select">
-                                <!-- Las opciones se llenarán dinámicamente desde JS -->
-                            </select>
-                            
-                            <label for="y-axis-select" style="padding: 6px;"><b>Y:</b></label>
-                            <select id="y-axis-select">
-                                <!-- Las opciones se llenarán dinámicamente desde JS -->
-                            </select>
-                            
-                            <button id="update-chart" class="btnDQ" onclick="updateChart();TopRadarinsects(); generateHeatmapFromExistingData(indexData)">Show Charts</button>
-                        </div>
-                        <div class="charts-container">
-                            <!-- Espacio para la gráfica -->
-                        <canvas id="dynamicChart" width="400" height="400"></canvas>
-                        <div id="customTooltip" style="font-size: 10px; display:none; position:absolute; background-color:white; padding:8px; border:1px solid #ccc; border-radius:4px; box-shadow:0px 4px 10px rgba(0, 0, 0, 0.25) ;"></div>
-                        <canvas id="topInsectsRadarChart" style="width: 50%; max-width: 750px; margin: auto;"></canvas>
-                        <div id="customTooltip2" style="font-size: 10px; display:none; position:absolute; background-color:white; padding:8px; border:1px solid #ccc; border-radius:4px; box-shadow:0px 4px 10px rgba(0, 0, 0, 0.25) ;"></div>
-                        </div>
-                        <div id="buffer-display">
-                            <ul id="buffer-list"></ul>
-                        </div>
-                        <div class="chart-container-btn">
-                        </div>
-                    </div>
+                
+                <div id="div-graph-pop" style="display: none;">
+                    <h3>Graphics above table</h3>
                     <div>
-                        <h3>2D Heatmap of Species</h3>
-                        <canvas id="heatmapCanvas" width="400" height="400"></canvas>
+                        <div class="PrincipalChart">
+                            <div id="axis-selection">
+                                <label for="x-axis-select" style="padding: 6px;"><b>X:</b></label>
+                                <select id="x-axis-select">
+                                    <!-- Las opciones se llenarán dinámicamente desde JS -->
+                                </select>
+                                
+                                <label for="y-axis-select" style="padding: 6px;"><b>Y:</b></label>
+                                <select id="y-axis-select">
+                                    <!-- Las opciones se llenarán dinámicamente desde JS -->
+                                </select>
+                                
+                                <button id="update-chart" class="btnDQ" onclick="updateChart();TopRadarinsects(); generateHeatmapFromExistingData(indexData)">Refresh</button>
+                            </div>
+                            <div class="charts-container">
+                                <!-- Espacio para la gráfica -->
+                            <canvas id="dynamicChart" width="400" height="400"></canvas>
+                            <div id="customTooltip" style="font-size: 10px; display:none; position:absolute; background-color:white; padding:8px; border:1px solid #ccc; border-radius:4px; box-shadow:0px 4px 10px rgba(0, 0, 0, 0.25) ;"></div>
+                            <canvas id="topInsectsRadarChart" style="width: 50%; max-width: 750px; margin: auto;"></canvas>
+                            <div id="customTooltip2" style="font-size: 10px; display:none; position:absolute; background-color:white; padding:8px; border:1px solid #ccc; border-radius:4px; box-shadow:0px 4px 10px rgba(0, 0, 0, 0.25) ;"></div>
+                            </div>
+                            <div id="buffer-display">
+                                <ul id="buffer-list"></ul>
+                            </div>
+                            <div class="chart-container-btn">
+                            </div>
+                        </div>
+                        <div>
+                            <h3>Heatmap of Species (Discrete values)</h3>
+                            <canvas id="heatmapCanvas" width="900" height="300"></canvas>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -1540,7 +1541,9 @@
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
         <script src="scriptDQ.js"></script>
     </body>
+
     <footer>
         <p>Insectonomy - Universidad Nacional de Colombia</p>
     </footer>
+    
 </html>

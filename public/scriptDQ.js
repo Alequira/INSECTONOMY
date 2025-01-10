@@ -52,7 +52,7 @@ btnC.addEventListener('click', () => {
     }
 });
 
-// Seleccionar todos los iconos con las clases de iconos y los popups correspondientes
+// Seleccionar todos los iconos con las clases de iconos y los popups correspondientes  - Pregunta sobre cada pop - 
 const iconEP = document.querySelector(".iconEP");
 const iconPP = document.querySelector(".iconPP");
 const iconU = document.querySelector(".iconU");
@@ -737,13 +737,11 @@ function updateChart() {
     }
 
     // Determinar qué datos usar
-    if (buffer.length == 0){
-        createDynamicChart(indexData, xAxis, yAxis);
-    }
-    else{
-        const dataToUse = buffer.length > 0 ? bufferRecords() : indexData;
-        createDynamicChart(dataToUse, xAxis, yAxis);
-    }
+    const dataToUse = buffer.length > 0 ? bufferRecords() : indexData;
+
+    createDynamicChart(dataToUse, xAxis, yAxis);
+
+    generateHeatmapFromExistingData(dataToUse, yAxis);
     
 }
 
@@ -1290,22 +1288,34 @@ function clean() {
     }
 }
 
+let heatmapChart = null;
+
 async function executeSearchAndUpdate() {
-    await searchGenAsp();
+    try {
+        const graphDiv = document.getElementById('div-graph-pop');
+        graphDiv.style.display = 'block';
 
-    updateChart();
+        await searchGenAsp();
 
-    TopRadarinsects();
-
-    generateHeatmapFromExistingData(indexData);
+        updateChart();
+        TopRadarinsects();
+    } catch (error) {
+        console.error('Error ejecutando la búsqueda:', error);
+    }
 }
 
 async function executeFetchAllAndUpdate() {
-    await fetchAllData();
+    try {
+        const graphDiv = document.getElementById('div-graph-pop');
+        graphDiv.style.display = 'block';
 
-    updateChart();
+        await fetchAllData();
 
-    TopRadarinsects();
+        updateChart();
+        TopRadarinsects();
+    } catch (error) {
+        console.error('Error ejecutando la búsqueda:', error);
+    }
 }
 
 let buffer = [];
@@ -1417,60 +1427,117 @@ function updateFamilyOptions(selectedOrder) {
     }
 }
 
-function generateHeatmapFromExistingData(indexData) {
+
+// Heatmap generador
+function generateHeatmapFromExistingData(indexData, yAxis) {
     if (!indexData || indexData.length === 0) {
         console.error('No data available for heatmap');
         return;
     }
 
-    console.log("Index data received:", indexData); // Verifica los datos recibidos
-    const subcategories = ['CultCultIdDi', 'CultInspArt', 'CultEdu', 'CultRecEcot', 'CultSpiReg']; // Ajustar según las columnas
+    // Mapeo de yAxis a categorías verdaderas
+    const yAxisToCategory = {
+        "Use": "use",
+        "ProdPot": "prod_pot",
+        "EcoPot": "eco_pot",
+        "Challenges": "challenges"
+    };
+
+    console.log("Selected Y-Axis:", yAxis);
+    console.log("Mapped category:", yAxisToCategory[yAxis]);
+
+    // Transformar yAxis en categoría verdadera
+    const selectedCategory = yAxisToCategory[yAxis];
+    
+    if (!selectedCategory) {
+        console.error(`Invalid Y-Axis value: ${yAxis}`);
+        return;
+    }
+
+    const subcategoriesByCategory = {
+        use: ['SoUseFo', 'SoUseFe', 'SoUseBioconv', 'SoUseBiocont', 'SoUseCult', 'SoUseOth'],
+        prod_pot: [
+            'ManStSc', 'ManRuSc', 'ManAgSc', 'ManSoStSc', 'ManHabSc', 'ManFacSc', 'ManTerSc', 'ManTraSc',
+            'NutFeedSc', 'NutCostSc', 'RepSexMatSc', 'RepNumBOffSc', 'RepCySc', 'RepGestIncSc',
+            'RepSexIntSc', 'ProPopStuSc', 'ProProfSc', 'ProLongSc', 'ProRelSc', 'ProOpBreSc', 'ProAddValSc'
+        ],
+        eco_pot: [
+            'CultCultIdDi', 'CultInspArt', 'CultEdu', 'CultRecEcot', 'CultSpiReg',
+            'RegBioInd', 'RegBioCont', 'RegPol', 'RegSeed', 'SupNutCy', 'SupSoIm'
+        ],
+        challenges: ['Vector', 'Pest', 'Toxins', 'Allergens', 'Phobia', 'Stigma']
+    };
+
+    const subcategories = subcategoriesByCategory[selectedCategory];
+    if (!subcategories) {
+        console.error(`Invalid category selected for heatmap: ${selectedCategory}`);
+        return;
+    }
 
     const heatmapData = [];
 
-    // Extraer datos de subcategorías
     indexData.forEach(record => {
+        const categoryData = record[selectedCategory];
+        console.log(`Category data for record (${selectedCategory}):`, categoryData);
+
+        if (!categoryData) {
+            console.error(`No data found for category: ${selectedCategory}`);
+            return;
+        }
+
         subcategories.forEach(subcategory => {
-            const value = record.eco_pot?.[subcategory];
-            if (value !== undefined) {
+            const value = categoryData[subcategory] ?? 0; // Manejar valores nulos
+            console.log(`Subcategory: ${subcategory}, Value: ${value}`);
+            if (value >= 0 && value <= 3) {
                 heatmapData.push({
-                    x: subcategory, // Nombre de la subcategoría
-                    y: value,       // Valor de 0 a 3
-                    value: 1        // Cada registro cuenta como una unidad
+                    x: subcategory,
+                    y: value,
+                    value: 1
                 });
             }
         });
     });
 
-    // Agrupar los datos
+    console.log("Heatmap data before grouping:", heatmapData);
+
     const groupedData = heatmapData.reduce((acc, { x, y, value }) => {
         const key = `${x}-${y}`;
         if (!acc[key]) {
             acc[key] = { x, y, value: 0 };
         }
-        acc[key].value += value;
+        acc[key].value += value; // Incrementa la densidad
         return acc;
     }, {});
 
     const groupedArray = Object.values(groupedData);
 
-    console.log("Grouped data for heatmap:", groupedArray); // Verifica los datos agrupados
-    generateHeatmapChart(groupedArray); // Llama al renderizado del gráfico
+    console.log("Grouped heatmap data:", groupedArray);
+
+    generateHeatmapChart(groupedArray, selectedCategory);
 }
 
-function generateHeatmapChart(data) {
+function generateHeatmapChart(data, selectedCategory) {
     const ctx = document.getElementById('heatmapCanvas').getContext('2d');
+
+    // Verificar si ya existe un gráfico y destruirlo
+    if (heatmapChart) {
+        heatmapChart.destroy();
+    }
+
+    console.log("Data received for heatmap chart:", data);
+
     const maxDensity = Math.max(...data.map(d => d.value));
 
-    new Chart(ctx, {
+    // Crear un nuevo gráfico y almacenar la referencia
+    heatmapChart = new Chart(ctx, {
         type: 'bubble',
         data: {
             datasets: [{
-                label: 'Species Density',
+                label: `Density for ${selectedCategory}`,
                 data: data.map(item => ({
-                    x: item.x, // Subcategoría
-                    y: item.y, // Valor de 0-3
-                    r: Math.sqrt(item.value) * 5 // Radio del punto proporcional a la densidad
+                    x: item.x,
+                    y: item.y,
+                    r: Math.sqrt(item.value) * 5 // Radio proporcional a la densidad
                 })),
                 backgroundColor: data.map(item => `rgba(75, 192, 192, ${item.value / maxDensity})`)
             }]
@@ -1483,6 +1550,9 @@ function generateHeatmapChart(data) {
                     title: { display: true, text: 'Subcategories' }
                 },
                 y: {
+                    type: 'linear',
+                    min: 0,
+                    max: 3,
                     title: { display: true, text: 'Scores (0-3)' },
                     ticks: { stepSize: 1 }
                 }
