@@ -55,16 +55,6 @@
                                     variables.</li>
                                 <li>Insights into the species' potential uses and applications.</li>
                             </ul>
-                        <br>
-                        <p class="prf">The Explorer also offers two interactive graph options:</p>
-                            <ul>
-                                <li>A regression graph that allows you to <b>compare</b> different characteristics and
-                                    view <i>the species potential</i>.</li>
-                                <li>A ranking graph that highlights the top three species with the highest
-                                    potential based on the criteria you've selected. <i>Note:</i> If you select fewer
-                                    than three species (one or two), the graph will not display.</li>
-                            </ul>
-
                     </div>
                     <div class="subsection">
                         <form id="input-form">
@@ -1464,7 +1454,8 @@
                 </div>
                 
                 <div id="div-graph-pop" style="display: none;">
-                    <h3>Graphics above table</h3>
+                    <h3>Graphic results of search</h3>
+                    <i><p>Click on all the species you are interested in the list and click refresh to see their charts.</p></i>
                     <div>
                         <div class="PrincipalChart">
                             <div id="axis-selection">
@@ -1480,22 +1471,30 @@
                                 
                                 <button id="update-chart" class="btnDQ" onclick="updateChart();TopRadarinsects(); generateHeatmapFromExistingData(indexData)">Refresh</button>
                             </div>
-                            <div class="charts-container">
-                                <!-- Espacio para la gráfica -->
-                            <canvas id="dynamicChart" width="400" height="400"></canvas>
-                            <div id="customTooltip" style="font-size: 10px; display:none; position:absolute; background-color:white; padding:8px; border:1px solid #ccc; border-radius:4px; box-shadow:0px 4px 10px rgba(0, 0, 0, 0.25) ;"></div>
-                            <canvas id="topInsectsRadarChart" style="width: 50%; max-width: 750px; margin: auto;"></canvas>
-                            <div id="customTooltip2" style="font-size: 10px; display:none; position:absolute; background-color:white; padding:8px; border:1px solid #ccc; border-radius:4px; box-shadow:0px 4px 10px rgba(0, 0, 0, 0.25) ;"></div>
+                            <div class="charts-wrapper">
+                                <div class="chart-item">
+                                    <canvas id="dynamicChart"></canvas>
+                                    <div id="customTooltip" style="font-size: 10px; display:none; position:absolute; background-color:white; padding:8px; border:1px solid #ccc; border-radius:4px; box-shadow:0px 4px 10px rgba(0, 0, 0, 0.25) ;"></div>
+                                    <p class="p-canvas">Regression graph that allows you to compare different characteristics and view the species potential.</p>
+                                </div>
+                                <div class="chart-item">
+                                    <canvas id="topInsectsRadarChart"></canvas>
+                                    <div id="customTooltip2" style="font-size: 10px; display:none; position:absolute; background-color:white; padding:8px; border:1px solid #ccc; border-radius:4px; box-shadow:0px 4px 10px rgba(0, 0, 0, 0.25) ;"></div>
+                                    <p class="p-canvas">Ranking graph that highlights the top three species with the highest potential based on the criteria you've selected. Note: If you select fewer than three species (one or two), the graph will not display.</p>
+                                </div>
                             </div>
+
+                            <div class="chart-container-btn">
+                            </div>
+
                             <div id="buffer-display">
                                 <ul id="buffer-list"></ul>
                             </div>
-                            <div class="chart-container-btn">
-                            </div>
+
                         </div>
                         <div>
-                            <h3>Heatmap of Species (Discrete values)</h3>
-                            <canvas id="heatmapCanvas" width="900" height="300"></canvas>
+                            <canvas id="heatmapCanvas" width="1400" height="500"></canvas>
+                            <p class="p-canvas">Heatmap plot showing discrete values of the subcategories present in the general category chosen on the y-axis in the regression graph.</p>
                         </div>
                     </div>
                 </div>
@@ -1530,8 +1529,8 @@
 
                 <!-- Botones de navegación -->
                 <div id="modal-navigation" style="text-align: center; margin-top: 20px;">
-                    <button id="prev-btn" class="btnDQ" style="display: none;" onclick="prevSection()">Description</button>
-                    <button id="next-btn" class="btnDQ" onclick="nextSection()">Insect Characteristics</button>
+                    <button id="prev-btn" class="btnDQM" style="display: none;" onclick="prevSection()">Description</button>
+                    <button id="next-btn" class="btnDQM" onclick="nextSection()">Insect Potential</button>
                 </div>
             </div>
         </div>

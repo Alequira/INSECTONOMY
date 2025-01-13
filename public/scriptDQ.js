@@ -806,6 +806,7 @@ function createDynamicChart(data, xAxis, yAxis) {
             ]
         },
         options: {
+            maintainAspectRatio: false,
             scales: {
                 x: {
                     type: 'linear',
@@ -852,6 +853,15 @@ function createDynamicChart(data, xAxis, yAxis) {
                             family: 'Poppins', // Fuente para los labels de la leyenda
                             size: 16
                         }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Regression graph',
+                    font: {
+                        size: 16,
+                        family: 'Poppins',
+                        weight: 'bold'
                     }
                 }
             },
@@ -989,6 +999,7 @@ function generateTopInsectsRadarChart(records) {
             datasets: datasets
         },
         options: {
+            maintainAspectRatio: true,
             scales: {
                 r: {
                     angleLines: {
@@ -1286,6 +1297,13 @@ function clean() {
         window.radarChart.destroy();
         window.radarChart = null;
     }
+    if (window.heatmapChart){
+        window.heatmapChart.destroy();
+        window.heatmapChart = null;
+    }
+
+    const graphDiv = document.getElementById('div-graph-pop');
+    graphDiv.style.display = 'none';
 }
 
 let heatmapChart = null;
@@ -1428,14 +1446,69 @@ function updateFamilyOptions(selectedOrder) {
 }
 
 
-// Heatmap generador
+// Nombres completos de las categorías
+const categoryNames = {
+    use: 'Use',
+    prod_pot: 'Productive Potential',
+    eco_pot: 'Ecosystem Potential',
+    challenges: 'Challenges'
+};
+
+// Nombres completos de las subcategorías
+const subcategoryNames = {
+    SoUseFo: 'Food',
+    SoUseFe: 'Feed',
+    SoUseBioconv: 'Bioconversion',
+    SoUseBiocont: 'Biocontrol',
+    SoUseCult: 'Cultural Use',
+    SoUseOth: 'Other Uses',
+    ManStSc: 'Standard Management',
+    ManRuSc: 'Rural Management',
+    ManAgSc: 'Agricultural Management',
+    ManSoStSc: 'Soil Stability',
+    ManHabSc: 'Habitat Support',
+    ManFacSc: 'Facilities',
+    ManTerSc: 'Territorial Support',
+    ManTraSc: 'Transportation',
+    NutFeedSc: 'Feed Nutrition',
+    NutCostSc: 'Cost Efficiency',
+    RepSexMatSc: 'Sexual Maturity',
+    RepNumBOffSc: 'Number of Offspring',
+    RepCySc: 'Reproductive Cycle',
+    RepGestIncSc: 'Gestation/Incubation',
+    RepSexIntSc: 'Sexual Interaction',
+    ProPopStuSc: 'Population Study',
+    ProProfSc: 'Profitability',
+    ProLongSc: 'Longevity',
+    ProRelSc: 'Reliability',
+    ProOpBreSc: 'Open Breeding',
+    ProAddValSc: 'Added Value',
+    CultCultIdDi: 'Cultural Identity & Diversity',
+    CultInspArt: 'Inspiration for Art',
+    CultEdu: 'Education',
+    CultRecEcot: 'Recreation & Ecotourism',
+    CultSpiReg: 'Spiritual & Regional Significance',
+    RegBioInd: 'Bioindicators',
+    RegBioCont: 'Biocontrol',
+    RegPol: 'Pollination',
+    RegSeed: 'Seed Dispersal',
+    SupNutCy: 'Nutrient Cycles',
+    SupSoIm: 'Soil Improvement',
+    Vector: 'Vector',
+    Pest: 'Pests',
+    Toxins: 'Toxins',
+    Allergens: 'Allergens',
+    Phobia: 'Phobia',
+    Stigma: 'Stigma'
+};
+
+// Función para generar el heatmap
 function generateHeatmapFromExistingData(indexData, yAxis) {
     if (!indexData || indexData.length === 0) {
         console.error('No data available for heatmap');
         return;
     }
 
-    // Mapeo de yAxis a categorías verdaderas
     const yAxisToCategory = {
         "Use": "use",
         "ProdPot": "prod_pot",
@@ -1443,12 +1516,7 @@ function generateHeatmapFromExistingData(indexData, yAxis) {
         "Challenges": "challenges"
     };
 
-    console.log("Selected Y-Axis:", yAxis);
-    console.log("Mapped category:", yAxisToCategory[yAxis]);
-
-    // Transformar yAxis en categoría verdadera
     const selectedCategory = yAxisToCategory[yAxis];
-    
     if (!selectedCategory) {
         console.error(`Invalid Y-Axis value: ${yAxis}`);
         return;
@@ -1478,19 +1546,13 @@ function generateHeatmapFromExistingData(indexData, yAxis) {
 
     indexData.forEach(record => {
         const categoryData = record[selectedCategory];
-        console.log(`Category data for record (${selectedCategory}):`, categoryData);
-
-        if (!categoryData) {
-            console.error(`No data found for category: ${selectedCategory}`);
-            return;
-        }
+        if (!categoryData) return;
 
         subcategories.forEach(subcategory => {
-            const value = categoryData[subcategory] ?? 0; // Manejar valores nulos
-            console.log(`Subcategory: ${subcategory}, Value: ${value}`);
+            const value = categoryData[subcategory] ?? 0;
             if (value >= 0 && value <= 3) {
                 heatmapData.push({
-                    x: subcategory,
+                    x: subcategoryNames[subcategory] || subcategory, // Nombres completos
                     y: value,
                     value: 1
                 });
@@ -1498,75 +1560,181 @@ function generateHeatmapFromExistingData(indexData, yAxis) {
         });
     });
 
-    console.log("Heatmap data before grouping:", heatmapData);
-
     const groupedData = heatmapData.reduce((acc, { x, y, value }) => {
         const key = `${x}-${y}`;
-        if (!acc[key]) {
-            acc[key] = { x, y, value: 0 };
-        }
-        acc[key].value += value; // Incrementa la densidad
+        if (!acc[key]) acc[key] = { x, y, value: 0 };
+        acc[key].value += value;
         return acc;
     }, {});
 
     const groupedArray = Object.values(groupedData);
 
-    console.log("Grouped heatmap data:", groupedArray);
-
     generateHeatmapChart(groupedArray, selectedCategory);
 }
 
+
+// Paleta Viridis (fija)
+const viridisColors = [
+    [68, 1, 84],   // Azul oscuro
+    [59, 82, 139], // Azul intermedio
+    [33, 145, 140], // Verde-azulado
+    [94, 201, 98],  // Verde brillante
+    [253, 231, 37], // Amarillo
+    [239, 59, 44]   // Naranja/Rojo
+];
+
+// Función global para calcular el color Viridis
+function getColor(density, minDensity, maxDensity) {
+    const ratio = (density - minDensity) / (maxDensity - minDensity); // Normalizar densidad
+    const index = Math.floor(ratio * (viridisColors.length - 1));
+    const nextIndex = Math.min(index + 1, viridisColors.length - 1);
+    const weight = ratio * (viridisColors.length - 1) - index;
+
+    const r = Math.floor(viridisColors[index][0] * (1 - weight) + viridisColors[nextIndex][0] * weight);
+    const g = Math.floor(viridisColors[index][1] * (1 - weight) + viridisColors[nextIndex][1] * weight);
+    const b = Math.floor(viridisColors[index][2] * (1 - weight) + viridisColors[nextIndex][2] * weight);
+
+    return `rgba(${r}, ${g}, ${b}, 0.7)`; // Ajustar opacidad al color
+}
+
+
+// Generar el gráfico del heatmap
 function generateHeatmapChart(data, selectedCategory) {
     const ctx = document.getElementById('heatmapCanvas').getContext('2d');
 
-    // Verificar si ya existe un gráfico y destruirlo
     if (heatmapChart) {
         heatmapChart.destroy();
     }
 
-    console.log("Data received for heatmap chart:", data);
-
     const maxDensity = Math.max(...data.map(d => d.value));
+    const minDensity = Math.min(...data.map(d => d.value));
 
-    // Crear un nuevo gráfico y almacenar la referencia
     heatmapChart = new Chart(ctx, {
         type: 'bubble',
         data: {
             datasets: [{
-                label: `Density for ${selectedCategory}`,
                 data: data.map(item => ({
                     x: item.x,
                     y: item.y,
-                    r: Math.sqrt(item.value) * 5 // Radio proporcional a la densidad
+                    r: Math.sqrt(item.value) * 5
                 })),
-                backgroundColor: data.map(item => `rgba(75, 192, 192, ${item.value / maxDensity})`)
+                backgroundColor: data.map(item => getColor(item.value, minDensity, maxDensity))
             }]
         },
         options: {
+            layout: {
+                padding: {
+                    right: 80,
+                    top: 20,
+                    bottom: 20,
+                    left: 20
+                }
+            },
             scales: {
                 x: {
                     type: 'category',
-                    labels: [...new Set(data.map(d => d.x))],
-                    title: { display: true, text: 'Subcategories' }
+                    labels: [...new Set(data.map(d => d.x))], // Nombres completos en eje X
+                    title: { 
+                        display: true, 
+                        text: 'Subcategories' ,
+                        font: {
+                            family: 'Poppins',
+                            size: 16,
+                            weight: 'bold'
+                        }
+                    },
+                    offset: true,
                 },
                 y: {
                     type: 'linear',
-                    min: 0,
-                    max: 3,
-                    title: { display: true, text: 'Scores (0-3)' },
-                    ticks: { stepSize: 1 }
+                    min: -1,
+                    max: 4,
+                    title: { 
+                        display: true, 
+                        text: `${categoryNames[selectedCategory] || 'Category'} - Score (0-3)`,
+                        font: {
+                            family: 'Poppins',
+                            size: 16,
+                            weight: 'bold'
+                        }
+                    },
+                    ticks: {
+                        font: {
+                            family: 'Poppins',
+                            size: 14
+                        }
+                    }
                 }
             },
             plugins: {
                 tooltip: {
+                    bodyFont: {
+                        family: 'Poppins',
+                        size: 14
+                    },
                     callbacks: {
                         label: context => {
                             const { x, y, r } = context.raw;
-                            return `Subcategory: ${x}, Score: ${y}, Count: ${Math.round(r / 5)}`;
+                            const count = Math.round(Math.pow(r / 5, 2));
+                            return `${categoryNames[selectedCategory] || 'Category'}: ${x}, Score: ${y}, Count: ${count}`;
                         }
                     }
+                },
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: `Heatmap of ${categoryNames[selectedCategory]|| 'Data'} (Discrete values)`,
+                    font: { size: 16, family: 'Poppins', weight: 'bold' }
                 }
             }
-        }
+        },
+        plugins: [createColorLegendPlugin(minDensity, maxDensity, getColor, 'right', selectedCategory)]
     });
+}
+
+function createColorLegendPlugin(minDensity, maxDensity, getColor, position = 'right', selectedCategory) {
+    return {
+        id: 'colorLegend',
+        afterDraw: chart => {
+            const ctx = chart.ctx;
+            const { top, bottom, right } = chart.chartArea;
+            const legendWidth = 20; // Ancho del gradiente
+            const legendHeight = bottom - top; // Altura completa del gráfico
+
+            // Posición de la escala (vertical a la derecha)
+            const startX = right + 20; // Justo a la derecha del gráfico
+            const startY = top;
+
+            // Crear un gradiente Viridis invertido (rojo arriba, azul abajo)
+            const gradient = ctx.createLinearGradient(startX, startY + legendHeight, startX, startY);
+            for (let i = 0; i <= 1; i += 0.01) {
+                const color = getColor(minDensity + i * (maxDensity - minDensity), minDensity, maxDensity);
+                gradient.addColorStop(i, color);
+            }
+
+            // Dibujar el gradiente
+            ctx.fillStyle = gradient;
+            ctx.fillRect(startX, startY, legendWidth, legendHeight);
+
+            // Dibujar las etiquetas de densidad
+            ctx.fillStyle = 'black';
+            ctx.textAlign = 'left';
+            ctx.font = '12px Arial';
+
+            // Etiqueta superior (densidad máxima, rojo)
+            ctx.fillText(`${maxDensity}`, startX + legendWidth + 5, startY + 10);
+
+            // Etiqueta inferior (densidad mínima, azul)
+            ctx.fillText(`${minDensity}`, startX + legendWidth + 5, startY + legendHeight - 5);
+
+            // Etiqueta central (Número de especies por categoría y puntaje)
+            const dynamicText = selectedCategory ? `Number of species by ${categoryNames[selectedCategory] || selectedCategory} and score` : "Number of species and score";
+            ctx.save();
+            ctx.translate(startX + legendWidth + 25, startY + legendHeight / 2);
+            ctx.rotate(-Math.PI / 2); // Rotar el texto 90 grados para que sea vertical
+            ctx.textAlign = 'center';
+            ctx.fillText(dynamicText, 0, 0); // Mostrar texto dinámico
+            ctx.restore();
+        }
+    };
 }
