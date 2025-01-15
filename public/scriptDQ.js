@@ -641,7 +641,7 @@ function displayIdsText(idsText) {
 }
 
 // Variables globales para la gráfica
-let dynamicChart = null;
+let dynamicChart;
 let indexData = []; 
 
 function convertCategoricalToNumerical(data, column) {
@@ -967,7 +967,7 @@ function generateTopInsectsRadarChart(records) {
 
     // Verificar si se encontraron al menos tres insectos
     if (topThreeInsects.length < 3) {
-        alert("There is not enough data to make a graph.");
+        alert("There is not enough data to make the top 3 Insects by average score graph.");
         return;
     }
 
@@ -1271,24 +1271,18 @@ const columnNameMapy = {
 
 
 function clean() {
-    // Limpiar el contenido de la tabla de resultados
     const tableBody = document.getElementById('results-table').getElementsByTagName('tbody')[0];
     tableBody.innerHTML = '';
 
-    // Limpiar los selectores de ejes
     document.getElementById('x-axis-select').innerHTML = '';
     document.getElementById('y-axis-select').innerHTML = '';
 
-    // Reiniciar el formulario de búsqueda si existe
     document.getElementById('input-form').reset();
 
-    // Limpiar el texto de resultados, como los IDs de búsqueda
     document.getElementById('ids-text').textContent = '';
 
-    // Resetear la variable `indexData` para comenzar desde cero
     indexData = [];
 
-    // Destruir las gráficas si existen
     if (dynamicChart) {
         dynamicChart.destroy();
         dynamicChart = null;
@@ -1456,59 +1450,109 @@ const categoryNames = {
 
 // Nombres completos de las subcategorías
 const subcategoryNames = {
+    // Subcategorías de Use
+    MaUSubs: 'Subsistence',
+    MaUSelCons: 'Self-Consumption',
+    MaUCom: 'Commercial',
     SoUseFo: 'Food',
     SoUseFe: 'Feed',
     SoUseBioconv: 'Bioconversion',
     SoUseBiocont: 'Biocontrol',
-    SoUseCult: 'Cultural Use',
-    SoUseOth: 'Other Uses',
-    ManStSc: 'Standard Management',
-    ManRuSc: 'Rural Management',
-    ManAgSc: 'Agricultural Management',
-    ManSoStSc: 'Soil Stability',
-    ManHabSc: 'Habitat Support',
-    ManFacSc: 'Facilities',
-    ManTerSc: 'Territorial Support',
+    SoUsePol: 'Pollination',
+    SoUsePet: 'Pet',
+    SoUseCult: 'Cultural',
+    SoUseOth: 'Other',
+    ObtHar: 'Harvesting',
+    ObtSHar: 'Semi-harvesting',
+    ObtPro: 'Production',
+    ContUtNA: 'North America',
+    ContUtCA: 'Central America',
+    ContUtSA: 'South America',
+    ContUtAs: 'Asia',
+    ContUtEu: 'Europe',
+    ContUtOc: 'Oceania',
+    ContUtAf: 'Africa',
+    MarYN: 'Market: Yes/No',
+    MarLoc: 'Local Market',
+    MarReg: 'Regional Market',
+    MarNat: 'National Market',
+    MarInt: 'International Market',
+    MarMP: 'Main Product',
+    ScLS: 'Low Scale',
+    ScMS: 'Middle Scale',
+    ScLaS: 'Large Scale',
+    SocAccCSA: 'Acceptance in Central & South America',
+    SocAccNA: 'Acceptance in North America',
+    SocAccAf: 'Acceptance in Africa',
+    SocAccOc: 'Acceptance in Oceania',
+    SocAccEu: 'Acceptance in Europe',
+    SocAccAs: 'Acceptance in Asia',
+    LegPunc: 'Legislation: Punctuation',
+    LegLeg: 'Legislation',
+    // Subcategorías de ProdPot
+    ManStSc: 'Stress',
+    ManRuSc: 'Rusticity',
+    ManAgSc: 'Agility',
+    ManSoStSc: 'Social Structure',
+    ManHabSc: 'Habits',
+    ManTerSc: 'Territoriality',
     ManTraSc: 'Transportation',
-    NutFeedSc: 'Feed Nutrition',
-    NutCostSc: 'Cost Efficiency',
+    ManFacSc: 'Facilities',
+    NutFeedSc: 'Feeding Type',
+    NutCostSc: 'Cost of Feed',
     RepSexMatSc: 'Sexual Maturity',
-    RepNumBOffSc: 'Number of Offspring',
-    RepCySc: 'Reproductive Cycle',
-    RepGestIncSc: 'Gestation/Incubation',
+    RepNumbOffSc: 'Number of Offspring',
+    RepCySc: 'Reproduction Cycles',
+    RepGestIncSc: 'Gestation/Incubation Time',
     RepSexIntSc: 'Sexual Interaction',
     ProPopStuSc: 'Population Study',
-    ProProfSc: 'Profitability',
+    ProProfSc: 'Profit',
     ProLongSc: 'Longevity',
-    ProRelSc: 'Reliability',
-    ProOpBreSc: 'Open Breeding',
+    ProReLSc: 'Research Level',
+    ProOpBreSc: 'Optimal Breeding Type',
     ProAddValSc: 'Added Value',
-    CultCultIdDi: 'Cultural Identity & Diversity',
-    CultInspArt: 'Inspiration for Art',
+    MarCultAccSc: 'Cultural Acceptance',
+    MarPriSc: 'Market Price',
+    MarCompDomSc: 'Competition with Domestic Species',
+    MarMarChaSc: 'Market Chains',
+    RegRestSc: 'Restrictions (IUCN-CITES/National)',
+    // Subcategorías de EcoPot
+    CultCultIdDi: 'Cultural Diversity & Identity',
+    CultInspArt: 'Inspiration & Art',
     CultEdu: 'Education',
     CultRecEcot: 'Recreation & Ecotourism',
-    CultSpiReg: 'Spiritual & Regional Significance',
-    RegBioInd: 'Bioindicators',
-    RegBioCont: 'Biocontrol',
+    CultSpiReg: 'Spiritual & Religious',
+    RegBioind: 'Bioindicator',
+    RegBiocont: 'Biocontrol',
     RegPol: 'Pollination',
     RegSeed: 'Seed Dispersal',
-    SupNutCy: 'Nutrient Cycles',
+    SupNutCy: 'Nutrient Cycling',
     SupSoIm: 'Soil Improvement',
+    ProFF: 'Food & Feed',
+    ProWildF: 'Wildlife Feed',
+    ProBiomol: 'Biomolecules',
+    ProBiopro: 'Bioproducts',
+    ProBiom: 'Biomodels',
+    ProBiomimi: 'Biomimicry',
+    // Subcategorías de Challenges
     Vector: 'Vector',
-    Pest: 'Pests',
+    Pest: 'Pest',
     Toxins: 'Toxins',
     Allergens: 'Allergens',
+    AntFact: 'Antinutritional Factors',
+    InvSp: 'Invasive Species',
     Phobia: 'Phobia',
-    Stigma: 'Stigma'
+    Stigma: 'Stigmatization'
 };
 
 // Función para generar el heatmap
 function generateHeatmapFromExistingData(indexData, yAxis) {
-    if (!indexData || indexData.length === 0) {
-        console.error('No data available for heatmap');
+
+    if (!yAxis) {
+        console.error("Y-Axis is undefined or empty. Please select a valid value.");
         return;
     }
-
+    
     const yAxisToCategory = {
         "Use": "use",
         "ProdPot": "prod_pot",
@@ -1522,18 +1566,42 @@ function generateHeatmapFromExistingData(indexData, yAxis) {
         return;
     }
 
+    console.log("Mapped category:", selectedCategory);
+
+    if (!indexData || indexData.length === 0) {
+        console.error('No data available for heatmap.');
+        return;
+    }
+
     const subcategoriesByCategory = {
-        use: ['SoUseFo', 'SoUseFe', 'SoUseBioconv', 'SoUseBiocont', 'SoUseCult', 'SoUseOth'],
-        prod_pot: [
-            'ManStSc', 'ManRuSc', 'ManAgSc', 'ManSoStSc', 'ManHabSc', 'ManFacSc', 'ManTerSc', 'ManTraSc',
-            'NutFeedSc', 'NutCostSc', 'RepSexMatSc', 'RepNumBOffSc', 'RepCySc', 'RepGestIncSc',
-            'RepSexIntSc', 'ProPopStuSc', 'ProProfSc', 'ProLongSc', 'ProRelSc', 'ProOpBreSc', 'ProAddValSc'
+        use: [
+        'MaUSubs', 'MaUSelCons', 'MaUCom',
+        'SoUseFo', 'SoUseFe', 'SoUseBioconv', 'SoUseBiocont', 'SoUsePol',
+        'SoUsePet', 'SoUseCult', 'SoUseOth',
+        'ObtHar', 'ObtSHar', 'ObtPro',
+        'ContUtNA', 'ContUtCA', 'ContUtSA', 'ContUtAs', 'ContUtEu', 'ContUtOc', 'ContUtAf',
+        'MarYN', 'MarLoc', 'MarReg', 'MarNat', 'MarInt',
+        'ScLS', 'ScMS', 'ScLaS',
+        'SocAccCSA', 'SocAccNA', 'SocAccAf', 'SocAccOc', 'SocAccEu', 'SocAccAs',
+        'LegPunc'
+        ],
+        prod_pot :[
+            'ManStSc', 'ManRuSc', 'ManAgSc', 'ManSoStSc', 'ManHabSc', 'ManTerSc', 'ManTraSc', 'ManFacSc',
+            'NutFeedSc', 'NutCostSc',
+            'RepSexMatSc', 'RepNumbOffSc', 'RepCySc', 'RepGestIncSc', 'RepSexIntSc',
+            'ProPopStuSc', 'ProProfSc', 'ProLongSc', 'ProReLSc', 'ProOpBreSc', 'ProAddValSc',
+            'MarCultAccSc', 'MarPriSc', 'MarCompDomSc', 'MarMarChaSc',
+            'RegRest'
         ],
         eco_pot: [
             'CultCultIdDi', 'CultInspArt', 'CultEdu', 'CultRecEcot', 'CultSpiReg',
-            'RegBioInd', 'RegBioCont', 'RegPol', 'RegSeed', 'SupNutCy', 'SupSoIm'
+            'RegBioind', 'RegBiocont', 'RegPol', 'RegSeed',
+            'SupNutCy', 'SupSoIm',
+            'ProFF', 'ProWildF', 'ProBiomol', 'ProBiopro', 'ProBiom', 'ProBiomimi'
         ],
-        challenges: ['Vector', 'Pest', 'Toxins', 'Allergens', 'Phobia', 'Stigma']
+        challenges: [
+            'Vector', 'Pest', 'Toxins', 'Allergens', 'AntFact', 'InvSp', 'Phobia', 'Stigma'
+        ]
     };
 
     const subcategories = subcategoriesByCategory[selectedCategory];
@@ -1546,13 +1614,16 @@ function generateHeatmapFromExistingData(indexData, yAxis) {
 
     indexData.forEach(record => {
         const categoryData = record[selectedCategory];
-        if (!categoryData) return;
+        if (!categoryData) {
+            console.warn(`No data found for category ${selectedCategory}, Record ID: ${record.id}`);
+            return;
+        }
 
         subcategories.forEach(subcategory => {
             const value = categoryData[subcategory] ?? 0;
             if (value >= 0 && value <= 3) {
                 heatmapData.push({
-                    x: subcategoryNames[subcategory] || subcategory, // Nombres completos
+                    x: subcategoryNames[subcategory] || subcategory,
                     y: value,
                     value: 1
                 });
@@ -1560,15 +1631,22 @@ function generateHeatmapFromExistingData(indexData, yAxis) {
         });
     });
 
+    console.log("Heatmap data before grouping:", heatmapData);
+
     const groupedData = heatmapData.reduce((acc, { x, y, value }) => {
         const key = `${x}-${y}`;
         if (!acc[key]) acc[key] = { x, y, value: 0 };
         acc[key].value += value;
         return acc;
     }, {});
-
+    
     const groupedArray = Object.values(groupedData);
+    if (groupedArray.length === 0) {
+        console.error(`No data to render heatmap for category ${selectedCategory}. Check your data.`);
+        return;
+    }
 
+    console.log("Grouped heatmap data:", groupedArray);
     generateHeatmapChart(groupedArray, selectedCategory);
 }
 
@@ -1585,14 +1663,25 @@ const viridisColors = [
 
 // Función global para calcular el color Viridis
 function getColor(density, minDensity, maxDensity) {
+    if (minDensity === maxDensity) {
+        // Si todos los valores son iguales, usar el color del medio de la paleta
+        const midIndex = Math.floor(viridisColors.length / 2);
+        const [r, g, b] = viridisColors[midIndex];
+        return `rgba(${r}, ${g}, ${b}, 0.7)`;
+    }
+
     const ratio = (density - minDensity) / (maxDensity - minDensity); // Normalizar densidad
     const index = Math.floor(ratio * (viridisColors.length - 1));
-    const nextIndex = Math.min(index + 1, viridisColors.length - 1);
-    const weight = ratio * (viridisColors.length - 1) - index;
 
-    const r = Math.floor(viridisColors[index][0] * (1 - weight) + viridisColors[nextIndex][0] * weight);
-    const g = Math.floor(viridisColors[index][1] * (1 - weight) + viridisColors[nextIndex][1] * weight);
-    const b = Math.floor(viridisColors[index][2] * (1 - weight) + viridisColors[nextIndex][2] * weight);
+    // Validar que el índice esté en el rango
+    const validIndex = Math.max(0, Math.min(index, viridisColors.length - 1));
+    const nextIndex = Math.min(validIndex + 1, viridisColors.length - 1);
+
+    const weight = ratio * (viridisColors.length - 1) - validIndex;
+
+    const r = Math.floor(viridisColors[validIndex][0] * (1 - weight) + viridisColors[nextIndex][0] * weight);
+    const g = Math.floor(viridisColors[validIndex][1] * (1 - weight) + viridisColors[nextIndex][1] * weight);
+    const b = Math.floor(viridisColors[validIndex][2] * (1 - weight) + viridisColors[nextIndex][2] * weight);
 
     return `rgba(${r}, ${g}, ${b}, 0.7)`; // Ajustar opacidad al color
 }

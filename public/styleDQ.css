@@ -679,7 +679,7 @@
         }
 
         #heatmapCanvas {
-            margin: 20px auto;
+            margin: 20px;
             display: block;
             max-width: 100%;
         }
