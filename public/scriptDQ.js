@@ -972,7 +972,7 @@ function generateTopInsectsRadarChart(records) {
     const topThreeInsects = insectScores.sort((a, b) => b.averageScore - a.averageScore).slice(0, 3);
 
     // Verificar si se encontraron al menos tres insectos
-    if (0 < topThreeInsects.length < 3) {
+    if (topThreeInsects.length < 3) {
         alert("There is not enough data to make the top 3 Insects by average score graph.");
         return;
     }
