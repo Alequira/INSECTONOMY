@@ -133,7 +133,13 @@ async function searchGenAsp() {
             displayResults(data.results);
             displayIdsText(data.idsText);
         } else {
-            alert("There is no data for this search. The data from the previous search is kept.");
+            alert("There is no data for this search. The data from the previous search was cleaned.");
+            const graphDiv = document.getElementById('div-graph-pop');
+            graphDiv.style.display = 'none';
+            const tableBody = document.getElementById('results-table').getElementsByTagName('tbody')[0];
+            tableBody.innerHTML = '';
+            document.getElementById('ids-text').textContent = '';
+            indexData = [];
         }
     } catch (error) {
         console.error('Error al realizar la búsqueda:', error);
@@ -966,7 +972,7 @@ function generateTopInsectsRadarChart(records) {
     const topThreeInsects = insectScores.sort((a, b) => b.averageScore - a.averageScore).slice(0, 3);
 
     // Verificar si se encontraron al menos tres insectos
-    if (topThreeInsects.length < 3) {
+    if (0 < topThreeInsects.length < 3) {
         alert("There is not enough data to make the top 3 Insects by average score graph.");
         return;
     }
