@@ -133,7 +133,7 @@ async function searchGenAsp() {
             displayResults(data.results);
             displayIdsText(data.idsText);
         } else {
-            console.error("No hay datos disponibles para la gráfica.");
+            alert("There is no data for this search. The data from the previous search is kept.");
         }
     } catch (error) {
         console.error('Error al realizar la búsqueda:', error);
@@ -1547,11 +1547,6 @@ const subcategoryNames = {
 
 // Función para generar el heatmap
 function generateHeatmapFromExistingData(indexData, yAxis) {
-
-    if (!yAxis) {
-        console.error("Y-Axis is undefined or empty. Please select a valid value.");
-        return;
-    }
     
     const yAxisToCategory = {
         "Use": "use",
