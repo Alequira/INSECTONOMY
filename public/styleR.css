@@ -45,37 +45,6 @@
     text-decoration: none;
 }
 
-/*Social Media Animation*/
-
-    .socialMedia{
-        margin: 0 auto 0 50px;
-    }
-
-    .socialMedia a {
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        width: 30px;
-        height: 30px;
-        background: transparent;
-        border:2px solid #fff;
-        border-radius: 6px;
-        text-decoration: none;
-        transition: .5s;
-    }
-
-    .socialMedia a:hover{
-        background: #fff;
-    }
-
-    .socialMedia a i {
-        font-size: 20px;
-        color: #fff;
-    }
-
-    .socialMedia a:hover i{
-        color: #250404;
-    }
 
 /*Header for Navigation*/
 
@@ -216,6 +185,10 @@
     transition: 0.4s;
 }
 
+.menu-toggle {
+    display: none;
+}
+
 footer {
     background-color: #474747;
     color: white;
@@ -226,4 +199,139 @@ footer {
     bottom: 0;
     font-size: small;
 }
+
+/* Para pantallas medianas */
+
+@media screen and (max-width: 1200px) and (min-width: 768px) {
+    .banner .slider .slide img {
+        max-height: 500px;
+    }
+
+    .banner .slider .slide .content {
+        width: 90%; 
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    p {
+        font-size: 1.2rem;
+    }
+}
+
+/* Para pantallas pequeñas */
+
+@media screen and (max-width: 768px) {
+    .navigation {
+        display: none;
+        flex-direction: column;
+        position: fixed; 
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh; 
+        background: rgba(0, 0, 0, 0.4); 
+        backdrop-filter: blur(10px); 
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+    }
+
+    .navigation a {
+        display: block;
+        color: white;
+        text-decoration: none;
+        font-size: 2rem;
+        padding: 20px;
+        transition: background 0.3s;
+    }
+
+    .navigation a:hover {
+        background: rgba(255, 255, 255, 0);
+        transform: scale(1.05);
+    }
+
+    .navigation.active {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+        font-size: 2rem;
+        color: white;
+        cursor: pointer;
+        position: absolute;
+        right: 20px;
+        top: 15px;
+        z-index: 1000;
+    }
+
+    .headerIndex {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 20px 5%;
+        margin-bottom: 500px;
+        background: url('Imagenes/nature-red-photography-macro-insect-green-619452-wallhere.com.jpg') no-repeat;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 99;
+    }
+    
+    .headerIndex .navigation a {
+        color: #fff;
+        font-size: 0.9em;
+        position: relative;
+        font-weight: 500;
+        text-decoration: none;
+        margin-left: 0px;
+    }
+
+    .headerIndex .navigation .btlogin{
+        font-size: 0.9em;
+        background: transparent;
+        width: 130px;
+        height: 50px;
+        outline: none;
+        color: #fff;
+        border: 2px solid #fff;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        margin-left: 0px;
+        transition: 0.8s;
+        margin-top: 30px;
+    }
+
+    .headerIndex .navigation a::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 15px;
+        width: 100%;
+        height: 3px;
+        background: transparent;
+        border-radius: 5px;
+        transform: translateX(10px);
+        transition: 0.5s;
+    }
+
+
+    footer {
+        background-color: #474747;
+        color: white;
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+        position: fixed;
+        bottom: 0;
+        font-size: clamp(0.2rem, 5vw, 0.6rem);;
+    }
+
+}
+
 

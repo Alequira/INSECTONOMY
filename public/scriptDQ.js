@@ -99,6 +99,28 @@ window.addEventListener("click", function (event) {
 });
 
 
+// Control de menú desplegable 
+document.addEventListener('DOMContentLoaded', function () {
+    const menuToggle = document.querySelector('.menu-toggle'); 
+    const navigation = document.querySelector('.navigation');
+    const icon = menuToggle.querySelector('i');
+    
+    if (menuToggle && navigation && icon) {
+        menuToggle.addEventListener('click', function () {
+            navigation.classList.toggle('active'); 
+
+            if (navigation.classList.contains('active')) {
+                icon.classList.replace('bx-bug-alt', 'bx-x'); 
+            } else {
+                icon.classList.replace('bx-x', 'bx-bug-alt'); 
+            }
+        });
+    } else {
+        console.error("No se encontró el menú o el icono."); 
+    }
+});
+
+
 
 // Función de búsqueda
 async function searchGenAsp() {
@@ -327,7 +349,6 @@ let pieChart = null;
 
 function generateCharts(record) {
 
-        // Verificar si las instancias de gráficos ya existen y destruirlas
         if (spiderChart !== null) {
             console.log("Destruyendo gráfica Spider Chart anterior.");
             spiderChart.destroy();
@@ -421,14 +442,14 @@ function generateCharts(record) {
                     align: 'center' 
                 },
                 interaction: {
-                    mode: 'nearest', // Encuentra el punto más cercano
-                    intersect: true // Requiere que el mouse esté directamente sobre el punto
+                    mode: 'nearest', 
+                    intersect: true 
                 }
                 
             }
         });
 
-        // Crear Pie Chart con los valores específicos de uso
+        
         pieChart = new Chart(ctx2, {
             type: 'line',
             data: {
@@ -484,7 +505,7 @@ function generateCharts(record) {
                         position: 'top' ,
                         labels: {
                                 font: {
-                                    family: 'Poppins', // Fuente para los labels de la leyenda
+                                    family: 'Poppins', 
                                     size: 16
                                 }
                             }
@@ -499,7 +520,7 @@ function generateCharts(record) {
                         }
                     }
                 },
-                interaction: {// Encuentra el punto más cercano
+                interaction: {
                     intersect: true // Requiere que el mouse esté directamente sobre el punto
                 }
                 
@@ -828,7 +849,7 @@ function createDynamicChart(data, xAxis, yAxis) {
                     },
                     ticks: {
                         font: {
-                            size: 14, // Tamaño de fuente para los números en el eje x
+                            size: 14, 
                             family: 'Poppins'
                         }
                     }
@@ -845,7 +866,7 @@ function createDynamicChart(data, xAxis, yAxis) {
                     },
                     ticks: {
                         font: {
-                            size: 14, // Tamaño de fuente para los números en el eje y
+                            size: 14,
                             family: 'Poppins'
                         }
                     }
@@ -856,7 +877,7 @@ function createDynamicChart(data, xAxis, yAxis) {
                 legend: {
                     labels: {
                         font: {
-                            family: 'Poppins', // Fuente para los labels de la leyenda
+                            family: 'Poppins', 
                             size: 16
                         }
                     }
@@ -1447,6 +1468,7 @@ function updateFamilyOptions(selectedOrder) {
 
 
 // Nombres completos de las categorías
+
 const categoryNames = {
     use: 'Use',
     prod_pot: 'Productive Potential',
@@ -1454,9 +1476,7 @@ const categoryNames = {
     challenges: 'Challenges'
 };
 
-// Nombres completos de las subcategorías
 const subcategoryNames = {
-    // Subcategorías de Use
     MaUSubs: 'Subsistence',
     MaUSelCons: 'Self-Consumption',
     MaUCom: 'Commercial',
@@ -1540,7 +1560,9 @@ const subcategoryNames = {
     ProBiopro: 'Bioproducts',
     ProBiom: 'Biomodels',
     ProBiomimi: 'Biomimicry',
+
     // Subcategorías de Challenges
+
     Vector: 'Vector',
     Pest: 'Pest',
     Toxins: 'Toxins',
@@ -1652,7 +1674,6 @@ function generateHeatmapFromExistingData(indexData, yAxis) {
 }
 
 
-// Paleta Viridis (fija)
 const viridisColors = [
     [68, 1, 84],   // Azul oscuro
     [59, 82, 139], // Azul intermedio
@@ -1662,19 +1683,17 @@ const viridisColors = [
     [239, 59, 44]   // Naranja/Rojo
 ];
 
-// Función global para calcular el color Viridis
 function getColor(density, minDensity, maxDensity) {
     if (minDensity === maxDensity) {
-        // Si todos los valores son iguales, usar el color del medio de la paleta
         const midIndex = Math.floor(viridisColors.length / 2);
         const [r, g, b] = viridisColors[midIndex];
         return `rgba(${r}, ${g}, ${b}, 0.7)`;
     }
 
-    const ratio = (density - minDensity) / (maxDensity - minDensity); // Normalizar densidad
+    const ratio = (density - minDensity) / (maxDensity - minDensity); 
     const index = Math.floor(ratio * (viridisColors.length - 1));
 
-    // Validar que el índice esté en el rango
+    
     const validIndex = Math.max(0, Math.min(index, viridisColors.length - 1));
     const nextIndex = Math.min(validIndex + 1, viridisColors.length - 1);
 
@@ -1723,7 +1742,7 @@ function generateHeatmapChart(data, selectedCategory) {
             scales: {
                 x: {
                     type: 'category',
-                    labels: [...new Set(data.map(d => d.x))], // Nombres completos en eje X
+                    labels: [...new Set(data.map(d => d.x))], 
                     title: { 
                         display: true, 
                         text: 'Subcategories' ,
@@ -1788,14 +1807,13 @@ function createColorLegendPlugin(minDensity, maxDensity, getColor, position = 'r
         afterDraw: chart => {
             const ctx = chart.ctx;
             const { top, bottom, right } = chart.chartArea;
-            const legendWidth = 20; // Ancho del gradiente
-            const legendHeight = bottom - top; // Altura completa del gráfico
+            const legendWidth = 20; 
+            const legendHeight = bottom - top; 
 
-            // Posición de la escala (vertical a la derecha)
-            const startX = right + 20; // Justo a la derecha del gráfico
+            
+            const startX = right + 20; 
             const startY = top;
 
-            // Crear un gradiente Viridis invertido (rojo arriba, azul abajo)
             const gradient = ctx.createLinearGradient(startX, startY + legendHeight, startX, startY);
             for (let i = 0; i <= 1; i += 0.01) {
                 const color = getColor(minDensity + i * (maxDensity - minDensity), minDensity, maxDensity);
@@ -1821,9 +1839,9 @@ function createColorLegendPlugin(minDensity, maxDensity, getColor, position = 'r
             const dynamicText = selectedCategory ? `Number of species by ${categoryNames[selectedCategory] || selectedCategory} and score` : "Number of species and score";
             ctx.save();
             ctx.translate(startX + legendWidth + 25, startY + legendHeight / 2);
-            ctx.rotate(-Math.PI / 2); // Rotar el texto 90 grados para que sea vertical
+            ctx.rotate(-Math.PI / 2); 
             ctx.textAlign = 'center';
-            ctx.fillText(dynamicText, 0, 0); // Mostrar texto dinámico
+            ctx.fillText(dynamicText, 0, 0); 
             ctx.restore();
         }
     };

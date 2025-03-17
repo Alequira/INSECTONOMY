@@ -1,57 +1,27 @@
-const wrapper = document.querySelector('.wrapper');
-const loginLink = document.querySelector('.login-link');
-const loginnLink = document.querySelector('.loginn-link');
-const registerLink = document.querySelector('.register-link');
-const registerProLink = document.querySelector('.registerpro-link');
-const btnlog = document.querySelector('.btlogin');
-const closelog = document.querySelector('.icon-close')
-const research = document.querySelector('.research') 
-const logo = document.querySelector('.logo') 
-const row = document.querySelector('.row') 
 
-/*Boton de login y Research en Index (Apareciendo)*/
+/* Control de menú desplegable */
 
-registerLink.addEventListener('click', ()=> {
-    wrapper.classList.add('active');
-})
+document.addEventListener('DOMContentLoaded', function () {
+    const menuToggle = document.querySelector('.menu-toggle'); 
+    const navigation = document.querySelector('.navigation');
+    const icon = menuToggle.querySelector('i');
+    
+    if (menuToggle && navigation && icon) {
+        menuToggle.addEventListener('click', function () {
+            navigation.classList.toggle('active'); 
 
-registerProLink.addEventListener('click', ()=> {
-    wrapper.classList.add('plus');
-})
+            if (navigation.classList.contains('active')) {
+                icon.classList.replace('bx-bug-alt', 'bx-x'); 
+            } else {
+                icon.classList.replace('bx-x', 'bx-bug-alt'); 
+            }
+        });
+    } else {
+        console.error("No se encontró el menú o el icono."); 
+    }
+});
 
-loginLink.addEventListener('click', ()=> {
-    wrapper.classList.remove('active');
-})
 
-loginnLink.addEventListener('click', ()=> {
-    wrapper.classList.remove('plus');
-})
 
-btnlog.addEventListener('click', ()=> {
-    wrapper.classList.add('pop');
-})
 
-closelog.addEventListener('click', ()=> {
-    wrapper.classList.remove('pop');
-})
-
-research.addEventListener('click', ()=> {
-    wrapper.classList.remove('pop');
-})
-
-research.addEventListener('click', ()=> {
-    row.classList.add('pop');
-})
-
-research.addEventListener('dblclick', ()=> {
-    row.classList.remove('pop');
-})
-
-logo.addEventListener('click', ()=> {
-    row.classList.remove('pop');
-})
-
-btnlog.addEventListener('click', ()=> {
-    row.classList.remove('pop');
-})
 
