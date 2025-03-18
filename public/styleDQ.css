@@ -4,7 +4,7 @@
 
 * {
     margin: 0;
-    padding: 30;
+    padding: 0px;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
@@ -44,7 +44,7 @@
         text-decoration: none;
     }
 
-    .headerDQ .navigation .anav {
+    .headerDQ .navigation a{
         color: #fff;
         font-size: 1em;
         position: relative;
@@ -53,7 +53,7 @@
         margin-left: 50px;
     }
 
-    .headerDQ .navigation .anav::after {
+    .headerDQ .navigation a::after {
         content: '';
         position: absolute;
         left: 0;
@@ -66,10 +66,12 @@
         transition: 0.5s;
     }
 
-    .headerDQ .navigation .anav:hover::after {
+    .headerDQ .navigation a:hover::after {
         background: #fff;
         transform: translateX(0);
     }
+
+    /*Button Login CSS*/
 
     .headerDQ .navigation .btlogin{
         font-size: 1em;
@@ -349,7 +351,7 @@
     .texti{
         justify-content: center;
         display: flex;
-        }
+    }
 
     .ids-text{
         text-align: center;
@@ -556,7 +558,7 @@
             text-align: center;
             position: sticky;
             top: 0;
-            background: #ffffff;
+            background: transparent;
             z-index: 2;  
             outline: 2px solid #2c0000; 
             outline-offset: -2px;
@@ -681,7 +683,7 @@
 
     /*Estilo del footer (general)*/
 
-    footer {
+    .footerDQ {
         background-color: #474747;
         color: white;
         width: 100%;
@@ -696,6 +698,7 @@
 /* Para pantallas medianas */
 
 @media screen and (max-width: 1200px) and (min-width: 768px) {
+
     .banner .slider .slide img {
         max-height: 500px; 
     }
@@ -719,6 +722,7 @@
 /* Para pantallas pequeñas */
 
 @media screen and (max-width: 768px) {
+
     .navigation {
         display: none;
         flex-direction: column;
@@ -728,29 +732,35 @@
         width: 100%;
         height: 100vh; 
         background: rgba(0, 0, 0, 0.4); 
-        backdrop-filter: blur(10px); 
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
         text-align: center;
         justify-content: center;
         align-items: center;
         z-index: 999;
     }
 
-    .navigation .anav {
+    .navigation.active {
+        display: flex;
+    }
+
+    .headerDQ .navigation a {
         display: block;
-        color: white;
+        color: #fff;
         text-decoration: none;
         font-size: 2rem;
         padding: 20px;
         transition: background 0.3s;
+        font-size: 0.9em;
+        margin-left: 0px;
+        position: relative;
+        font-weight: 500;
+        text-decoration: none;
     }
 
-    .navigation .anav:hover {
+    .navigation a:hover {
         background: rgba(255, 255, 255, 0);
         transform: scale(1.05);
-    }
-
-    .navigation.active {
-        display: flex;
     }
 
     .menu-toggle {
@@ -770,26 +780,14 @@
         left: 0;
         width: 100%;
         padding: 20px 5%;
-        background: transparent;
         display: flex;
         justify-content: space-between;
-        background-size: cover;
         align-items: center;
         z-index: 99;
         background: url('Imagenes/nature-red-photography-macro-insect-green-619452-wallhere.com.jpg') no-repeat;
-        backdrop-filter: blur(30px);
     }
 
-    .headerDQ .navigation .anav {
-        color: #fff;
-        font-size: 0.9em;
-        position: relative;
-        font-weight: 500;
-        text-decoration: none;
-        margin-left: 0px;
-    }
-
-    .headerDQ .navigation .anav::after {
+    .headerDQ .navigation a::after {
         content: '';
         position: absolute;
         left: 0;
@@ -887,7 +885,7 @@
         margin-left: 4vw;
     }
 
-/**/
+    /**/
     .collapsibleU{
         margin: 20px;
         margin-left: 4vw;
@@ -945,7 +943,6 @@
         vertical-align: top; 
     }
   
-
     .charts-wrapper canvas {
         width: 700px; 
         height: auto;
@@ -959,16 +956,28 @@
         margin-bottom: 0px;
       }
       
-      .heatmap-scroller canvas {
+    .heatmap-scroller canvas {
         min-width: 1200px;  
         height: auto;
         max-width: none;     
         display: block;     
         margin: 0 auto;      
-      }
-  
+    }
 
-    footer {
+    h2{
+        text-align: center;
+        font-size: 10vw;
+    }
+
+    .mainDQ, .footerDQ {
+        transition: filter 0.2s ease-in-out;
+    }
+
+    .mainDQ.blurred, .footerDQ.blurred {
+        filter: blur(10px);
+    }
+
+    .footerDQ {
         background-color: #474747;
         color: white;
         width: 100%;

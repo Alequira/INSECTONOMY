@@ -75,7 +75,7 @@
         transform: translateX(0);
     }
 
-/*Button Login Css*/
+/*Button Login CSS*/
 
     .headerIndex .navigation .btlogin{
         font-size: 1em;
@@ -219,6 +219,7 @@ footer {
 /* Para pantallas pequeñas */
 
 @media screen and (max-width: 768px) {
+
     .navigation {
         display: none;
         flex-direction: column;
@@ -229,6 +230,7 @@ footer {
         height: 100vh; 
         background: rgba(0, 0, 0, 0.4); 
         backdrop-filter: blur(10px); 
+        -webkit-backdrop-filter: blur(10px);
         text-align: center;
         justify-content: center;
         align-items: center;
@@ -331,6 +333,11 @@ footer {
         margin-left: 0px;
         margin-bottom: 40px;
     }
+
+    .mainHIW {
+        margin-top: 10vw;
+    }
+
     .row p{
         padding: 2vw;
         color: #000000;
@@ -340,8 +347,9 @@ footer {
     .row h2{
         text-align: center;
         left: -10px;
-        padding: 0.4rem;
-        font-size: 8vw;
+        margin-top: 5vw;
+        margin-bottom: 10vw;
+        font-size: 10vw;
         color: #000000;
     }
 
@@ -360,7 +368,7 @@ footer {
         margin-right: 0%;
     }
 
-
+    
     footer {
         background-color: #474747;
         color: white;

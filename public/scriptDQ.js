@@ -98,16 +98,20 @@ window.addEventListener("click", function (event) {
     }
 });
 
-
 // Control de menú desplegable 
 document.addEventListener('DOMContentLoaded', function () {
     const menuToggle = document.querySelector('.menu-toggle'); 
     const navigation = document.querySelector('.navigation');
     const icon = menuToggle.querySelector('i');
-    
+    const mainContent = document.querySelector('.mainDQ'); 
+    const footerContent = document.querySelector('.footerDQ'); 
+
     if (menuToggle && navigation && icon) {
         menuToggle.addEventListener('click', function () {
-            navigation.classList.toggle('active'); 
+            navigation.classList.toggle('active');
+
+            mainContent.classList.toggle('blurred');
+            footerContent.classList.toggle('blurred');
 
             if (navigation.classList.contains('active')) {
                 icon.classList.replace('bx-bug-alt', 'bx-x'); 
@@ -116,9 +120,10 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     } else {
-        console.error("No se encontró el menú o el icono."); 
+        console.error("No se encontró el menú o el icono.");
     }
 });
+
 
 
 
