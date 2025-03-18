@@ -1731,6 +1731,8 @@ function generateHeatmapChart(data, selectedCategory) {
             }]
         },
         options: {
+            responsive: false,        
+            maintainAspectRatio: false,
             layout: {
                 padding: {
                     right: 80,

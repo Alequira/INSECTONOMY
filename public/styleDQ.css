@@ -93,57 +93,6 @@
         color: #5c0404;
     }
 
-    .headerDQ {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        padding: 20px 100px;
-        background: transparent;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        z-index: 99;
-        background: url('Imagenes/nature-red-photography-macro-insect-green-619452-wallhere.com.jpg') no-repeat;
-        backdrop-filter: blur(30px);
-    }
-
-
-    .headerDQ .logo{
-        color: #fff;
-        font-size: 1.5em;
-        user-select: none;
-        text-decoration: none;
-    }
-
-    .headerDQ .logito{
-        color: #fff;
-        font-size: 1em;
-        user-select: none;
-        text-decoration: none;
-    }
-
-    
-    .headerIndex .navigation .btlogin{
-        font-size: 1em;
-        background: transparent;
-        width: 130px;
-        height: 50px;
-        outline: none;
-        color: #fff;
-        border: 2px solid #fff;
-        border-radius: 6px;
-        cursor: pointer;
-        font-weight: 600;
-        margin-left: 50px;
-        transition: 0.8s;
-    }
-
-    .headerIndex .navigation .btlogin:hover{
-        background-color: #fff;
-        color: #5c0404;
-    }
-
     #div-graph-pop {
         margin: 20px auto;
         padding: 20px;
@@ -230,6 +179,7 @@
         font-size: 1.8em;
         line-height: 130px;
     }
+
     .input-boxEP{
         display: inline;
         align-items: center;
@@ -400,10 +350,11 @@
         justify-content: center;
         display: flex;
         }
-            .ids-text{
-                text-align: center;
-                max-width: 1200px;
-            }
+
+    .ids-text{
+        text-align: center;
+        max-width: 1200px;
+    }
 
         /*Estilo de botones*/
 
@@ -454,6 +405,8 @@
             background-color: #220000;
             color: #ffffff;
         }
+
+        /* Botones para collapsible */
 
         /**/
             .collapsibleGA{
@@ -866,6 +819,156 @@
         margin-top: 30px;
     }
 
+    .mainDQ{
+        margin-top: 130px;
+        margin-left: 8vw;
+        margin-right: 8vw;
+        margin-bottom: 40px;
+    }
+
+    .pI{
+        margin-top: 40px;
+        margin-bottom: 10px;
+        margin-left: clamp(0.3rem, 8vw, 0.6rem);
+        margin-right: clamp(0.3rem, 8vw, 0.6rem);
+    }
+
+    
+    /*Content GeneralASP*/
+
+
+    .contentGA{
+        margin-left: clamp(0.3rem, 8vw, 0.6rem);
+        margin-right: clamp(0.3rem, 8vw, 0.6rem);
+        margin-bottom: 40px;
+        align-items: center;
+        display: block;
+        line-height: 40px;
+        border: 1px solid #240202;
+        border-radius: 6px;
+        padding: 10px;
+    }
+
+    
+    /*Content EcoPot*/
+
+    .contentEP.POP{
+        margin-left: clamp(0.3rem, 8vw, 0.6rem);
+        margin-right: clamp(0.3rem, 8vw, 0.6rem);
+    }
+
+    .contentPP.POP{
+        margin-left: clamp(0.3rem, 8vw, 0.6rem);
+        margin-right: clamp(0.3rem, 8vw, 0.6rem);
+    }
+
+    .contentU.POP{
+        margin-left: clamp(0.3rem, 8vw, 0.6rem);
+        margin-right: clamp(0.3rem, 8vw, 0.6rem);
+    }
+
+    .contentC.POP{
+        margin-left: clamp(0.3rem, 8vw, 0.6rem);
+        margin-right: clamp(0.3rem, 8vw, 0.6rem);
+    }
+
+    .collapsibleGA{
+        margin: 20px;
+        margin-left: 4vw;
+    }
+
+    .collapsibleEP{
+        margin: 20px;
+        margin-left: 4vw;
+    }
+
+    .collapsiblePP{
+        margin: 20px;
+        margin-left: 4vw;
+    }
+
+/**/
+    .collapsibleU{
+        margin: 20px;
+        margin-left: 4vw;
+    }
+
+    /**/
+    .collapsibleC{
+        margin: 20px;
+        margin-left: 4vw;
+    }
+
+    /* Estilo del contenedor del popup embebido */
+    .popup-content-embedded {
+        display: none; 
+        position: absolute; 
+        top: 30px; 
+        left: -200px; 
+        background: #fff; 
+        padding: 10px; 
+        border-radius: 6px; 
+        width: 200px; 
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); 
+        z-index: 3; 
+        font-size: 10px;              
+        line-height: 1.5; 
+    }
+
+    /* Flecha del popup */
+    .popup-content-embedded::after {
+        content: '';
+        position: absolute;
+        top: -10px; 
+        left: 50%; 
+        transform: translateX(-50%);
+        border-width: 10px;
+        border-style: solid;
+        border-color: transparent transparent #fff transparent; 
+    }
+
+    .table-container {
+        margin-right: 0px;
+    }
+
+    .charts-wrapper {
+        width: 100%;
+        overflow-x: auto; 
+        -webkit-overflow-scrolling: touch; 
+        margin-bottom: 20px;
+    }
+  
+    .charts-wrapper .chart-item {
+        min-width: 700px; 
+        max-width: none; 
+        display: inline-block; 
+        vertical-align: top; 
+    }
+  
+
+    .charts-wrapper canvas {
+        width: 700px; 
+        height: auto;
+        max-width: none; 
+    }
+
+    .heatmap-scroller {
+        width: 100%;                
+        overflow-x: auto;           
+        -webkit-overflow-scrolling: touch; 
+        margin-bottom: 0px;
+      }
+      
+      /* Mantener un min-width grande para forzar scroll en pantallas pequeñas */
+      .heatmap-scroller canvas {
+        min-width: 1200px;  
+        height: auto;
+        max-width: none;     
+        display: block;     
+        margin: 0 auto;      
+      }
+  
+
     footer {
         background-color: #474747;
         color: white;
@@ -874,7 +977,7 @@
         padding: 10px 0;
         position: fixed;
         bottom: 0;
-        font-size: clamp(0.2rem, 5vw, 0.6rem);;
+        font-size: clamp(0.2rem, 5vw, 0.6rem);
     }
 
 }

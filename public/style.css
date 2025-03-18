@@ -41,7 +41,7 @@
 
     .headerIndex .navigation a {
         color: #fff;
-        font-size: 1em;
+        font-size: clamp(0.8rem, 5vw, 1rem);
         position: relative;
         font-weight: 500;
         text-decoration: none;
@@ -304,23 +304,8 @@ footer {
 /* Para pantallas medianas (768px - 1200px) */
 
 @media screen and (max-width: 1200px) and (min-width: 768px) {
-    .banner .slider .slide img {
-        max-height: 500px; /* Reducir altura del fondo sin afectar la fuente */
-    }
-
-    .banner .slider .slide .content {
-        width: 90%; 
-    }
-
-    h1 {
-        font-size: 2.5rem;
-    }
-
-    p {
-        font-size: 1.2rem;
-    }
+    /*Header for Navigation*/
 }
-
 
 /* Para pantallas pequeñas */
 
