@@ -959,7 +959,6 @@
         margin-bottom: 0px;
       }
       
-      /* Mantener un min-width grande para forzar scroll en pantallas pequeñas */
       .heatmap-scroller canvas {
         min-width: 1200px;  
         height: auto;
