@@ -697,31 +697,11 @@
 
 /* Para pantallas medianas */
 
-@media screen and (max-width: 1200px) and (min-width: 768px) {
-
-    .banner .slider .slide img {
-        max-height: 500px; 
-    }
-
-    .banner .slider .slide .content {
-        width: 90%; 
-    }
-
-    h1 {
-        font-size: 2.5rem;
-    }
-
-    p {
-        font-size: 1.2rem;
-    }
-}
-
-
 
 
 /* Para pantallas pequeñas */
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1200px) {
 
     .navigation {
         display: none;
@@ -966,8 +946,9 @@
 
     h2{
         text-align: center;
-        font-size: 10vw;
+        font-size: clamp(1rem, 10vw, 3rem);
     }
+
 
     .mainDQ, .footerDQ {
         transition: filter 0.2s ease-in-out;
