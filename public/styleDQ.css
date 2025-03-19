@@ -46,7 +46,7 @@
 
     .headerDQ .navigation a{
         color: #fff;
-        font-size: 1em;
+        font-size: clamp(0.2rem, 5vw, 0.6rem);
         position: relative;
         font-weight: 500;
         text-decoration: none;
@@ -74,17 +74,17 @@
     /*Button Login CSS*/
 
     .headerDQ .navigation .btlogin{
-        font-size: 1em;
+        font-size: 1vw;
         background: transparent;
-        width: 130px;
-        height: 50px;
+        width: 7vw;
+        height: 3vw;
         outline: none;
         color: #fff;
         border: 2px solid #fff;
         border-radius: 6px;
         cursor: pointer;
         font-weight: 600;
-        margin-left: 50px;
+        margin-left: 3vw;
         transition: 0.8s;
     }
 
