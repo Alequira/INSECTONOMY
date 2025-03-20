@@ -351,6 +351,17 @@ footer {
         margin-right: 0%;
     }
 
+    .row1{
+        flex-direction: column;
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+
+    .row1 img{
+        max-width: 100%;
+    }
+
 
     footer {
         background-color: #474747;
