@@ -629,15 +629,18 @@
     top: 0;
     width: 100%; 
     height: 100%; 
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+    background-color: rgba(0, 0, 0, 0.5); 
 }
 
 .modal-content {
     background-color: #fefefe;
-    margin: 7% auto; 
+    margin: 5vw auto; 
     padding: 30px;
     width: 70%; 
     border-radius: 4px;
+    overflow-y: auto;
+    height: auto;
+    max-height: 80vh;
 }
 
 .close-modal {
@@ -655,35 +658,36 @@
 }
 
 .modal-section {
-    display: none; /* Ocultar todas las secciones por defecto */
+    display: none; 
 }
 
 /* Estilo de la navegación */
 #modal-navigation button {
     padding: 10px 20px;
     margin: 2px;
-    background-color: #333;
-    color: #fff;
+    background-color: #ffffff;
+    color: #500000;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: 0.3s ease-in-out;
+    border: 2px solid #440000;
 }
 
 #modal-navigation button:hover {
-    background-color: #555;
+    background-color: #4d0000;
+    color:#ffffff;
 }
 
 /* Estilos específicos para los canvas */
 #record-modal canvas#chart1 {
     display: block;  
-    width: 550px !important;  
-    height: 550px !important;  
+    width: 50% !important;  
+    height: 50% !important;  
 }
 #record-modal canvas#chart2 {
     display: block;  
-    width: 550px !important;  
-    height: 550px !important;  
+    width: 50% !important;  
+    height: 50% !important;  
 }
 
 .selected-row {
