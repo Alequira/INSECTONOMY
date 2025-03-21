@@ -1474,7 +1474,7 @@
                                     <div id="customTooltip" style="font-size: 10px; display:none; position:absolute; background-color:white; padding:8px; border:1px solid #ccc; border-radius:4px; box-shadow:0px 4px 10px rgba(0, 0, 0, 0.25) ;"></div>
                                     <p class="p-canvas">Regression graph that allows you to compare different characteristics and view the species potential.</p>
                                 </div>
-                                <div class="chart-item">
+                                <div class="chart-item" id="radar-chart-container">
                                     <canvas id="topInsectsRadarChart"></canvas>
                                     <div id="customTooltip2" style="font-size: 10px; display:none; position:absolute; background-color:white; padding:8px; border:1px solid #ccc; border-radius:4px; box-shadow:0px 4px 10px rgba(0, 0, 0, 0.25) ;"></div>
                                     <p class="p-canvas">Ranking graph that highlights the top three species with the highest potential based on the criteria you've selected. Note: If you select fewer than three species (one or two), the graph will not display.</p>
@@ -1490,7 +1490,7 @@
 
                         </div>
                         <div class="heatmap-scroller">
-                            <canvas id="heatmapCanvas"></canvas>
+                            <canvas id="heatmapCanvas" height="700px" width="1200px"></canvas>
                         </div>
 
                         <p class="p-canvas">Heatmap plot showing discrete values of the subcategories present in the general category chosen on the y-axis in the regression graph. The size and color of each "bubble" corresponds to the number of species that have the values indicated by the horizontal and vertical position.</p>

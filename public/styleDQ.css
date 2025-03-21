@@ -46,11 +46,11 @@
 
     .headerDQ .navigation a{
         color: #fff;
-        font-size: clamp(0.2rem, 5vw, 0.6rem);
+        font-size: clamp(0.2rem, 5vw, 0.72rem);
         position: relative;
         font-weight: 500;
         text-decoration: none;
-        margin-left: 50px;
+        margin-left: 1.5vw;
     }
 
     .headerDQ .navigation a::after {
@@ -151,8 +151,8 @@
     }
 
     .contentGA{
-        margin-left: 200px;
-        margin-right: 300px;
+        margin-left: clamp(0.6rem, 15vw, 6rem);
+        margin-right: clamp(0.6rem, 15vw, 6rem);
         margin-bottom: 40px;
         align-items: center;
         display: block;
@@ -163,8 +163,8 @@
     }
 
     .contentGA.POP{
-        margin-left: 200px;
-        margin-right: 300px;
+        margin-left: clamp(0.6rem, 15vw, 6rem);
+        margin-right: clamp(0.6rem, 15vw, 6rem);
         margin-bottom: 40px;
         align-items: center;
         display: none;
@@ -189,8 +189,8 @@
     }
 
     .contentEP.POP{
-        margin-left: 200px;
-        margin-right: 300px;
+        margin-left: clamp(0.6rem, 15vw, 6rem);
+        margin-right: clamp(0.6rem, 15vw, 6rem);
         align-items: center;
         display: block;
         line-height: 40px;
@@ -200,8 +200,8 @@
     }
 
     .contentEP{
-        margin-left: 200px;
-        margin-right: 300px;
+        margin-left: clamp(0.6rem, 15vw, 6rem);
+        margin-right: clamp(0.6rem, 15vw, 6rem);
         align-items: center;
         display: none;
         line-height: 40px;
@@ -211,37 +211,50 @@
     }
 
     .charts-wrapper {
-        display: flex; 
-        justify-content: space-around; 
-        align-items: flex-start; 
+        width: 100%;
+        overflow-x: auto; 
+        overflow-y: hidden; 
+        -webkit-overflow-scrolling: touch; 
+        display: flex;
         flex-wrap: nowrap; 
         gap: 20px; 
-        width: 100%; 
-        max-width: 1800px; 
-        margin: auto; 
-        padding: 20px;
+        justify-content: flex-start; 
+        align-items: flex-start; 
+        padding-bottom: 20px;
     }
     
     .chart-item {
-        flex: 1;
-        text-align: center; 
-        max-width: 48%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        flex: 0 0 auto; 
+        min-width: 400px; 
+        max-width: none; 
+        height: auto;
+        margin: 10px;
+        padding: 10px;
         box-sizing: border-box;
     }
     
     .chart-item canvas {
-        width: 100%; 
-        height: 400px; 
-        max-height: 500px;
+        width: auto; 
+        max-width: 100%; 
+        height: auto !important;
+        max-height: 400px; 
     }
-    
     
     .p-canvas {
-        font-size: 14px;
         margin-top: 10px;
-        font-style: italic;
         text-align: center;
+        width: 100%;
+        max-width: 600px;
+        padding: 0 10px; 
+        font-size: 14px;
+        font-style: italic;
+        overflow:hidden;
     }
+    
 
 
     /**/
@@ -258,8 +271,8 @@
     }
 
     .contentPP.POP{
-        margin-left: 200px;
-        margin-right: 300px;
+        margin-left: clamp(0.6rem, 15vw, 6rem);
+        margin-right: clamp(0.6rem, 15vw, 6rem);
         align-items: center;
         display: block;
         line-height: 40px;
@@ -269,8 +282,8 @@
     }
 
     .contentPP{
-        margin-left: 200px;
-        margin-right: 300px;
+        margin-left: clamp(0.6rem, 15vw, 6rem);
+        margin-right: clamp(0.6rem, 15vw, 6rem);
         align-items: center;
         display: none;
         line-height: 40px;
@@ -292,8 +305,8 @@
     }
 
     .contentU.POP{
-        margin-left: 200px;
-        margin-right: 300px;
+        margin-left: clamp(0.6rem, 15vw, 6rem);
+        margin-right: clamp(0.6rem, 15vw, 6rem);
         align-items: center;
         display: block;
         line-height: 40px;
@@ -303,8 +316,8 @@
     }
 
     .contentU{
-        margin-left: 200px;
-        margin-right: 300px;
+        margin-left: clamp(0.6rem, 15vw, 6rem);
+        margin-right: clamp(0.6rem, 15vw, 6rem);
         align-items: center;
         display: none;
         line-height: 40px;
@@ -327,8 +340,8 @@
 
 
     .contentC.POP{
-        margin-left: 200px;
-        margin-right: 300px;
+        margin-left: clamp(0.6rem, 15vw, 6rem);
+        margin-right: clamp(0.6rem, 15vw, 6rem);
         align-items: center;
         display: block;
         line-height: 40px;
@@ -338,8 +351,8 @@
     }
 
     .contentC{
-        margin-left: 200px;
-        margin-right: 300px;
+        margin-left: clamp(0.6rem, 15vw, 6rem);
+        margin-right: clamp(0.6rem, 15vw, 6rem);
         align-items: center;
         display: none;
         line-height: 40px;
@@ -564,10 +577,19 @@
             outline-offset: -2px;
         }
 
+        .heatmap-scroller {
+            width: 100%;                
+            overflow-x: auto;           
+            -webkit-overflow-scrolling: touch; 
+            margin-bottom: 0px;
+          }
+
         #heatmapCanvas {
             margin: 20px;
             display: block;
-            max-width: 100%;
+            max-width: 1200px;
+            width:100%;
+            height: auto;
         }
 
 /* Estilo del contenedor del popup embebido */
@@ -688,10 +710,10 @@
         color: white;
         width: 100%;
         text-align: center;
-        padding: 10px 0;
-        position: sticky;
+        padding: 7px 0;
+        position: fixed;
         bottom: 0;
-        font-size: small;
+        font-size: clamp(0.2rem, 5vw, 0.7rem);
         z-index: 3;
     }
 
